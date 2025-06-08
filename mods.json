@@ -1,0 +1,171 @@
+{
+  "packageVersion": "1.40.6_6407",
+  "newestDependencies": {
+    "beatsaber-hook": "6.4.2",
+    "beatsaverplusplus": "0.2.1",
+    "bs-cordl": "4006.*",
+    "bs-utils": "0.8.6",
+    "bsml": "0.4.53",
+    "conditional-dependencies": "0.3.0",
+    "config-utils": "2.0.3",
+    "cpp-semver": "0.1.2",
+    "custom-types": "0.18.3",
+    "fmt": "11.0.2",
+    "kaleb": "0.1.9",
+    "lapiz": "0.2.21",
+    "libcryptopp": "8.5.0",
+    "libil2cpp": "0.4.0",
+    "metacore": "1.3.0",
+    "mmkay": "0.1.1",
+    "paper2_scotland2": "4.6.4",
+    "playlistcore": "1.5.2",
+    "rapidjson-macros": "2.1.0",
+    "scotland2": "0.1.6",
+    "sombrero": "0.1.43",
+    "song-details": "1.0.2",
+    "songcore": "1.1.22",
+    "tinyxml2": "10.0.0",
+    "web-utils": "0.6.7"
+  },
+  "installedMods": {
+    "bs-utils": {
+      "repo": "https://github.com/bsq-ports/QuestBS-Utils",
+      "version": "0.8.6",
+      "build_command": "qpm s qmod; cd build; mkdir -p debug; mv debug_libbs-utils.so debug/libbs-utils.so"
+    },
+    "bsml": {
+      "repo": "https://github.com/bsq-ports/Quest-BSML",
+      "version": "0.4.53"
+    },
+    "lapiz": {
+      "repo": "https://github.com/raineaeternal/Lapiz",
+      "version": "0.2.21"
+    },
+    "metacore": {
+      "repo": "https://github.com/Metalit/MetaCore",
+      "version": "1.3.0",
+      "build_command": "qpm s build; qpm s qmod"
+    },
+    "playlistcore": {
+      "repo": "https://github.com/Metalit/PlaylistCore",
+      "version": "1.5.2",
+      "build_command": "qpm s build; qpm s qmod"
+    },
+    "songcore": {
+      "repo": "https://github.com/raineaeternal/Quest-SongCore",
+      "version": "1.1.22",
+      "build_command": "qpm s build; qpm s qmod"
+    }
+  },
+  "mods": {
+    "AnyText": {
+      "repo": "https://github.com/CatsaCode/AnyText",
+      "build_command": "pwsh ./scripts/build.ps1; pwsh ./scripts/createqmod.ps1"
+    },
+    "BSNightcoreQuest": {
+      "repo": "https://github.com/Tatenshi/BSNightcoreQuest",
+      "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1"
+    },
+    "BeatLeader": {
+      "repo": "https://github.com/BeatLeader/beatleader-qmod",
+      "build_command": "pwsh ./scripts/build.ps1; pwsh ./scripts/createqmod.ps1"
+    },
+    "BetterSongSearch": {
+      "repo": "https://github.com/bsq-ports/BetterSongSearchQuest",
+      "build_command": "pwsh build.ps1; pwsh createqmod.ps1"
+    },
+    "ClockMod": {
+      "repo": "https://github.com/EnderdracheLP/ClockMod",
+      "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1"
+    },
+    "DlcSorter": {
+      "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.DlcSorter"
+    },
+    "FakeId": {
+      "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.FakeID"
+    },
+    "FasterScroll": {
+      "repo": "https://github.com/christopherweinhardt/FasterScrollQuest"
+    },
+    "HitsoundTweaqs": {
+      "repo": "https://github.com/NSGolova/HitsoundTweaqs",
+      "build_command": "qpm s build; qpm s qmod"
+    },
+    "NoPromo": {
+      "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.NoPromo"
+    },
+    "Nya": {
+      "repo": "https://github.com/FrozenAlex/Nya-quest"
+    },
+    "RandomSongPicker": {
+      "repo": "https://github.com/Tatenshi/RandomSongPicker"
+    },
+    "RecentlyPlayed": {
+      "repo": "https://github.com/Tatenshi/RecentlyPlayed",
+      "build_command": "qpm s build; qpm s qmod"
+    },
+    "SmallQubes": {
+      "repo": "https://github.com/NSGolova/SmallQubes",
+      "build_command": "qpm s build; qpm s qmod"
+    },
+    "bsl": {
+      "repo": "https://github.com/FrozenAlex/BetterSongList",
+      "build_command": "pwsh ./scripts/build.ps1; pwsh ./scripts/createqmod.ps1"
+    },
+    "bts-yeeter": {
+      "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.BtsYeeter"
+    },
+    "crashreporter": {
+      "repo": "https://github.com/darknight1050/CrashReporter"
+    },
+    "custom-json-data": {
+      "repo": "https://github.com/StackDoubleFlow/CustomJSONData"
+    },
+    "datakeeper": {
+      "repo": "https://github.com/Metalit/PlayerDataKeeper",
+      "build_command": "qpm s build; qpm s qmod"
+    },
+    "graphicstweaks": {
+      "repo": "https://github.com/FrozenAlex/GraphicsTweaks"
+    },
+    "imagecoverexpander": {
+      "repo": "https://github.com/vcmikuu/ImageCoverExpander"
+    },
+    "morebuttons": {
+      "repo": "https://github.com/Metalit/MoreButtons",
+      "build_command": "qpm s build; qpm s qmod"
+    },
+    "particletuner": {
+      "repo": "https://github.com/kodenamekrak/ParticleTuner"
+    },
+    "playlistmanager": {
+      "repo": "https://github.com/Metalit/PlaylistManager",
+      "build_command": "qpm s build; qpm s qmod"
+    },
+    "qonsistentsabercolors": {
+      "repo": "https://github.com/kodenamekrak/QonsistentSaberColors"
+    },
+    "redbar": {
+      "repo": "https://github.com/vcmikuu/Red-bar"
+    },
+    "smoothedcontroller": {
+      "repo": "https://github.com/FrozenAlex/SmoothedController"
+    },
+    "songdownloader": {
+      "repo": "https://github.com/darknight1050/SongDownloader",
+      "build_command": "qpm s qmod"
+    },
+    "too-many-fireworks": {
+      "repo": "https://github.com/CatsaCode/TooManyFireworks"
+    },
+    "transitions": {
+      "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.Transitions",
+      "branch": "dev/1.40.6_6407",
+      "build_command": "qpm s build; qpm s qmod"
+    },
+    "unicode": {
+      "repo": "https://github.com/Metalit/UnicodeQuest",
+      "build_command": "qpm s build; qpm s qmod"
+    }
+  }
+}

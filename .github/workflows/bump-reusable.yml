@@ -1,0 +1,250 @@
+name: Bump mods (Reusable)
+
+on:
+  workflow_call:
+    inputs:
+      id:
+        required: true
+        type: string
+      game_version:
+        required: true
+        type: string
+      bs_cordl:
+        required: true
+        type: string
+      newest_mods:
+        required: true
+        type: string
+      repo:
+        required: true
+        type: string
+      version:
+        required: false
+        type: string
+      branch:
+        required: false
+        type: string
+      install:
+        required: false
+        type: boolean
+        default: false
+      build_command:
+        required: false
+        type: string
+
+jobs:
+  bump:
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    name: bump ${{ inputs.id }}
+
+    env:
+      run_build: true
+
+    steps:
+      - name: Get game_version
+        id: game_version
+        run: |
+          echo "Game version is ${{ inputs.game_version }}"
+
+      - name: Get timestamp
+        run: |
+          echo "timestamp=$(date +%s)" >> $GITHUB_ENV
+
+      - name: Get home path
+        run: |
+          echo "HOME=$HOME" | tee -a "$GITHUB_ENV"
+
+      - name: Checkout repository
+        run: |
+          if [ -n "${{ inputs.branch }}" ]; then
+            echo "Checking out branch ${{ inputs.branch }} of repository ${{ inputs.repo }}"
+            git clone "${{ inputs.repo }}" --recursive --branch "${{ inputs.branch }}" .
+          else
+            echo "Checking out default branch of repository ${{ inputs.repo }}"
+            git clone "${{ inputs.repo }}" --recursive .
+          fi
+
+          # Output the current commit hash
+          echo "git_commit=$(git rev-parse HEAD)" >> $GITHUB_ENV
+
+      - uses: seanmiddleditch/gha-setup-ninja@v3
+
+      - name: Restore QPM Cache
+        uses: actions/cache/restore@v4
+        with:
+          key: qpm-cache-${{ runner.os }}-${{ github.run_id }}-
+          restore-keys: qpm-cache-${{ runner.os }}-${{ github.run_id }}-
+          path: |
+            ${{ env.HOME }}/.local/share/QPM-RS
+            ${{ env.HOME }}/.config/QPM-RS
+
+      - name: Setup qpm
+        uses: fernthedev/qpm-action@v1
+        with:
+          workflow_token: ${{ secrets.GITHUB_TOKEN}}
+          restore: false
+          resolve_ndk: false
+          cache: false
+
+      - name: Get ID from qpm.json
+        id: qpm_id
+        run: |
+          if [ -f qpm.json ]; then
+            id="$(jq -r '.info.id' qpm.json)"
+            echo "id=$id" >> $GITHUB_OUTPUT
+          else
+            echo "qpm.json not found!"
+            exit 1
+          fi
+
+      - name: QPM cache clear
+        run: |
+          qpm cache clear "${{ steps.qpm_id.outputs.id }}" || echo "No cache to clear for ${{ steps.qpm_id.outputs.id }}"
+
+      - name: List QPM cache
+        run: |
+          qpm cache list || echo "No cache to list"
+
+      - name: Check for ${{ steps.qpm_id.outputs.id }} v${{ inputs.version || '0.0.0' }}
+        run: |
+          echo "run_build=true" >> $GITHUB_ENV
+
+          if [[ "${{ inputs.version }}" != '' ]]; then
+            mkdir -p /tmp/package-check
+            cd /tmp/package-check
+            qpm package create "package-test" "0.1.0"
+            qpm dependency add bs-cordl -v "${{ inputs.bs_cordl }}"
+            qpm dependency add "${{ steps.qpm_id.outputs.id }}" -v "^${{ inputs.version }}"
+            if qpm restore --update; then
+              echo "run_build=false" >> $GITHUB_ENV
+            else
+              echo "Package ${{ steps.qpm_id.outputs.id }} v${{ inputs.version }} is not available."
+            fi
+          fi
+
+          if curl -s "https://mods.bsquest.xyz/${{ inputs.game_version }}.json" | jq -r '. | to_entries | map(.key) | .[]' | grep -xq "${{ inputs.id }}"; then
+            echo "run_build=false" >> $GITHUB_ENV
+          fi
+          true
+
+      - name: Resolve NDK
+        if: env.run_build != 'false'
+        run: |
+          qpm ndk resolve -d || (
+            echo "No NDK pinned."
+            qpm ndk pin 27 || (
+              qpm ndk download 27
+              qpm ndk pin 27
+            )
+          )
+
+      - name: Bump dependencies
+        if: env.run_build != 'false'
+        run: |
+          # Loop through each mod in newest_mods by newline, then split by colon
+          echo "${{ inputs.newest_mods }}" | jq -rM '.[]' | while IFS=: read -r mod_name mod_version; do
+
+            # Read qpm.json into a variable
+            qpm_json=$(cat qpm.json)
+
+            # Use jq to loop through .dependencies in qpm.json, check if .id matches mod_name, and update .versionRange
+
+            if echo "$qpm_json" | jq -e ".dependencies[] | select(.id == \"$mod_name\")" > /dev/null; then
+              echo "Updating $mod_name to version $mod_version"
+              jq --arg mod_name "$mod_name" --arg mod_version "^${mod_version}" \
+                '.dependencies[] |= if .id == $mod_name then .versionRange = $mod_version else . end' \
+                qpm.json > qpm.json.tmp && mv qpm.json.tmp qpm.json
+            fi
+          done
+
+          qpm dependency sort
+          cat qpm.json
+
+      - name: Bump version
+        if: env.run_build != 'false'
+        run: |
+          if [ "${{ inputs.version }}" != '' ]; then
+            echo "Updating qpm.json with version ${{ inputs.version }}"
+              jq --arg version "${{ inputs.version }}" \
+                '.info.version = $version' qpm.json > qpm.json.tmp && mv qpm.json.tmp qpm.json
+          fi
+
+          if [ -e mod.template.json ]; then
+            echo "Updating mod.template.json with game version ${{ inputs.game_version }}"
+            jq --arg game_version "${{ inputs.game_version }}" \
+              '.packageVersion = $game_version' mod.template.json > mod.template.json.tmp && mv mod.template.json.tmp mod.template.json
+          fi
+
+          if [ -e mod.json ]; then
+            echo "Updating mod.json with game version ${{ inputs.game_version }}"
+            jq --arg game_version "${{ inputs.game_version }}" \
+              '.packageVersion = $game_version' mod.json > mod.json.tmp && mv mod.json.tmp mod.json
+          fi
+
+      - name: QPM restore
+        if: env.run_build != 'false'
+        run: |
+          qpm restore --update
+
+      - name: Build
+        if: env.run_build != 'false'
+        run: ${{ inputs.build_command || 'qpm qmod zip' }}
+        env:
+          HOME: ${{ env.HOME }}
+
+      - name: Install
+        if: env.run_build != 'false' && inputs.install == true
+        run: |
+          qpm install
+
+      - name: Display qpm.shared.json
+        if: env.run_build != 'false'
+        run: |
+          cat qpm.shared.json
+
+      - name: List QPM cache
+        run: |
+          qpm cache list || echo "No cache to list"
+
+      - name: Delete all GitHub QPM caches
+        if: inputs.install == true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+          REPO: ${{ github.repository }}
+        run: |
+          gh api -H "Accept: application/vnd.github+json" \
+            /repos/$REPO/actions/caches \
+            --paginate \
+            -q '.actions_caches[] | select(.key | startswith("qpm-cache-${{ runner.os }}-${{ github.run_id }}-")) | .id' |
+          while read cache_id; do
+            echo "Deleting cache id $cache_id"
+            gh api --method DELETE /repos/$REPO/actions/caches/$cache_id
+          done
+
+      - name: Save QPM Cache
+        if: inputs.install == true
+        uses: actions/cache/save@v4
+        with:
+          key: qpm-cache-${{ runner.os }}-${{ github.run_id }}-${{ env.timestamp }}
+          path: |
+            ${{ env.HOME }}/.local/share/QPM-RS
+            ${{ env.HOME }}/.config/QPM-RS
+
+      - name: Upload Workspace
+        if: env.run_build != 'false'
+        uses: actions/upload-artifact@v4
+        with:
+          name: workspace_${{ steps.qpm_id.outputs.id }}
+          include-hidden-files: true
+          path: |
+            .
+            !./extern
+
+      - name: Upload Build
+        if: env.run_build != 'false'
+        uses: actions/upload-artifact@v4
+        with:
+          path: |
+            *.qmod
+          name: qmod_${{ steps.qpm_id.outputs.id }}

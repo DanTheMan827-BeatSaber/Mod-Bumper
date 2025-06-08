@@ -1,0 +1,164 @@
+name: Bump mods
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - '*'
+
+permissions:
+  actions: write
+
+jobs:
+  clear-cache:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Delete all QPM caches
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh api -H "Accept: application/vnd.github+json" \
+            /repos/$REPO/actions/caches \
+            --paginate \
+            -q '.actions_caches[] | select(.key | startswith("qpm-cache-${{ runner.os }}-${{ github.run_id }}-")) | .id' |
+          while read cache_id; do
+            echo "Deleting cache id $cache_id"
+            gh api --method DELETE /repos/$REPO/actions/caches/$cache_id
+          done
+
+  get-mods:
+    runs-on: ubuntu-latest
+    outputs:
+      packageVersion: ${{ steps.parse-mods.outputs.packageVersion }}
+      newestDependencies: ${{ steps.parse-mods.outputs.newestDependencies }}
+      bs-cordl: ${{ steps.parse-mods.outputs.bs-cordl }}
+      beatsaber-hook: ${{ steps.parse-mods.outputs.beatsaber-hook }}
+      installedMods: ${{ steps.parse-mods.outputs.installedMods }}
+      mods: ${{ steps.parse-mods.outputs.mods }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Parse mods.json
+        id: parse-mods
+        run: |
+          echo "installedMods=$(jq -crM '.installedMods | to_entries | map({id: .key} + .value)' mods.json)" >> $GITHUB_OUTPUT
+          echo "mods=$(jq -crM '.mods | to_entries | map({id: .key} + .value)' mods.json)" >> $GITHUB_OUTPUT
+          echo "newestDependencies=$(jq -crM '.newestDependencies | to_entries | map("\(.key):\(.value)")' mods.json)" >> $GITHUB_OUTPUT
+          echo "bs-cordl=$(jq -rM '.newestDependencies["bs-cordl"]' mods.json)" >> $GITHUB_OUTPUT
+          echo "beatsaber-hook=$(jq -rM '.newestDependencies["beatsaber-hook"]' mods.json)" >> $GITHUB_OUTPUT
+          echo "packageVersion=$(jq -rM '.packageVersion' mods.json)" >> $GITHUB_OUTPUT
+
+  bump-installable-mods:
+    needs: [clear-cache, get-mods]
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: bump ${{ matrix.id }}
+    with:
+      id: ${{ matrix.id }}
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: ${{ matrix.repo }}
+      version: ${{ matrix.version }}
+      branch: ${{ matrix.branch }}
+      install: true
+      build_command: ${{ matrix.build_command }}
+
+    strategy:
+      max-parallel: 1
+      matrix:
+        include: ${{ fromJson(needs.get-mods.outputs.installedMods)}}
+
+  bump:
+    needs: [bump-installable-mods, get-mods]
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: bump ${{ matrix.id }}
+    with:
+      id: ${{ matrix.id }}
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: ${{ matrix.repo }}
+      version: ${{ matrix.version }}
+      branch: ${{ matrix.branch }}
+      install: false
+      build_command: ${{ matrix.build_command }}
+
+    strategy:
+      matrix:
+        include: ${{ fromJson(needs.get-mods.outputs.mods) }}
+
+  combine-artifacts:
+    needs: bump
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          pattern: qmod_*
+
+      - name: Move QMODs to root
+        run: |
+          find artifacts -type f -name '*.qmod' -exec mv {} . \;
+
+      - name: Upload combined artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: all_qmods
+          path: |
+            *.qmod
+
+  upload-cache:
+    needs: bump
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get home path
+        run: |
+          echo "HOME=$HOME" | tee -a "$GITHUB_ENV"
+
+      - name: Restore QPM Cache
+        uses: actions/cache/restore@v4
+        with:
+          key: qpm-cache-${{ runner.os }}-${{ github.run_id }}-
+          restore-keys: qpm-cache-${{ runner.os }}-${{ github.run_id }}-
+          path: |
+            ${{ env.HOME }}/.local/share/QPM-RS
+            ${{ env.HOME }}/.config/QPM-RS
+
+      - name: Clear NDK cache
+        run: |
+          rm -r "${{ env.HOME }}/.local/share/QPM-RS/ndk" || echo "No NDK cache to clear"
+
+      - name: Upload cache artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: qpm-cache
+          path: |
+            ${{ env.HOME }}/.local/share/QPM-RS
+            ${{ env.HOME }}/.config/QPM-RS
+
+  clear-cache-end:
+    runs-on: ubuntu-latest
+    if: always()
+    needs: upload-cache
+    steps:
+      - name: Delete all QPM caches
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh api -H "Accept: application/vnd.github+json" \
+            /repos/$REPO/actions/caches \
+            --paginate \
+            -q '.actions_caches[] | select(.key | startswith("qpm-cache-${{ runner.os }}-${{ github.run_id }}-")) | .id' |
+          while read cache_id; do
+            echo "Deleting cache id $cache_id"
+            gh api --method DELETE /repos/$REPO/actions/caches/$cache_id
+          done
