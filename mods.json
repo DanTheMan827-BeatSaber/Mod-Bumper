@@ -55,6 +55,25 @@
       "repo": "https://github.com/raineaeternal/Quest-SongCore",
       "version": "1.1.22",
       "build_command": "qpm s build; qpm s qmod"
+    },
+    "chatplex-sdk-bs": {
+      "repo": "https://github.com/hardcpp/QuestChatPlexSDK-BS/",
+      "version": "6.4.1"
+    },
+    "multiplayer-core": {
+      "repo": "https://github.com/EnderdracheLP/MultiplayerCore.Quest",
+      "version": "1.6.2",
+      "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1 'MultiplayerCore'"
+    },
+    "camera-utils": {
+      "repo": "https://github.com/Reezonate/CameraUtils-Quest/",
+      "version": "1.1.7",
+      "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1 'camera-utils'"
+    },
+    "BeatTogether": {
+      "repo": "https://github.com/BeatTogether/BeatTogether.Quest",
+      "version": "2.2.2",
+      "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1 'BeatTogether'"
     }
   },
   "mods": {
@@ -90,6 +109,9 @@
     "HitsoundTweaqs": {
       "repo": "https://github.com/NSGolova/HitsoundTweaqs",
       "build_command": "qpm s build; qpm s qmod"
+    },
+    "mod-list": {
+      "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.ModList/"
     },
     "NoPromo": {
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.NoPromo"
@@ -166,6 +188,16 @@
     "unicode": {
       "repo": "https://github.com/Metalit/UnicodeQuest",
       "build_command": "qpm s build; qpm s qmod"
+    },
+    "qbeatsaberplus-gametweaker": {
+      "repo": "https://github.com/hardcpp/QBeatSaberPlus-GameTweaker",
+      "build_command": "qpm s qmod"
+    },
+    "qbeatsaberplus-menumusic": {
+      "repo": "https://github.com/hardcpp/QBeatSaberPlus-MenuMusic/"
+    },
+    "qbeatsaberplus-notetweaker": {
+      "repo": "https://github.com/hardcpp/QBeatSaberPlus-NoteTweaker"
     }
   }
 }
