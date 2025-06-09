@@ -41,6 +41,11 @@
       "repo": "https://github.com/raineaeternal/Lapiz",
       "version": "0.2.21"
     },
+    "songcore": {
+      "repo": "https://github.com/raineaeternal/Quest-SongCore",
+      "version": "1.1.22",
+      "build_command": "qpm s build; qpm s qmod"
+    },
     "metacore": {
       "repo": "https://github.com/Metalit/MetaCore",
       "version": "1.3.0",
@@ -49,11 +54,6 @@
     "playlistcore": {
       "repo": "https://github.com/Metalit/PlaylistCore",
       "version": "1.5.2",
-      "build_command": "qpm s build; qpm s qmod"
-    },
-    "songcore": {
-      "repo": "https://github.com/raineaeternal/Quest-SongCore",
-      "version": "1.1.22",
       "build_command": "qpm s build; qpm s qmod"
     },
     "chatplex-sdk-bs": {
@@ -69,11 +69,6 @@
       "repo": "https://github.com/Reezonate/CameraUtils-Quest/",
       "version": "1.1.7",
       "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1 'camera-utils'"
-    },
-    "BeatTogether": {
-      "repo": "https://github.com/BeatTogether/BeatTogether.Quest",
-      "version": "2.2.2",
-      "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1 'BeatTogether'"
     }
   },
   "mods": {
@@ -88,6 +83,10 @@
     "BeatLeader": {
       "repo": "https://github.com/BeatLeader/beatleader-qmod",
       "build_command": "pwsh ./scripts/build.ps1; pwsh ./scripts/createqmod.ps1"
+    },
+    "BeatTogether": {
+      "repo": "https://github.com/BeatTogether/BeatTogether.Quest",
+      "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1 'BeatTogether'"
     },
     "BetterSongSearch": {
       "repo": "https://github.com/bsq-ports/BetterSongSearchQuest",
