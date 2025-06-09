@@ -141,9 +141,11 @@ jobs:
 
       - name: Bump dependencies
         if: env.run_build != 'false'
+        env:
+          NEWEST_MODS: ${{ inputs.newest_mods }}
         run: |
           # Loop through each mod in newest_mods by newline, then split by colon
-          echo "${{ inputs.newest_mods }}" | jq -rM '.[]' | while IFS=: read -r mod_name mod_version; do
+          echo "$NEWEST_MODS" | jq -rM '.[]' | while IFS=: read -r mod_name mod_version; do
 
             # Read qpm.json into a variable
             qpm_json=$(cat qpm.json)
