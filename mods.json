@@ -64,7 +64,7 @@
     },
     "BSNightcoreQuest": {
       "repo": "https://github.com/Tatenshi/BSNightcoreQuest",
-      "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1"
+      "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1 'BSNightcoreQuest'"
     },
     "BeatLeader": {
       "repo": "https://github.com/BeatLeader/beatleader-qmod",
@@ -72,7 +72,7 @@
     },
     "BetterSongSearch": {
       "repo": "https://github.com/bsq-ports/BetterSongSearchQuest",
-      "build_command": "pwsh build.ps1; pwsh createqmod.ps1"
+      "build_command": "pwsh build.ps1; pwsh createqmod.ps1 'BetterSongSearch'"
     },
     "ClockMod": {
       "repo": "https://github.com/EnderdracheLP/ClockMod",
