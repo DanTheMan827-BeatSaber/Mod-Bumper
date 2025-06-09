@@ -91,7 +91,7 @@
     },
     "BetterSongSearch": {
       "repo": "https://github.com/bsq-ports/BetterSongSearchQuest",
-      "build_command": "pwsh build.ps1; pwsh createqmod.ps1 'BetterSongSearch'"
+      "build_command": "pwsh build.ps1; qpm qmod zip"
     },
     "ClockMod": {
       "repo": "https://github.com/EnderdracheLP/ClockMod",
