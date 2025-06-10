@@ -140,6 +140,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: qpm-cache
+          include-hidden-files: true
           path: |
             ${{ env.HOME }}/.local/share/QPM-RS
             ${{ env.HOME }}/.config/QPM-RS
