@@ -73,8 +73,7 @@
   },
   "mods": {
     "AnyText": {
-      "repo": "https://github.com/CatsaCode/AnyText",
-      "build_command": "pwsh ./scripts/build.ps1; pwsh ./scripts/createqmod.ps1"
+      "repo": "https://github.com/CatsaCode/AnyText"
     },
     "BSNightcoreQuest": {
       "repo": "https://github.com/Tatenshi/BSNightcoreQuest",
@@ -122,8 +121,7 @@
       "repo": "https://github.com/Tatenshi/RandomSongPicker"
     },
     "RecentlyPlayed": {
-      "repo": "https://github.com/Tatenshi/RecentlyPlayed",
-      "build_command": "qpm s build; qpm s qmod"
+      "repo": "https://github.com/Tatenshi/RecentlyPlayed"
     },
     "SmallQubes": {
       "repo": "https://github.com/NSGolova/SmallQubes",
@@ -173,8 +171,7 @@
       "repo": "https://github.com/FrozenAlex/SmoothedController"
     },
     "songdownloader": {
-      "repo": "https://github.com/darknight1050/SongDownloader",
-      "build_command": "qpm s qmod"
+      "repo": "https://github.com/darknight1050/SongDownloader"
     },
     "too-many-fireworks": {
       "repo": "https://github.com/CatsaCode/TooManyFireworks"
@@ -189,8 +186,7 @@
       "build_command": "qpm s build; qpm s qmod"
     },
     "qbeatsaberplus-gametweaker": {
-      "repo": "https://github.com/hardcpp/QBeatSaberPlus-GameTweaker",
-      "build_command": "qpm s qmod"
+      "repo": "https://github.com/hardcpp/QBeatSaberPlus-GameTweaker"
     },
     "qbeatsaberplus-menumusic": {
       "repo": "https://github.com/hardcpp/QBeatSaberPlus-MenuMusic/"
