@@ -78,6 +78,7 @@ jobs:
           path: |
             ${{ env.HOME }}/.local/share/QPM-RS
             ${{ env.HOME }}/.config/QPM-RS
+            ${{ env.HOME }}/installed-mods.txt
 
       - name: Setup qpm
         uses: fernthedev/qpm-action@v1
@@ -139,6 +140,13 @@ jobs:
             )
           )
 
+      - name: Sort dependencies
+        if: env.run_build != 'false'
+        run: |
+          # We don't need to sort dependencies, but this causes qpm to re-serialize qpm.json
+          # and ensures that the file contains the additionalData object for each dependency.
+          qpm dependency sort
+
       - name: Bump dependencies
         if: env.run_build != 'false'
         env:
@@ -184,6 +192,16 @@ jobs:
               '.packageVersion = $game_version' mod.json > mod.json.tmp && mv mod.json.tmp mod.json
           fi
 
+      - name: Exclude installed mods from qmod
+        if: env.run_build != 'false'
+        run: |
+          if [ -f "${{ env.HOME }}/installed-mods.txt" ]; then
+            jq --argjson ids_to_update "$(jq -R . "${{ env.HOME }}/installed-mods.txt" | jq -sM .)" '.dependencies |= map(if .id | IN($ids_to_update[]) then .additionalData.includeQmod = false else . end)' qpm.json > qpm.json.tmp && mv qpm.json.tmp qpm.json
+            jq . qpm.json
+          else
+            echo "No installed mods file found, skipping exclusion"
+          fi
+
       - name: QPM restore
         if: env.run_build != 'false'
         run: |
@@ -199,6 +217,7 @@ jobs:
         if: env.run_build != 'false' && inputs.install == true
         run: |
           qpm install
+          echo "${{ steps.qpm_id.outputs.id }}" >> "${{ env.HOME }}/installed-mods.txt"
 
       - name: Display qpm.shared.json
         if: env.run_build != 'false'
@@ -232,6 +251,7 @@ jobs:
           path: |
             ${{ env.HOME }}/.local/share/QPM-RS
             ${{ env.HOME }}/.config/QPM-RS
+            ${{ env.HOME }}/installed-mods.txt
 
       - name: Upload Workspace
         if: env.run_build != 'false'
