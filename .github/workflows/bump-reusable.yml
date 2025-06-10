@@ -197,7 +197,6 @@ jobs:
         run: |
           if [ -f "${{ env.HOME }}/installed-mods.txt" ]; then
             jq --argjson ids_to_update "$(jq -R . "${{ env.HOME }}/installed-mods.txt" | jq -sM .)" '.dependencies |= map(if .id | IN($ids_to_update[]) then .additionalData.includeQmod = false else . end)' qpm.json > qpm.json.tmp && mv qpm.json.tmp qpm.json
-            jq . qpm.json
           else
             echo "No installed mods file found, skipping exclusion"
           fi
@@ -206,6 +205,18 @@ jobs:
         if: env.run_build != 'false'
         run: |
           qpm restore --update
+
+      - name: Display qpm.json
+        if: env.run_build != 'false'
+        continue-on-error: true
+        run: |
+          jq . qpm.json
+
+      - name: Display qpm.shared.json
+        if: env.run_build != 'false'
+        continue-on-error: true
+        run: |
+          jq . qpm.shared.json
 
       - name: Build
         if: env.run_build != 'false'
