@@ -80,8 +80,7 @@
       "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1 'BSNightcoreQuest'"
     },
     "BeatLeader": {
-      "repo": "https://github.com/BeatLeader/beatleader-qmod",
-      "build_command": "pwsh ./scripts/build.ps1; pwsh ./scripts/createqmod.ps1"
+      "repo": "https://github.com/BeatLeader/beatleader-qmod"
     },
     "BeatTogether": {
       "repo": "https://github.com/BeatTogether/BeatTogether.Quest",
