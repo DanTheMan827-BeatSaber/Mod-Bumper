@@ -176,9 +176,7 @@
       "repo": "https://github.com/CatsaCode/TooManyFireworks"
     },
     "transitions": {
-      "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.Transitions",
-      "branch": "dev/1.40.6_6407",
-      "build_command": "qpm s build; qpm s qmod"
+      "repo": "https://github.com/Metalit/Transitions"
     },
     "unicode": {
       "repo": "https://github.com/Metalit/UnicodeQuest",
