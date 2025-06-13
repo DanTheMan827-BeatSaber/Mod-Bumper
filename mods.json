@@ -29,11 +29,6 @@
     "web-utils": "0.6.7"
   },
   "installedMods": {
-    "bs-utils": {
-      "repo": "https://github.com/bsq-ports/QuestBS-Utils",
-      "version": "0.8.6",
-      "build_command": "qpm s qmod; cd build; mkdir -p debug; mv debug_libbs-utils.so debug/libbs-utils.so"
-    },
     "bsml": {
       "repo": "https://github.com/bsq-ports/Quest-BSML",
       "version": "0.4.53"
