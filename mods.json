@@ -168,6 +168,7 @@
     "IntroSkip": {
       "repo": "https://github.com/Royston1999/IntroSkip-Quest",
       "build_command": "pwsh ./build.ps1; pwsh ./buildQMOD.ps1 IntroSkip"
+    },
     "morebuttons": {
       "repo": "https://github.com/Metalit/MoreButtons",
       "build_command": "qpm s build; qpm s qmod"
