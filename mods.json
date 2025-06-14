@@ -26,6 +26,7 @@
     "song-details": "1.0.2",
     "songcore": "1.1.22",
     "tinyxml2": "10.0.0",
+    "tracks": "2.2.1",
     "web-utils": "0.6.7"
   },
   "installedMods": {
@@ -70,6 +71,10 @@
       "repo": "https://github.com/Fernthedev/HollywoodQuest/",
       "version": "1.2.1",
       "build_command": "pip install PyGithub; pip install requests; python3 ./update_ffmpeg.py; qpm qmod zip"
+    },
+    "tracks": {
+      "repo": "https://github.com/StackDoubleFlow/Tracks",
+      "version": "2.2.1"
     }
   },
   "mods": {
@@ -91,6 +96,9 @@
       "repo": "https://github.com/bsq-ports/BetterSongSearchQuest",
       "build_command": "pwsh build.ps1; qpm qmod zip"
     },
+    "chroma": {
+      "repo": "https://github.com/bsq-ports/Chroma/"
+    },
     "ClockMod": {
       "repo": "https://github.com/EnderdracheLP/ClockMod",
       "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1"
@@ -103,6 +111,10 @@
     },
     "FasterScroll": {
       "repo": "https://github.com/christopherweinhardt/FasterScrollQuest"
+    },
+    "HitScoreVisualizer": {
+      "repo": "https://github.com/christopherweinhardt/HitScoreVisualizer/",
+      "build_command": "qpm s build; qpm s qmod"
     },
     "HitsoundTweaqs": {
       "repo": "https://github.com/NSGolova/HitsoundTweaqs",
@@ -153,6 +165,9 @@
     "imagecoverexpander": {
       "repo": "https://github.com/vcmikuu/ImageCoverExpander"
     },
+    "IntroSkip": {
+      "repo": "https://github.com/Royston1999/IntroSkip-Quest",
+      "build_command": "pwsh ./build.ps1; pwsh ./buildQMOD.ps1 IntroSkip"
     "morebuttons": {
       "repo": "https://github.com/Metalit/MoreButtons",
       "build_command": "qpm s build; qpm s qmod"
@@ -170,8 +185,19 @@
     "redbar": {
       "repo": "https://github.com/vcmikuu/Red-bar"
     },
+    "scorepercentage": {
+      "repo": "https://github.com/Royston1999/ScorePercentage-Quest",
+      "build_command": "pwsh ./build.ps1; qpm qmod zip"
+    },
+    "slicedetails": {
+      "repo": "https://github.com/Royston1999/SliceDetails-Quest",
+      "build_command": "pwsh ./build.ps1; qpm qmod zip"
+    },
     "smoothedcontroller": {
       "repo": "https://github.com/FrozenAlex/SmoothedController"
+    },
+    "songchartvisualizer": {
+      "repo": "https://github.com/kodenamekrak/SongChartVisualizer/"
     },
     "songdownloader": {
       "repo": "https://github.com/darknight1050/SongDownloader"
@@ -194,6 +220,10 @@
     },
     "qbeatsaberplus-notetweaker": {
       "repo": "https://github.com/hardcpp/QBeatSaberPlus-NoteTweaker"
+    },
+    "Qounters": {
+      "repo": "https://github.com/Metalit/Qounters",
+      "build_command": "pwsh ./scripts/build.ps1; pwsh ./scripts/createqmod.ps1"
     }
   }
 }
