@@ -230,7 +230,9 @@ jobs:
 
       - name: Build
         if: env.run_build != 'false'
-        run: ${{ inputs.build_command || 'qpm qmod zip' }}
+        run: |
+          set -x
+          ${{ inputs.build_command || 'qpm qmod zip' }}
         env:
           HOME: ${{ env.HOME }}
 
