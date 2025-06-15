@@ -60,7 +60,8 @@
     },
     "chatplex-sdk-bs": {
       "repo": "https://github.com/hardcpp/QuestChatPlexSDK-BS/",
-      "version": "6.4.1"
+      "version": "6.4.1",
+      "build_command": "pwsh ./build.ps1; qpm qmod zip --skip_build"
     },
     "multiplayer-core": {
       "repo": "https://github.com/EnderdracheLP/MultiplayerCore.Quest",
