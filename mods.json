@@ -79,7 +79,8 @@
     },
     "tracks": {
       "repo": "https://github.com/StackDoubleFlow/Tracks",
-      "version": "2.2.1"
+      "version": "2.2.1",
+      "build_command": "cargo install cargo-ndk; qpm qmod zip"
     }
   },
   "mods": {
