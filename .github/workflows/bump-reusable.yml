@@ -68,8 +68,6 @@ jobs:
           # Output the current commit hash
           echo "git_commit=$(git rev-parse HEAD)" >> $GITHUB_ENV
 
-      - uses: seanmiddleditch/gha-setup-ninja@v3
-
       - name: Restore QPM Cache
         uses: actions/cache/restore@v4
         with:
@@ -137,6 +135,9 @@ jobs:
           key: workspace-${{ runner.os }}-${{ inputs.game_version }}-${{ inputs.version }}-${{ env.git_commit }}
           path: |
             .
+
+      - uses: seanmiddleditch/gha-setup-ninja@v3
+        if: env.run_build != 'false'
 
       - name: Resolve NDK
         if: env.run_build != 'false'
