@@ -9,6 +9,7 @@
     "conditional-dependencies": "0.3.0",
     "config-utils": "2.0.3",
     "cpp-semver": "0.1.2",
+    "custom-json-data": "0.23.2",
     "custom-types": "0.18.3",
     "fmt": "11.0.2",
     "hollywood": "1.2.1",
@@ -52,6 +53,10 @@
       "repo": "https://github.com/Metalit/PlaylistCore",
       "version": "1.5.2",
       "build_command": "qpm s build; qpm s qmod"
+    },
+    "custom-json-data": {
+      "repo": "https://github.com/StackDoubleFlow/CustomJSONData",
+      "version": "0.23.2"
     },
     "chatplex-sdk-bs": {
       "repo": "https://github.com/hardcpp/QuestChatPlexSDK-BS/",
@@ -151,9 +156,6 @@
     },
     "crashreporter": {
       "repo": "https://github.com/darknight1050/CrashReporter"
-    },
-    "custom-json-data": {
-      "repo": "https://github.com/StackDoubleFlow/CustomJSONData"
     },
     "datakeeper": {
       "repo": "https://github.com/Metalit/PlayerDataKeeper",
