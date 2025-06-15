@@ -129,6 +129,15 @@ jobs:
           fi
           true
 
+      - name: Cache Workspace
+        if: env.run_build != 'false'
+        id: cache-workspace
+        uses: actions/cache@v4
+        with:
+          key: workspace-${{ runner.os }}-${{ inputs.game_version }}-${{ inputs.version }}-${{ env.git_commit }}
+          path: |
+            .
+
       - name: Resolve NDK
         if: env.run_build != 'false'
         run: |
