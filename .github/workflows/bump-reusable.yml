@@ -132,7 +132,7 @@ jobs:
         id: cache-workspace
         uses: actions/cache@v4
         with:
-          key: workspace-${{ runner.os }}-${{ inputs.game_version }}-${{ inputs.version }}-${{ env.git_commit }}
+          key: workspace-${{ runner.os }}-${{ inputs.id }}-${{ inputs.game_version }}-${{ inputs.version }}-${{ env.git_commit }}
           path: |
             .
 
