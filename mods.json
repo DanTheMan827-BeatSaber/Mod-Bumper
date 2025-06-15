@@ -80,7 +80,7 @@
     "tracks": {
       "repo": "https://github.com/StackDoubleFlow/Tracks",
       "version": "2.2.1",
-      "build_command": "rustup target add aarch64-linux-android; rustup target install aarch64-linux-android; cargo install cargo-ndk; qpm qmod zip"
+      "build_command": "rustup target install aarch64-linux-android; rustup target add aarch64-linux-android; cargo install cargo-ndk; qpm qmod zip"
     }
   },
   "mods": {
