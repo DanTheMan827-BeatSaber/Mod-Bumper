@@ -31,6 +31,9 @@ on:
       build_command:
         required: false
         type: string
+      qmod_command:
+        required: false
+        type: string
 
 jobs:
   bump:
@@ -229,10 +232,18 @@ jobs:
           jq . qpm.shared.json
 
       - name: Build
+        if: env.run_build != 'false' && steps.cache-workspace.outputs.cache_hit == 'false'
+        run: |
+          set -x
+          ${{ inputs.build_command || 'qpm s build' }}
+        env:
+          HOME: ${{ env.HOME }}
+
+      - name: Create qmod
         if: env.run_build != 'false'
         run: |
           set -x
-          ${{ inputs.build_command || 'qpm qmod zip' }}
+          ${{ inputs.qmod_command || 'qpm qmod zip --skip_build' }}
         env:
           HOME: ${{ env.HOME }}
 
