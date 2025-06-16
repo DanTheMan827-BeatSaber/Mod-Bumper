@@ -181,8 +181,29 @@ jobs:
             fi
           done
 
-          qpm dependency sort
-          cat qpm.json
+      - name: Add qmodIncludeDirs
+        if: env.run_build != 'false'
+        run: |
+          jq '
+          .workspace.qmodIncludeDirs += (
+            ["extern/libs", "build"]
+            | map(select(
+                . as $item
+                | (
+                    $norms := [
+                      $item,
+                      ($item | startswith("./") | if . then . else "./\($item)" end)
+                    ]
+                    | map(gsub("/+$"; ""))
+                  );
+                  (.workspace.qmodIncludeDirs // [])
+                  | map(gsub("^\\./"; ""))
+                  | map(gsub("/+$"; ""))
+                  | inside($norms | map(.))
+                  | not
+                )
+              )
+          )' qpm.json > qpm.json.tmp && mv qpm.json.tmp qpm.json
 
       - name: Bump version
         if: env.run_build != 'false'
