@@ -234,7 +234,7 @@ jobs:
           jq . qpm.shared.json
 
       - name: Build
-        if: env.run_build != 'false' && steps.cache-workspace.outputs.cache_hit != 'true'
+        if: env.run_build == 'true' && steps.cache-workspace.outputs.cache_hit == 'false'
         run: |
           set -x
           ${{ inputs.build_command || 'qpm s build' }}
