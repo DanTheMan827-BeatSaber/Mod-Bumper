@@ -28,6 +28,10 @@ on:
         required: false
         type: boolean
         default: false
+      force_build:
+        required: false
+        type: boolean
+        default: false
       build_command:
         required: false
         type: string
@@ -111,6 +115,10 @@ jobs:
       - name: Check for ${{ steps.qpm_id.outputs.id }} v${{ inputs.version || '0.0.0' }}
         run: |
           echo "run_build=true" >> $GITHUB_ENV
+
+          if [[ "${{ inputs.force_build }}" == "true" ]]; then
+            exit 0
+          fi
 
           if [[ "${{ inputs.version }}" != '' ]]; then
             mkdir -p /tmp/package-check
