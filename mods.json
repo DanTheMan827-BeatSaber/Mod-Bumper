@@ -63,13 +63,13 @@
     "multiplayer-core": {
       "repo": "https://github.com/EnderdracheLP/MultiplayerCore.Quest",
       "version": "1.6.2",
-      "qmod": "pwsh buildQMOD.ps1 'MultiplayerCore'"
+      "qmod": "pwsh buildQMOD.ps1 MultiplayerCore -package"
     },
     "camera-utils": {
       "repo": "https://github.com/Reezonate/CameraUtils-Quest/",
       "version": "1.1.7",
       "build": "pwsh build.ps1",
-      "qmod": "pwsh buildQMOD.ps1 'camera-utils'"
+      "qmod": "pwsh buildQMOD.ps1 camera-utils -package"
     },
     "hollywood": {
       "repo": "https://github.com/Fernthedev/HollywoodQuest/",
@@ -95,7 +95,7 @@
     "BeatTogether": {
       "repo": "https://github.com/BeatTogether/BeatTogether.Quest",
       "build": "pwsh build.ps1",
-      "qmod": "pwsh buildQMOD.ps1 'BeatTogether'"
+      "qmod": "pwsh buildQMOD.ps1 BeatTogether -package"
     },
     "BetterSongSearch": {
       "repo": "https://github.com/bsq-ports/BetterSongSearchQuest"
@@ -106,7 +106,7 @@
     "ClockMod": {
       "repo": "https://github.com/EnderdracheLP/ClockMod",
       "build": "pwsh build.ps1",
-      "qmod": "pwsh buildQMOD.ps1"
+      "qmod": "pwsh buildQMOD.ps1 ClockMod -package"
     },
     "DlcSorter": {
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.DlcSorter"
@@ -123,7 +123,7 @@
     },
     "HitsoundTweaqs": {
       "repo": "https://github.com/NSGolova/HitsoundTweaqs",
-      "qmod": "pwsh ./buildQMOD.ps1"
+      "qmod": "pwsh ./buildQMOD.ps1 HitsoundTweaqs -package"
     },
     "mod-list": {
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.ModList/"
@@ -145,7 +145,7 @@
     },
     "SmallQubes": {
       "repo": "https://github.com/NSGolova/SmallQubes",
-      "qmod": "pwsh ./buildQMOD.ps1"
+      "qmod": "pwsh ./buildQMOD.ps1 SmallQubes -package"
     },
     "bsl": {
       "repo": "https://github.com/FrozenAlex/BetterSongList",
@@ -169,7 +169,7 @@
     "IntroSkip": {
       "repo": "https://github.com/Royston1999/IntroSkip-Quest",
       "build": "pwsh ./build.ps1",
-      "qmod": "pwsh ./buildQMOD.ps1 IntroSkip"
+      "qmod": "pwsh ./buildQMOD.ps1 IntroSkip -package"
     },
     "morebuttons": {
       "repo": "https://github.com/Metalit/MoreButtons",
