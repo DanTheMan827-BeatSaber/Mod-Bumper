@@ -241,6 +241,11 @@ jobs:
         env:
           HOME: ${{ env.HOME }}
 
+      - name: List files
+        if: env.run_build != 'false'
+        run: |
+          find
+
       - name: Create qmod
         if: env.run_build != 'false'
         run: |
