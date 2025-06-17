@@ -87,7 +87,8 @@
       "repo": "https://github.com/CatsaCode/AnyText"
     },
     "BSNightcoreQuest": {
-      "repo": "https://github.com/Tatenshi/BSNightcoreQuest"
+      "repo": "https://github.com/Tatenshi/BSNightcoreQuest",
+      "qmod": "qpm s qmod"
     },
     "BeatLeader": {
       "repo": "https://github.com/BeatLeader/beatleader-qmod"
