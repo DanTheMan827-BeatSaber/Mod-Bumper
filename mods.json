@@ -123,7 +123,7 @@
     },
     "HitsoundTweaqs": {
       "repo": "https://github.com/NSGolova/HitsoundTweaqs",
-      "qmod": "pwsh ./buildQMOD.ps1 HitsoundTweaqs -package"
+      "qmod": "pwsh ./buildQMOD.ps1 HitsoundTweaqs"
     },
     "mod-list": {
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.ModList/"
@@ -145,7 +145,7 @@
     },
     "SmallQubes": {
       "repo": "https://github.com/NSGolova/SmallQubes",
-      "qmod": "pwsh ./buildQMOD.ps1 SmallQubes -package"
+      "qmod": "pwsh ./buildQMOD.ps1 SmallQubes"
     },
     "bsl": {
       "repo": "https://github.com/FrozenAlex/BetterSongList",
@@ -169,7 +169,7 @@
     "IntroSkip": {
       "repo": "https://github.com/Royston1999/IntroSkip-Quest",
       "build": "pwsh ./build.ps1",
-      "qmod": "pwsh ./buildQMOD.ps1 IntroSkip -package"
+      "qmod": "pwsh ./buildQMOD.ps1 IntroSkip"
     },
     "morebuttons": {
       "repo": "https://github.com/Metalit/MoreButtons",
@@ -190,7 +190,7 @@
     },
     "scorepercentage": {
       "repo": "https://github.com/Royston1999/ScorePercentage-Quest",
-      "build_command": "pwsh ./build.ps1; qpm qmod zip"
+      "build": "pwsh ./build.ps1"
     },
     "slicedetails": {
       "repo": "https://github.com/Royston1999/SliceDetails-Quest",
