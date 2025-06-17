@@ -69,7 +69,7 @@
       "repo": "https://github.com/Reezonate/CameraUtils-Quest/",
       "version": "1.1.7",
       "build": "pwsh build.ps1",
-      "qmod": "pwsh buildQMOD.ps1 camera-utils -package"
+      "qmod": "pwsh buildQMOD.ps1 camera-utils"
     },
     "hollywood": {
       "repo": "https://github.com/Fernthedev/HollywoodQuest/",
