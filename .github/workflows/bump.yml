@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
     inputs:
       force_build:
-      type: boolean
-      default: false
+        type: boolean
+        default: false
   push:
     branches:
       - '*'
