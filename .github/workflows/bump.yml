@@ -65,7 +65,8 @@ jobs:
       version: ${{ matrix.version }}
       branch: ${{ matrix.branch }}
       install: true
-      build_command: ${{ matrix.build_command }}
+      build_command: ${{ matrix.build }}
+      qmod_command: ${{ matrix.qmod }}
 
     strategy:
       max-parallel: 1
@@ -86,7 +87,8 @@ jobs:
       version: ${{ matrix.version }}
       branch: ${{ matrix.branch }}
       install: false
-      build_command: ${{ matrix.build_command }}
+      build_command: ${{ matrix.build }}
+      qmod_command: ${{ matrix.qmod }}
 
     strategy:
       matrix:

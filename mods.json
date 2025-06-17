@@ -42,17 +42,15 @@
     "songcore": {
       "repo": "https://github.com/raineaeternal/Quest-SongCore",
       "version": "1.1.22",
-      "build_command": "qpm s build; qpm s qmod"
+      "qmod": "qpm qmod manifest; pwsh ./scripts/createqmod.ps1 SongCore"
     },
     "metacore": {
       "repo": "https://github.com/Metalit/MetaCore",
-      "version": "1.3.0",
-      "build_command": "qpm s build; qpm s qmod"
+      "version": "1.3.0"
     },
     "playlistcore": {
       "repo": "https://github.com/Metalit/PlaylistCore",
-      "version": "1.5.2",
-      "build_command": "qpm s build; qpm s qmod"
+      "version": "1.5.2"
     },
     "custom-json-data": {
       "repo": "https://github.com/StackDoubleFlow/CustomJSONData",
@@ -60,28 +58,28 @@
     },
     "chatplex-sdk-bs": {
       "repo": "https://github.com/hardcpp/QuestChatPlexSDK-BS/",
-      "version": "6.4.1",
-      "build_command": "pwsh ./build.ps1; qpm qmod zip --skip_build"
+      "version": "6.4.1"
     },
     "multiplayer-core": {
       "repo": "https://github.com/EnderdracheLP/MultiplayerCore.Quest",
       "version": "1.6.2",
-      "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1 'MultiplayerCore'"
+      "qmod": "pwsh buildQMOD.ps1 MultiplayerCore -package"
     },
     "camera-utils": {
       "repo": "https://github.com/Reezonate/CameraUtils-Quest/",
       "version": "1.1.7",
-      "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1 'camera-utils'"
+      "build": "pwsh build.ps1",
+      "qmod": "pwsh buildQMOD.ps1 camera-utils"
     },
     "hollywood": {
       "repo": "https://github.com/Fernthedev/HollywoodQuest/",
       "version": "1.2.1",
-      "build_command": "pip install PyGithub; pip install requests; python3 ./update_ffmpeg.py; qpm qmod zip"
+      "build": "pip install PyGithub; pip install requests; python3 ./update_ffmpeg.py; qpm s build"
     },
     "tracks": {
       "repo": "https://github.com/StackDoubleFlow/Tracks",
       "version": "2.2.1",
-      "build_command": "cargo install cargo-ndk; rustup target install aarch64-linux-android; rustup target add aarch64-linux-android; qpm qmod zip"
+      "build": "cargo install cargo-ndk; rustup target install aarch64-linux-android; rustup target add aarch64-linux-android; qpm s build"
     }
   },
   "mods": {
@@ -90,25 +88,26 @@
     },
     "BSNightcoreQuest": {
       "repo": "https://github.com/Tatenshi/BSNightcoreQuest",
-      "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1 'BSNightcoreQuest'"
+      "qmod": "qpm s qmod"
     },
     "BeatLeader": {
       "repo": "https://github.com/BeatLeader/beatleader-qmod"
     },
     "BeatTogether": {
       "repo": "https://github.com/BeatTogether/BeatTogether.Quest",
-      "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1 'BeatTogether'"
+      "build": "pwsh build.ps1",
+      "qmod": "pwsh buildQMOD.ps1 BeatTogether -package"
     },
     "BetterSongSearch": {
-      "repo": "https://github.com/bsq-ports/BetterSongSearchQuest",
-      "build_command": "pwsh build.ps1; qpm qmod zip"
+      "repo": "https://github.com/bsq-ports/BetterSongSearchQuest"
     },
     "chroma": {
       "repo": "https://github.com/bsq-ports/Chroma/"
     },
     "ClockMod": {
       "repo": "https://github.com/EnderdracheLP/ClockMod",
-      "build_command": "pwsh build.ps1; pwsh buildQMOD.ps1"
+      "build": "pwsh build.ps1",
+      "qmod": "pwsh buildQMOD.ps1 ClockMod -package"
     },
     "DlcSorter": {
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.DlcSorter"
@@ -121,11 +120,11 @@
     },
     "HitScoreVisualizer": {
       "repo": "https://github.com/christopherweinhardt/HitScoreVisualizer/",
-      "build_command": "qpm s build; qpm s qmod"
+      "qmod": "pwsh ./scripts/createqmod.ps1"
     },
     "HitsoundTweaqs": {
       "repo": "https://github.com/NSGolova/HitsoundTweaqs",
-      "build_command": "qpm s build; qpm s qmod"
+      "qmod": "pwsh ./buildQMOD.ps1 HitsoundTweaqs"
     },
     "mod-list": {
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.ModList/"
@@ -147,11 +146,11 @@
     },
     "SmallQubes": {
       "repo": "https://github.com/NSGolova/SmallQubes",
-      "build_command": "qpm s build; qpm s qmod"
+      "qmod": "pwsh ./buildQMOD.ps1 SmallQubes"
     },
     "bsl": {
       "repo": "https://github.com/FrozenAlex/BetterSongList",
-      "build_command": "pwsh ./scripts/build.ps1; pwsh ./scripts/createqmod.ps1"
+      "build": "pwsh ./scripts/build.ps1"
     },
     "bts-yeeter": {
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.BtsYeeter"
@@ -160,8 +159,7 @@
       "repo": "https://github.com/darknight1050/CrashReporter"
     },
     "datakeeper": {
-      "repo": "https://github.com/Metalit/PlayerDataKeeper",
-      "build_command": "qpm s build; qpm s qmod"
+      "repo": "https://github.com/Metalit/PlayerDataKeeper"
     },
     "graphicstweaks": {
       "repo": "https://github.com/FrozenAlex/GraphicsTweaks"
@@ -171,18 +169,19 @@
     },
     "IntroSkip": {
       "repo": "https://github.com/Royston1999/IntroSkip-Quest",
-      "build_command": "pwsh ./build.ps1; pwsh ./buildQMOD.ps1 IntroSkip"
+      "build": "pwsh ./build.ps1",
+      "qmod": "pwsh ./buildQMOD.ps1 IntroSkip"
     },
     "morebuttons": {
       "repo": "https://github.com/Metalit/MoreButtons",
-      "build_command": "qpm s build; qpm s qmod"
+      "qmod": "pwsh ./scripts/createqmod.ps1"
     },
     "particletuner": {
       "repo": "https://github.com/kodenamekrak/ParticleTuner"
     },
     "playlistmanager": {
       "repo": "https://github.com/Metalit/PlaylistManager",
-      "build_command": "qpm s build; qpm s qmod"
+      "qmod": "pwsh ./scripts/createqmod.ps1"
     },
     "qonsistentsabercolors": {
       "repo": "https://github.com/kodenamekrak/QonsistentSaberColors"
@@ -192,11 +191,11 @@
     },
     "scorepercentage": {
       "repo": "https://github.com/Royston1999/ScorePercentage-Quest",
-      "build_command": "pwsh ./build.ps1; qpm qmod zip"
+      "build": "pwsh ./build.ps1"
     },
     "slicedetails": {
       "repo": "https://github.com/Royston1999/SliceDetails-Quest",
-      "build_command": "pwsh ./build.ps1; qpm qmod zip"
+      "build": "pwsh ./build.ps1"
     },
     "smoothedcontroller": {
       "repo": "https://github.com/FrozenAlex/SmoothedController"
@@ -215,7 +214,7 @@
     },
     "unicode": {
       "repo": "https://github.com/Metalit/UnicodeQuest",
-      "build_command": "qpm s build; qpm s qmod"
+      "qmod": "pwsh ./scripts/createqmod.ps1"
     },
     "qbeatsaberplus-gametweaker": {
       "repo": "https://github.com/hardcpp/QBeatSaberPlus-GameTweaker"
@@ -228,7 +227,7 @@
     },
     "Qounters": {
       "repo": "https://github.com/Metalit/Qounters",
-      "build_command": "pwsh ./scripts/build.ps1; pwsh ./scripts/createqmod.ps1"
+      "qmod": "pwsh ./scripts/createqmod.ps1"
     }
   }
 }

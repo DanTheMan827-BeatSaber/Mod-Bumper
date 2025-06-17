@@ -31,6 +31,9 @@ on:
       build_command:
         required: false
         type: string
+      qmod_command:
+        required: false
+        type: string
 
 jobs:
   bump:
@@ -178,8 +181,10 @@ jobs:
             fi
           done
 
-          qpm dependency sort
-          cat qpm.json
+      - name: Add qmodIncludeDirs
+        if: env.run_build != 'false'
+        run: |
+          jq '.workspace.qmodIncludeDirs += ["extern/libs", "build"]' qpm.json > qpm.json.tmp && mv qpm.json.tmp qpm.json
 
       - name: Bump version
         if: env.run_build != 'false'
@@ -229,10 +234,23 @@ jobs:
           jq . qpm.shared.json
 
       - name: Build
+        if: env.run_build != 'false' && steps.cache-workspace.outputs.cache-hit != 'true'
+        run: |
+          set -x
+          ${{ inputs.build_command || 'qpm s build' }}
+        env:
+          HOME: ${{ env.HOME }}
+
+      - name: List files
+        if: env.run_build != 'false'
+        run: |
+          find
+
+      - name: Create qmod
         if: env.run_build != 'false'
         run: |
           set -x
-          ${{ inputs.build_command || 'qpm qmod zip' }}
+          ${{ inputs.qmod_command || 'qpm qmod zip --skip_build' }}
         env:
           HOME: ${{ env.HOME }}
 
