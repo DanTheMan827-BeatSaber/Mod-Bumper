@@ -328,6 +328,29 @@ jobs:
             ${{ env.HOME }}/.config/QPM-RS
             ${{ env.HOME }}/installed-mods.txt
 
+      - name: Wait for cache entry to be available
+        if: inputs.install == true
+        id: wait-for-cache
+        run: |
+          ATTEMPTS=12
+          for i in $(seq 1 $ATTEMPTS); do
+            echo "Attempt $i: trying to restore cache..."
+            CACHE_RESULT=$(gh api \
+              -H "Accept: application/vnd.github+json" \
+              /repos/${{ github.repository }}/actions/caches \
+              --jq '.actions_caches[] | select(.key=="qpm-cache-${{ runner.os }}-${{ github.run_id }}-${{ env.timestamp }}")')
+            if [ -n "$CACHE_RESULT" ]; then
+              echo "Cache entry found!"
+              exit 0
+            fi
+            echo "Cache not found, waiting 5 seconds..."
+            sleep 5
+          done
+          echo "Cache entry not found after $ATTEMPTS attempts."
+          exit 1
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Upload Workspace
         if: env.run_build != 'false'
         uses: actions/upload-artifact@v4
