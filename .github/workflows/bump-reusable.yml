@@ -332,9 +332,9 @@ jobs:
         if: inputs.install == true
         id: wait-for-cache
         run: |
-          ATTEMPTS=12
+          ATTEMPTS=120
           for i in $(seq 1 $ATTEMPTS); do
-            echo "Attempt $i: trying to restore cache..."
+            echo "Attempt $i: trying to find cache entry qpm-cache-${{ runner.os }}-${{ github.run_id }}-${{ env.timestamp }}"
             CACHE_RESULT=$(gh api \
               -H "Accept: application/vnd.github+json" \
               /repos/${{ github.repository }}/actions/caches \
