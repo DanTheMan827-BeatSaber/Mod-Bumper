@@ -262,6 +262,32 @@ jobs:
         env:
           HOME: ${{ env.HOME }}
 
+      - name: Bump version
+        if: env.run_build != 'false'
+        run: |
+          if [ "${{ inputs.version }}" != '' ]; then
+            echo "Updating qpm.json with version ${{ inputs.version }}"
+              jq --arg version "${{ inputs.version }}" \
+                '.info.version = $version' qpm.json > qpm.json.tmp && mv qpm.json.tmp qpm.json
+          fi
+
+          if [ -e mod.template.json ]; then
+            echo "Updating mod.template.json with game version ${{ inputs.game_version }}"
+            jq --arg game_version "${{ inputs.game_version }}" \
+              '.packageVersion = $game_version' mod.template.json > mod.template.json.tmp && mv mod.template.json.tmp mod.template.json
+          fi
+
+          if [ -e mod.json ]; then
+            echo "Updating mod.json with game version ${{ inputs.game_version }}"
+            jq --arg game_version "${{ inputs.game_version }}" \
+              '.packageVersion = $game_version' mod.json > mod.json.tmp && mv mod.json.tmp mod.json
+          fi
+
+      - name: QPM restore
+        if: env.run_build != 'false'
+        run: |
+          qpm restore --update
+
       - name: Install
         if: env.run_build != 'false' && inputs.install == true
         run: |
