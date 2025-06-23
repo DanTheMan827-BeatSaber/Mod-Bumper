@@ -213,6 +213,9 @@
     "transitions": {
       "repo": "https://github.com/Metalit/Transitions"
     },
+    "tricksaber-lite": {
+      "repo": "https://github.com/vcmikuu/TrickSaber-Lite"
+    },
     "unicode": {
       "repo": "https://github.com/Metalit/UnicodeQuest",
       "qmod": "pwsh ./scripts/createqmod.ps1"
