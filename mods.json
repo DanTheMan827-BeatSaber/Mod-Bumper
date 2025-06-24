@@ -63,14 +63,11 @@
     },
     "multiplayer-core": {
       "repo": "https://github.com/EnderdracheLP/MultiplayerCore.Quest",
-      "version": "1.6.2",
-      "qmod": "pwsh buildQMOD.ps1 MultiplayerCore -package"
+      "version": "1.6.2"
     },
     "camera-utils": {
       "repo": "https://github.com/Reezonate/CameraUtils-Quest/",
-      "version": "1.1.7",
-      "build": "pwsh build.ps1",
-      "qmod": "pwsh buildQMOD.ps1 camera-utils"
+      "version": "1.1.7"
     },
     "hollywood": {
       "repo": "https://github.com/Fernthedev/HollywoodQuest/",
@@ -88,8 +85,7 @@
       "repo": "https://github.com/CatsaCode/AnyText"
     },
     "BSNightcoreQuest": {
-      "repo": "https://github.com/Tatenshi/BSNightcoreQuest",
-      "qmod": "qpm s qmod"
+      "repo": "https://github.com/Tatenshi/BSNightcoreQuest"
     },
     "BeatLeader": {
       "repo": "https://github.com/BeatLeader/beatleader-qmod"
@@ -124,8 +120,7 @@
       "qmod": "pwsh ./scripts/createqmod.ps1"
     },
     "HitsoundTweaqs": {
-      "repo": "https://github.com/NSGolova/HitsoundTweaqs",
-      "qmod": "pwsh ./buildQMOD.ps1 HitsoundTweaqs"
+      "repo": "https://github.com/NSGolova/HitsoundTweaqs"
     },
     "mod-list": {
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.ModList/"
@@ -146,12 +141,10 @@
       "repo": "https://github.com/Tatenshi/RecentlyPlayed"
     },
     "SmallQubes": {
-      "repo": "https://github.com/NSGolova/SmallQubes",
-      "qmod": "pwsh ./buildQMOD.ps1 SmallQubes"
+      "repo": "https://github.com/NSGolova/SmallQubes"
     },
     "bsl": {
-      "repo": "https://github.com/FrozenAlex/BetterSongList",
-      "build": "pwsh ./scripts/build.ps1"
+      "repo": "https://github.com/FrozenAlex/BetterSongList"
     },
     "bts-yeeter": {
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.BtsYeeter"
