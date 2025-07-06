@@ -10,7 +10,7 @@
     "conditional-dependencies": "0.3.0",
     "config-utils": "2.0.3",
     "cpp-semver": "0.1.2",
-    "custom-json-data": "0.23.2",
+    "custom-json-data": "0.24.2",
     "custom-types": "0.18.3",
     "fmt": "11.0.2",
     "hollywood": "1.2.1",
@@ -28,7 +28,7 @@
     "song-details": "1.0.2",
     "songcore": "1.1.22",
     "tinyxml2": "10.0.0",
-    "tracks": "2.2.1",
+    "tracks": "2.3.1",
     "web-utils": "0.6.7"
   },
   "installedMods": {
@@ -55,7 +55,7 @@
     },
     "custom-json-data": {
       "repo": "https://github.com/StackDoubleFlow/CustomJSONData",
-      "version": "0.23.2"
+      "version": "0.24.2"
     },
     "chatplex-sdk-bs": {
       "repo": "https://github.com/hardcpp/QuestChatPlexSDK-BS/",
@@ -76,7 +76,7 @@
     },
     "tracks": {
       "repo": "https://github.com/StackDoubleFlow/Tracks",
-      "version": "2.2.1",
+      "version": "2.3.1",
       "build": "cargo install cargo-ndk && rustup target install aarch64-linux-android && rustup target add aarch64-linux-android && qpm s build"
     }
   },
