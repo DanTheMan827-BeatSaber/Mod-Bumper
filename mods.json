@@ -81,6 +81,9 @@
     }
   },
   "mods": {
+    "AntiVertigo" {
+      "repo": "https://github.com/FrozenAlex/AntiVertigo"
+    },
     "AnyText": {
       "repo": "https://github.com/CatsaCode/AnyText"
     },
@@ -105,6 +108,10 @@
       "repo": "https://github.com/EnderdracheLP/ClockMod",
       "build": "pwsh build.ps1",
       "qmod": "pwsh buildQMOD.ps1 ClockMod -package"
+    },
+    "custommodels": {
+      "repo": "https://github.com/Metalit/CustomModels",
+      "qmod": "pwsh ./scripts/createqmod.ps1"
     },
     "DlcSorter": {
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.DlcSorter"
@@ -225,6 +232,12 @@
     "Qounters": {
       "repo": "https://github.com/Metalit/Qounters",
       "qmod": "pwsh ./scripts/createqmod.ps1"
+    },
+    "jdfixer": {
+      "repo": "https://github.com/Metalit/QuestJDFixer"
+    },
+    "playlistdownloader": {
+      "https://github.com/Metalit/PlaylistDownloader"
     }
   }
 }
