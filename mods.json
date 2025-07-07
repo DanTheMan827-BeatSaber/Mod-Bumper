@@ -237,7 +237,7 @@
       "repo": "https://github.com/Metalit/QuestJDFixer"
     },
     "playlistdownloader": {
-      "https://github.com/Metalit/PlaylistDownloader"
+      "repo": "https://github.com/Metalit/PlaylistDownloader"
     }
   }
 }
