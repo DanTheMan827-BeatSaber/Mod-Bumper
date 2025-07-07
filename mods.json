@@ -81,7 +81,7 @@
     }
   },
   "mods": {
-    "AntiVertigo" {
+    "AntiVertigo": {
       "repo": "https://github.com/FrozenAlex/AntiVertigo"
     },
     "AnyText": {
