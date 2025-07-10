@@ -36,7 +36,8 @@
     "bs-cordl": {
       "repo": "https://github.com/QuestPackageManager/bs-cordl",
       "build": "true",
-      "qmod": "true"
+      "qmod": "true",
+      "version": "4007.0.0"
     },
     "bsml": {
       "repo": "https://github.com/bsq-ports/Quest-BSML",
