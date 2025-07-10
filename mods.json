@@ -97,7 +97,7 @@
     "BeatTogether": {
       "repo": "https://github.com/BeatTogether/BeatTogether.Quest",
       "build": "pwsh build.ps1",
-      "qmod": "pwsh buildQMOD.ps1 BeatTogether -package"
+      "qmod": "pwsh buildQMOD.ps1 BeatTogether"
     },
     "BetterSongSearch": {
       "repo": "https://github.com/bsq-ports/BetterSongSearchQuest"
@@ -107,8 +107,7 @@
     },
     "ClockMod": {
       "repo": "https://github.com/EnderdracheLP/ClockMod",
-      "build": "pwsh build.ps1",
-      "qmod": "pwsh buildQMOD.ps1 ClockMod -package"
+      "build": "pwsh build.ps1"
     },
     "custommodels": {
       "repo": "https://github.com/Metalit/CustomModels",
