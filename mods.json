@@ -233,6 +233,10 @@
       "repo": "https://github.com/Metalit/Qounters",
       "qmod": "pwsh ./scripts/createqmod.ps1"
     },
+    "QuestSounds": {
+      "repo":"https://github.com/EnderdracheLP/QuestSounds",
+      "build": "pwsh ./build.ps1"
+    },
     "jdfixer": {
       "repo": "https://github.com/Metalit/QuestJDFixer"
     },
