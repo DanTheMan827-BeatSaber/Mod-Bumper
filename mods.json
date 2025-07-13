@@ -235,7 +235,8 @@
     },
     "QuestSounds": {
       "repo":"https://github.com/EnderdracheLP/QuestSounds",
-      "build": "pwsh ./build.ps1"
+      "build": "pwsh ./build.ps1",
+      "qmod": "qpm qmod zip --skip_build -i Examples"
     },
     "jdfixer": {
       "repo": "https://github.com/Metalit/QuestJDFixer"
