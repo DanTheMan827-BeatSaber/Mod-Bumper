@@ -136,6 +136,9 @@
       "build": "ln -s extern/libs/* .; NDK=\"$(cat ndkpath.txt)\" make libmappingextensions.so",
       "qmod": "qpm qmod zip --skip_build -i . -i extern/libs"
     },
+    "NoodleExtensions": {
+      "repo": "https://github.com/bsq-ports/NoodleExtensions"
+    },
     "mod-list": {
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.ModList/"
     },
