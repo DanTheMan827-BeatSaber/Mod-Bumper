@@ -94,6 +94,7 @@ jobs:
       install: false
       build_command: ${{ matrix.build }}
       qmod_command: ${{ matrix.qmod }}
+      prebump: ${{ matrix.prebump }}
       force_build: ${{ inputs.force_build }}
 
     strategy:
