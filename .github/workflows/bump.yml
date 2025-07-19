@@ -71,6 +71,7 @@ jobs:
       install: true
       build_command: ${{ matrix.build }}
       qmod_command: ${{ matrix.qmod }}
+      prebump_command: ${{ matrix.prebump }}
       force_build: ${{ inputs.force_build }}
 
     strategy:
@@ -94,7 +95,7 @@ jobs:
       install: false
       build_command: ${{ matrix.build }}
       qmod_command: ${{ matrix.qmod }}
-      prebump: ${{ matrix.prebump }}
+      prebump_command: ${{ matrix.prebump }}
       force_build: ${{ inputs.force_build }}
 
     strategy:
