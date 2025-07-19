@@ -32,6 +32,9 @@ on:
         required: false
         type: boolean
         default: false
+      prebump_command:
+        required: false
+        type: string
       build_command:
         required: false
         type: string
@@ -160,6 +163,11 @@ jobs:
               qpm ndk pin 27
             )
           )
+
+      - name: Run pre-bump
+        if: env.run_build != 'false'
+        run: |
+          ${{ inputs.prebump_command || true }}
 
       - name: Sort dependencies
         if: env.run_build != 'false'
