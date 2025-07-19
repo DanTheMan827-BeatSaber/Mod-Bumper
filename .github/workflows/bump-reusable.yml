@@ -32,6 +32,9 @@ on:
         required: false
         type: boolean
         default: false
+      prebump_command:
+        required: false
+        type: string
       build_command:
         required: false
         type: string
@@ -149,6 +152,11 @@ jobs:
 
       - uses: seanmiddleditch/gha-setup-ninja@v3
         if: env.run_build != 'false'
+
+      - name: Run pre-bump
+        if: env.run_build != 'false'
+        run: |
+          ${{ inputs.prebump_command || true }}
 
       - name: Resolve NDK
         if: env.run_build != 'false'
