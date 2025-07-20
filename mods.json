@@ -194,6 +194,9 @@
       "repo": "https://github.com/Metalit/PlaylistManager",
       "qmod": "pwsh ./scripts/createqmod.ps1"
     },
+    "Play3rdPer": {
+      "repo": "https://github.com/Epic17plyz/3rd-Person-Mod"
+    },
     "qonsistentsabercolors": {
       "repo": "https://github.com/kodenamekrak/QonsistentSaberColors"
     },
