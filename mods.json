@@ -116,6 +116,9 @@
     "DlcSorter": {
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.DlcSorter"
     },
+    "emulator-fpfc": {
+      "repo": "https://github.com/kodenamekrak/Emulator-FPFC"
+    },
     "FakeId": {
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.FakeID"
     },
