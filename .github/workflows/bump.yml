@@ -6,9 +6,6 @@ on:
       force_build:
         type: boolean
         default: false
-  push:
-    branches:
-      - '*'
 
 permissions:
   actions: write
