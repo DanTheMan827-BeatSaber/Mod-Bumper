@@ -37,6 +37,7 @@ jobs:
           echo "bs-cordl=$(jq -rM '.newestDependencies["bs-cordl"]' mods.json)" >> $GITHUB_OUTPUT
           echo "beatsaber-hook=$(jq -rM '.newestDependencies["beatsaber-hook"]' mods.json)" >> $GITHUB_OUTPUT
           echo "packageVersion=$(jq -rM '.packageVersion' mods.json)" >> $GITHUB_OUTPUT
+          cat $GITHUB_OUTPUT
 
   bump-installable-mods:
     needs: [get-mods]
