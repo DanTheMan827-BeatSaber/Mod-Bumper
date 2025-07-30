@@ -43,8 +43,7 @@
     },
     "songcore": {
       "repo": "https://github.com/raineaeternal/Quest-SongCore",
-      "version": "1.1.24",
-      "qmod": "qpm qmod manifest && pwsh ./scripts/createqmod.ps1 SongCore"
+      "version": "1.1.24"
     },
     "metacore": {
       "repo": "https://github.com/Metalit/MetaCore",
@@ -126,8 +125,7 @@
       "repo": "https://github.com/christopherweinhardt/FasterScrollQuest"
     },
     "HitScoreVisualizer": {
-      "repo": "https://github.com/christopherweinhardt/HitScoreVisualizer/",
-      "qmod": "pwsh ./scripts/createqmod.ps1"
+      "repo": "https://github.com/christopherweinhardt/HitScoreVisualizer/"
     },
     "HitsoundTweaqs": {
       "repo": "https://github.com/NSGolova/HitsoundTweaqs"
@@ -183,8 +181,7 @@
     },
     "IntroSkip": {
       "repo": "https://github.com/Royston1999/IntroSkip-Quest",
-      "build": "pwsh ./build.ps1",
-      "qmod": "pwsh ./buildQMOD.ps1 IntroSkip"
+      "build": "pwsh ./build.ps1"
     },
     "morebuttons": {
       "repo": "https://github.com/Metalit/MoreButtons",
