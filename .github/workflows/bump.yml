@@ -49,9 +49,9 @@ jobs:
           (
             source $GITHUB_OUTPUT
             cd /tmp/package-check
+            cat "$ANDROID_HOME" > ndkpath.txt
             qpm package create "package-test" "0.1.0"
             qpm dependency add bs-cordl -v "${bs-cordl}"
-            qpm ndk resolve
             qpm restore --update
             echo "packageVersion=$(cat extern/includes/bs-cordl/include/version.txt)" >> $GITHUB_OUTPUT
           )
