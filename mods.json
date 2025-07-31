@@ -76,7 +76,7 @@
     "tracks": {
       "repo": "https://github.com/StackDoubleFlow/Tracks",
       "version": "2.4.5",
-      "build": "rustup install nightly && rustup target add aarch64-linux-android --toolchain nightly && cargo install --locked --git https://github.com/bbqsrc/cargo-ndk.git cargo-ndk && qpm s build"
+      "build": "rustup install nightly && rustup target add aarch64-linux-android --toolchain nightly && cargo install bindgen-cli && cargo install --locked --git https://github.com/bbqsrc/cargo-ndk.git cargo-ndk && qpm s build"
     }
   },
   "mods": {
