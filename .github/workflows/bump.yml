@@ -40,7 +40,6 @@ jobs:
       - name: Parse mods.json
         id: parse-mods
         run: |
-          set -x
           echo "installedMods=$(jq -crM '.installedMods | to_entries | map({id: .key} + .value)' mods.json)" >> $GITHUB_OUTPUT
           echo "mods=$(jq -crM '.mods | to_entries | map({id: .key} + .value)' mods.json)" >> $GITHUB_OUTPUT
           echo "newestDependencies=$(jq -crM '.newestDependencies | to_entries | map("\(.key):\(.value)")' mods.json)" >> $GITHUB_OUTPUT
@@ -48,11 +47,9 @@ jobs:
 
           mkdir -p /tmp/package-check
           (
-            source $GITHUB_OUTPUT
             cd /tmp/package-check
-            cat "$ANDROID_HOME" > ndkpath.txt
             qpm package create "package-test" "0.1.0"
-            qpm dependency add bs-cordl -v "${bs-cordl}"
+            qpm dependency add bs-cordl -v "$(jq -rM '.newestDependencies["bs-cordl"]' mods.json)"
             qpm restore --update
             echo "packageVersion=$(cat extern/includes/bs-cordl/include/version.txt)" >> $GITHUB_OUTPUT
           )
