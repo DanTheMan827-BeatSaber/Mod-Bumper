@@ -13,21 +13,13 @@ jobs:
   clear-caches:
     runs-on: ubuntu-latest
     steps:
-      - name: List all caches
-        id: list_caches
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          echo "Fetching cache list..."
-          gh api "repos/${{ github.repository }}/actions/caches" --jq '.actions_caches[].id' > cache_ids.txt
-          echo "Cache IDs:"
-          cat cache_ids.txt
-
       - name: Delete all caches
         env:
-          GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+          REPO: ${{ github.repository }}
         run: |
-          while read -r cache_id; do
-            echo "Deleting cache $cache_id"
-            gh api --method DELETE "repos/${{ github.repository }}/actions/caches/$cache_id"
-          done < cache_ids.txt
+          gh api "repos/$REPO/actions/caches" --jq '.actions_caches[].id' | while read cache_id; do
+            echo "Deleting cache id $cache_id"
+            gh api --method DELETE /repos/$REPO/actions/caches/$cache_id
+            sleep 1
+          done
