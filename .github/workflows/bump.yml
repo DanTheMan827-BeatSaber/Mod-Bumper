@@ -14,7 +14,7 @@ jobs:
   get-mods:
     runs-on: ubuntu-latest
     outputs:
-      packageVersion: ${{ steps.cordl-check.outputs.packageVersion }}
+      packageVersion: ${{ steps.parse-mods.outputs.packageVersion }}
       newestDependencies: ${{ steps.parse-mods.outputs.newestDependencies }}
       bs-cordl: ${{ steps.parse-mods.outputs.bs-cordl }}
       installedMods: ${{ steps.parse-mods.outputs.installedMods }}
@@ -35,13 +35,7 @@ jobs:
       - name: Get version from bs-cordl
         id: cordl-check
         run: |
-          mkdir -p /tmp/package-check
-          cd /tmp/package-check
-          qpm package create "package-test" "0.1.0"
-          qpm dependency add bs-cordl -v "${{ inputs.bs_cordl }}"
-          qpm restore --update
-          echo "packageVersion=$(cat extern/includes/bs-cordl/include/version.txt)" >> $GITHUB_OUTPUT
-          rm -r /tmp/package-check
+
 
       - name: Parse mods.json
         id: parse-mods
@@ -50,6 +44,15 @@ jobs:
           echo "mods=$(jq -crM '.mods | to_entries | map({id: .key} + .value)' mods.json)" >> $GITHUB_OUTPUT
           echo "newestDependencies=$(jq -crM '.newestDependencies | to_entries | map("\(.key):\(.value)")' mods.json)" >> $GITHUB_OUTPUT
           echo "bs-cordl=$(jq -rM '.newestDependencies["bs-cordl"]' mods.json)" >> $GITHUB_OUTPUT
+
+          mkdir -p /tmp/package-check
+          cd /tmp/package-check
+          qpm package create "package-test" "0.1.0"
+          qpm dependency add bs-cordl -v "$bs-cordl"
+          qpm restore --update
+          echo "packageVersion=$(cat extern/includes/bs-cordl/include/version.txt)" >> $GITHUB_OUTPUT
+          rm -r /tmp/package-check
+          
           cat $GITHUB_OUTPUT
 
   bump-installable-mods:
