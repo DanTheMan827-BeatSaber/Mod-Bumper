@@ -1,0 +1,31 @@
+name: Trigger Bump Workflow
+
+on:
+  push:
+    branches:
+      - '*'
+
+permissions:
+  contents: read
+  actions: write  # ✅ This is required to dispatch workflows
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger bump.yml
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/bump.yml/dispatches \
+            -d "{\"ref\": \"${{ github.ref_name }}\"}")
+
+          if [ "$RESPONSE" -ne 204 ]; then
+            echo "Failed to trigger bump.yml (HTTP $RESPONSE)"
+            exit 1
+          else
+            echo "Successfully triggered bump.yml"
+          fi
