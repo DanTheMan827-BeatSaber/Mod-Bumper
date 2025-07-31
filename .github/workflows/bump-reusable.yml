@@ -96,6 +96,13 @@ jobs:
           resolve_ndk: false
           cache: false
 
+      - name: Setup qpm ndk path
+        run: |
+          NDK_PATH=/usr/local/lib/android/sdk/ndk
+          sudo mkdir -p "$NDK_PATH"
+          sudo chmod +rwx "$NDK_PATH"
+          qpm config ndk-path "$NDK_PATH"
+
       - name: Get ID from qpm.json
         id: qpm_id
         run: |
