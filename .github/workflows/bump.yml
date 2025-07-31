@@ -47,9 +47,10 @@ jobs:
 
           mkdir -p /tmp/package-check
           (
+            source $GITHUB_OUTPUT
             cd /tmp/package-check
             qpm package create "package-test" "0.1.0"
-            qpm dependency add bs-cordl -v "$bs-cordl"
+            qpm dependency add bs-cordl -v "${bs-cordl}"
             qpm restore --update
             echo "packageVersion=$(cat extern/includes/bs-cordl/include/version.txt)" >> $GITHUB_OUTPUT
           )
