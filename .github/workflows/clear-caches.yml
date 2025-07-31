@@ -1,0 +1,33 @@
+name: Clear All Caches
+
+on:
+  workflow_dispatch:
+
+permissions:
+  actions: write
+
+env:
+  GITHUB_TOKEN: ${{ github.token }}
+
+jobs:
+  clear-caches:
+    runs-on: ubuntu-latest
+    steps:
+      - name: List all caches
+        id: list_caches
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          echo "Fetching cache list..."
+          gh api "repos/${{ github.repository }}/actions/caches" --jq '.actions_caches[].id' > cache_ids.txt
+          echo "Cache IDs:"
+          cat cache_ids.txt
+
+      - name: Delete all caches
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          while read -r cache_id; do
+            echo "Deleting cache $cache_id"
+            gh api --method DELETE "repos/${{ github.repository }}/actions/caches/$cache_id"
+          done < cache_ids.txt
