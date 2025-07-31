@@ -43,13 +43,14 @@ jobs:
           echo "installedMods=$(jq -crM '.installedMods | to_entries | map({id: .key} + .value)' mods.json)" >> $GITHUB_OUTPUT
           echo "mods=$(jq -crM '.mods | to_entries | map({id: .key} + .value)' mods.json)" >> $GITHUB_OUTPUT
           echo "newestDependencies=$(jq -crM '.newestDependencies | to_entries | map("\(.key):\(.value)")' mods.json)" >> $GITHUB_OUTPUT
-          echo "bs-cordl=$(jq -rM '.newestDependencies["bs-cordl"]' mods.json)" >> $GITHUB_OUTPUT
+          cordl="$(jq -rM '.newestDependencies["bs-cordl"]' mods.json)"
+          echo "bs-cordl=$cordl" >> $GITHUB_OUTPUT
 
           mkdir -p /tmp/package-check
           (
             cd /tmp/package-check
             qpm package create "package-test" "0.1.0"
-            qpm dependency add bs-cordl -v "$(jq -rM '.newestDependencies["bs-cordl"]' mods.json)"
+            qpm dependency add bs-cordl -v "$cordl"
             qpm restore --update
             echo "packageVersion=$(cat extern/includes/bs-cordl/include/version.txt)" >> $GITHUB_OUTPUT
           )
