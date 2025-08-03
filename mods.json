@@ -97,6 +97,9 @@
     "BetterSongSearch": {
       "repo": "https://github.com/bsq-ports/BetterSongSearchQuest"
     },
+    "bomb-qolorer": {
+      "repo": "https://github.com/FrozenAlex/bomb-qolorer"
+    },
     "bsl": {
       "repo": "https://github.com/bsq-ports/BetterSongList"
     },
