@@ -245,6 +245,9 @@
     "songdownloader": {
       "repo": "https://github.com/darknight1050/SongDownloader"
     },
+    "songrankedbadge": {
+      "repo": "https://github.com/kodenamekrak/SongRankedBadge"
+    },
     "too-many-fireworks": {
       "repo": "https://github.com/CatsaCode/TooManyFireworks"
     },
