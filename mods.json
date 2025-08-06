@@ -249,7 +249,8 @@
       "repo": "https://github.com/kodenamekrak/SongRankedBadge"
     },
     "stream-mod": {
-      "repo": "https://github.com/Metalit/StreamMod"
+      "repo": "https://github.com/Metalit/StreamMod",
+      "build": "git clone https://github.com/microsoft/vcpkg.git vcpkg_installed && ./vcpkg_installed/bootstrap-vcpkg.sh && export VCPKG_ROOT=\"$(realpath ./vcpkg_installed)\" && qpm s build"
     },
     "too-many-fireworks": {
       "repo": "https://github.com/CatsaCode/TooManyFireworks"
