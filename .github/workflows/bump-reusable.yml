@@ -148,6 +148,26 @@ jobs:
           fi
           true
 
+      - name: Setup ccache
+        if: env.run_build != 'false'
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          key: ${{ runner.os }}-${{ inputs.id }}-${{ inputs.game_version }}-${{ inputs.version }}-${{ env.git_commit }}
+
+      - name: Configure CPM cache path
+        if: env.run_build != 'false'
+        run: |
+          echo "CPM_SOURCE_CACHE=$HOME/.cache/CPM" >> $GITHUB_ENV
+
+      - name: Cache CPM packages
+        if: env.run_build != 'false'
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.CPM_SOURCE_CACHE }}
+          key: ${{ runner.os }}-cpm-packages-${{ hashFiles('**/CMakeLists.txt', 'CMakeLists.txt', '**/*.cmake') }}
+          restore-keys: |
+            ${{ runner.os }}-cpm-packages-
+
       - name: Cache Workspace
         if: env.run_build != 'false'
         id: cache-workspace
