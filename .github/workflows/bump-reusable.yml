@@ -152,7 +152,7 @@ jobs:
         if: env.run_build != 'false'
         uses: hendrikmuhs/ccache-action@v1.2
         with:
-          key: ${{ runner.os }}-${{ inputs.id }}-${{ inputs.game_version }}-${{ inputs.version }}-${{ env.git_commit }}
+          key: ${{ runner.os }}-${{ inputs.id }}-
 
       - name: Configure CPM cache path
         if: env.run_build != 'false'
