@@ -90,7 +90,7 @@ jobs:
       - name: Setup qpm
         uses: fernthedev/qpm-action@v1
         with:
-          workflow_token: ${{ secrets.GITHUB_TOKEN}}
+          workflow_token: ${{ secrets.GITHUB_TOKEN }}
           restore: false
           resolve_ndk: false
           cache: false
@@ -356,7 +356,7 @@ jobs:
       - name: Delete all GitHub QPM caches
         if: inputs.install == true
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         run: |
           gh api -H "Accept: application/vnd.github+json" \
@@ -403,6 +403,8 @@ jobs:
 
       - name: Delete all ccache cache entries except latest
         if: env.run_build != 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh api -H "Accept: application/vnd.github+json" \
             /repos/$REPO/actions/caches \
