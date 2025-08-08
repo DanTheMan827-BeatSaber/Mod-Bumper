@@ -382,7 +382,7 @@ jobs:
         if: env.run_build != 'false'
         id: ccache-hash
         run: |
-          CACHE_BASE="cache-base=ccache-${{ runner.os }}-${{ inputs.id }}-"
+          CACHE_BASE="ccache-${{ runner.os }}-${{ inputs.id }}-"
           echo "cache-base=$CACHE_BASE" >> $GITHUB_OUTPUT
           
           if [[ -d "${{ env.CCACHE_DIR }}" ]]; then
