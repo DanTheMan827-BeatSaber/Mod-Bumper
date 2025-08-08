@@ -354,15 +354,14 @@ jobs:
         if: inputs.install == true
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
         run: |
           gh api -H "Accept: application/vnd.github+json" \
-            /repos/$REPO/actions/caches \
+            /repos/${{ github.repository }}/actions/caches \
             --paginate \
             -q '.actions_caches[] | select(.key | startswith("qpm-cache-${{ runner.os }}-${{ github.run_id }}-")) | .id' |
           while read cache_id; do
             echo "Deleting cache id $cache_id"
-            gh api --method DELETE /repos/$REPO/actions/caches/$cache_id
+            gh api --method DELETE /repos/${{ github.repository }}/actions/caches/$cache_id
           done
 
       - name: Save QPM Cache
@@ -404,12 +403,12 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh api -H "Accept: application/vnd.github+json" \
-            /repos/$REPO/actions/caches \
+            /repos/${{ github.repository }}/actions/caches \
             --paginate \
             -q '.actions_caches[] | select(.key | startswith("${{ steps.ccache-hash.outputs.cache-base }}") and .key != "${{ steps.ccache-hash.outputs.cache-key }}") | .id' |
           while read cache_id; do
             echo "Deleting cache id $cache_id"
-            gh api --method DELETE /repos/$REPO/actions/caches/$cache_id
+            gh api --method DELETE /repos/${{ github.repository }}/actions/caches/$cache_id
           done
 
       - name: Wait for cache entry to be available
