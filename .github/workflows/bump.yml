@@ -11,6 +11,38 @@ permissions:
   actions: write
 
 jobs:
+  cleanup-trigger-runs:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Delete all workflow runs for push.yml
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WORKFLOW_FILE: push.yml
+          REPO: ${{ github.repository }}
+        run: |
+          # Get workflow ID by filename
+          workflow_id=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/$REPO/actions/workflows/$WORKFLOW_FILE" \
+            --jq .id)
+      
+          echo "Workflow ID for $WORKFLOW_FILE: $workflow_id"
+      
+          # Get all run IDs for the workflow
+          run_ids=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/$REPO/actions/workflows/$workflow_id/runs?per_page=100" \
+            --jq '.workflow_runs[].id')
+      
+          for run_id in $run_ids; do
+            echo "Deleting run $run_id"
+            gh api \
+              --method DELETE \
+              -H "Accept: application/vnd.github+json" \
+              "/repos/$REPO/actions/runs/$run_id"
+          done
+
   get-mods:
     runs-on: ubuntu-latest
     outputs:
