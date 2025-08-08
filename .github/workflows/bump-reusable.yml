@@ -158,6 +158,22 @@ jobs:
           restore-keys: |
             ccache-${{ runner.os }}-${{ inputs.id }}-
 
+      - name: Get ccache cache hash
+        if: env.run_build != 'false'
+        id: ccache-hash-old
+        run: |
+          CACHE_BASE="ccache-${{ runner.os }}-${{ inputs.id }}-"
+          echo "cache-base=$CACHE_BASE" >> $GITHUB_OUTPUT
+          
+          if [[ -d "${{ env.CCACHE_DIR }}" ]]; then
+            FILES=$(find "${{ env.CCACHE_DIR }}" -type f ! -name stats -exec sha1sum {} \;)
+            HASH=$(echo "$FILES" | sha1sum | awk '{print $1}')
+            
+            echo "hash=$HASH" >> $GITHUB_OUTPUT
+            echo "cache-key=$CACHE_BASE$HASH" >> $GITHUB_OUTPUT
+          fi
+          cat $GITHUB_OUTPUT
+
       - name: Setup ccache
         if: env.run_build != 'false'
         env:
@@ -379,6 +395,11 @@ jobs:
             ${{ env.HOME }}/.config/QPM-RS
             ${{ env.HOME }}/installed-mods.txt
 
+      - name: Cleanup ccache entries
+        if: env.run_build != 'false' && steps.cache-workspace.outputs.cache-hit != 'true'
+        run: |
+          ccache --evict-older-than 1d
+
       - name: Get ccache cache hash
         if: env.run_build != 'false'
         id: ccache-hash
@@ -396,7 +417,7 @@ jobs:
           cat $GITHUB_OUTPUT
 
       - name: Save ccache cache
-        if: env.run_build != 'false'
+        if: env.run_build != 'false' && steps.ccache-hash.outputs.cache-key != steps.ccache-hash-old.outputs.cache-key
         uses: actions/cache/save@v4
         with:
           path: ${{ env.CCACHE_DIR }}
