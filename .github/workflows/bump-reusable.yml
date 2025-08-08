@@ -188,8 +188,8 @@ jobs:
             ORIGINAL_DATA=$(cat CMakeLists.txt)
       
             # Write the ccache lines to the 'list' file
-            echo "set(CMAKE_C_COMPILER_LAUNCHER ccache" > CMakeLists.txt
-            echo "set(CMAKE_CXX_COMPILER_LAUNCHER ccache" >> CMakeLists.txt
+            echo "set(CMAKE_C_COMPILER_LAUNCHER ccache)" > CMakeLists.txt
+            echo "set(CMAKE_CXX_COMPILER_LAUNCHER ccache)" >> CMakeLists.txt
       
             # Append the original content back to the 'list' file
             echo "$ORIGINAL_DATA" >> CMakeLists.txt
