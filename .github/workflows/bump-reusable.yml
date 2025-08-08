@@ -57,13 +57,12 @@ jobs:
         run: |
           echo "Game version is ${{ inputs.game_version }}"
 
-      - name: Get timestamp
-        run: |
-          echo "timestamp=$(date +%s)" >> $GITHUB_ENV
-
-      - name: Get home path
+      - name: Configure ENV
         run: |
           echo "HOME=$HOME" | tee -a "$GITHUB_ENV"
+          echo "CPM_SOURCE_CACHE=$HOME/.cpm-cache/" | tee -a "$GITHUB_ENV"
+          echo "CCACHE_DIR=$HOME/.ccache-cache/" | tee -a "$GITHUB_ENV"
+          echo "timestamp=$(date +%s)" | tee -a "$GITHUB_ENV"
 
       - name: Checkout repository
         run: |
@@ -148,24 +147,19 @@ jobs:
           fi
           true
 
-      - name: Setup ccache
-        uses: hendrikmuhs/ccache-action@v1.2
+      - name: Restore ccache cache
+        uses: actions/cache/restore@v4
         with:
-          key: ${{ runner.os }}-${{ inputs.id }}-
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-${{ runner.os }}-${{ inputs.id }}-
+          restore-keys: |
+            ccache-${{ runner.os }}-${{ inputs.id }}-
 
-      - name: Configure CPM cache path
+      - name: Setup ccache
         if: env.run_build != 'false'
         run: |
-          echo "CPM_SOURCE_CACHE=$HOME/.cpm-cache/" >> $GITHUB_ENV
-
-      - name: Cache CPM packages
-        if: env.run_build != 'false'
-        uses: actions/cache@v4
-        with:
-          path: ${{ env.CPM_SOURCE_CACHE }}
-          key: cpm-cache-${{ runner.os }}-${{ inputs.id }}-${{ hashFiles('**/CMakeLists.txt', 'CMakeLists.txt', '**/*.cmake') }}
-          restore-keys: |
-            cpm-cache-${{ runner.os }}-${{ inputs.id }}-
+          sudo apt update
+          sudo apt install ccache
 
       - name: Cache Workspace
         if: env.run_build != 'false'
@@ -211,7 +205,7 @@ jobs:
           )
 
       - name: Run pre-bump
-        if: env.run_build != 'false'
+        if: env.run_build != 'false' && inputs.prebump_command
         run: |
           ${{ inputs.prebump_command || true }}
 
@@ -381,6 +375,22 @@ jobs:
             ${{ env.HOME }}/.local/share/QPM-RS
             ${{ env.HOME }}/.config/QPM-RS
             ${{ env.HOME }}/installed-mods.txt
+
+      - name: Get ccache cache hash
+        id: ccache-hash
+        run:
+          if [[ -d "${{ env.CCACHE_DIR }}" ]]; then
+            echo "hash=$(find "${{ env.CCACHE_DIR }}" -type f ! -name 'stats' -exec sha1sum {} \; | sha1sum | awk '{print $1}')" >> $GITHUB_OUTPUT
+          else
+            echo "hash=" >> $GITHUB_OUTPUT
+          fi
+          cat $GITHUB_OUTPUT
+
+      - name: Save ccache cache
+        uses: actions/cache/save@v4
+        with:
+          path: ${{ env.CCACHE_DIR }}
+          key: ccache-${{ runner.os }}-${{ inputs.id }}-${{ ccache-hash.outputs.hash }}
 
       - name: Wait for cache entry to be available
         if: inputs.install == true
