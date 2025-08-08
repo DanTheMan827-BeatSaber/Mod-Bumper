@@ -163,18 +163,6 @@ jobs:
           sudo apt update
           sudo apt install ccache
 
-      - name: Cache Workspace
-        if: env.run_build != 'false'
-        id: cache-workspace
-        uses: actions/cache@v4
-        with:
-          key: workspace-${{ runner.os }}-${{ inputs.id }}-${{ inputs.game_version }}-${{ inputs.version }}-${{ env.git_commit }}
-          path: |
-            .
-
-      - uses: seanmiddleditch/gha-setup-ninja@v3
-        if: env.run_build != 'false'
-
       - name: Prepend ccache launcher variables to CMakeLists.txt
         run: |
           if [ -f CMakeLists.txt ]; then
@@ -194,6 +182,18 @@ jobs:
           else
             echo "CMakeLists.txt file not found. Skipping..."
           fi
+
+      - name: Cache Workspace
+        if: env.run_build != 'false'
+        id: cache-workspace
+        uses: actions/cache@v4
+        with:
+          key: workspace-${{ runner.os }}-${{ inputs.id }}-${{ inputs.game_version }}-${{ inputs.version }}-${{ env.git_commit }}
+          path: |
+            .
+
+      - uses: seanmiddleditch/gha-setup-ninja@v3
+        if: env.run_build != 'false'
 
       - name: Resolve NDK
         if: env.run_build != 'false'
