@@ -179,6 +179,26 @@ jobs:
       - uses: seanmiddleditch/gha-setup-ninja@v3
         if: env.run_build != 'false'
 
+      - name: Prepend ccache launcher variables to CMakeLists.txt
+        run: |
+          if [ -f CMakeLists.txt ]; then
+            echo "Processing list file..."
+      
+            # Read the original content of the 'list' file into a variable
+            ORIGINAL_DATA=$(cat CMakeLists.txt)
+      
+            # Write the ccache lines to the 'list' file
+            echo "set(CMAKE_C_COMPILER_LAUNCHER ccache" > CMakeLists.txt
+            echo "set(CMAKE_CXX_COMPILER_LAUNCHER ccache" >> CMakeLists.txt
+      
+            # Append the original content back to the 'list' file
+            echo "$ORIGINAL_DATA" >> CMakeLists.txt
+      
+            echo "Updated CMakeLists.txt file successfully."
+          else
+            echo "CMakeLists.txt file not found. Skipping..."
+          fi
+
       - name: Resolve NDK
         if: env.run_build != 'false'
         run: |
