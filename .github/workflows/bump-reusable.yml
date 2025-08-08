@@ -157,6 +157,8 @@ jobs:
 
       - name: Setup ccache
         if: env.run_build != 'false'
+        env:
+          DPKG_MAINTSCRIPT_PACKAGE_BLACKLIST: "man-db:libc-bin"
         run: |
           sudo apt update
           sudo apt install ccache
