@@ -192,9 +192,6 @@ jobs:
           path: |
             .
 
-      - uses: seanmiddleditch/gha-setup-ninja@v3
-        if: env.run_build != 'false'
-
       - name: Resolve NDK
         if: env.run_build != 'false'
         run: |
