@@ -156,16 +156,16 @@ jobs:
       - name: Configure CPM cache path
         if: env.run_build != 'false'
         run: |
-          echo "CPM_SOURCE_CACHE=$HOME/.cache/CPM" >> $GITHUB_ENV
+          echo "CPM_SOURCE_CACHE=$HOME/.cpm-cache/" >> $GITHUB_ENV
 
       - name: Cache CPM packages
         if: env.run_build != 'false'
         uses: actions/cache@v4
         with:
           path: ${{ env.CPM_SOURCE_CACHE }}
-          key: ${{ runner.os }}-cpm-packages-${{ hashFiles('**/CMakeLists.txt', 'CMakeLists.txt', '**/*.cmake') }}
+          key: ${{ runner.os }}-${{ inputs.id }}-cpm-packages-${{ hashFiles('**/CMakeLists.txt', 'CMakeLists.txt', '**/*.cmake') }}
           restore-keys: |
-            ${{ runner.os }}-cpm-packages-
+            ${{ runner.os }}-${{ inputs.id }}-cpm-packages-
 
       - name: Cache Workspace
         if: env.run_build != 'false'
