@@ -2,6 +2,19 @@ name: Clear All Caches
 
 on:
   workflow_dispatch:
+    inputs:
+      ccache:
+        type: boolean
+        default: false
+      workspace:
+        type: boolean
+        default: false
+      cpm:
+        type: boolean
+        default: false
+      all:
+        type: boolean
+        default: false
 
 permissions:
   actions: write
@@ -14,6 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete all caches
+        if: inputs.all
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
           REPO: ${{ github.repository }}
@@ -22,4 +36,49 @@ jobs:
             echo "Deleting cache id $cache_id"
             gh api --method DELETE /repos/$REPO/actions/caches/$cache_id
             sleep 1
+          done
+
+      - name: Delete all workspace caches
+        if: (!inputs.all) && inputs.workspace
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh api -H "Accept: application/vnd.github+json" \
+            /repos/$REPO/actions/caches \
+            --paginate \
+            -q '.actions_caches[] | select(.key | startswith("workspace-")) | .id' |
+          while read cache_id; do
+            echo "Deleting cache id $cache_id"
+            gh api --method DELETE /repos/$REPO/actions/caches/$cache_id
+          done
+
+      - name: Delete all ccache caches
+        if: (!inputs.all) && inputs.ccache
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh api -H "Accept: application/vnd.github+json" \
+            /repos/$REPO/actions/caches \
+            --paginate \
+            -q '.actions_caches[] | select(.key | startswith("ccache-")) | .id' |
+          while read cache_id; do
+            echo "Deleting cache id $cache_id"
+            gh api --method DELETE /repos/$REPO/actions/caches/$cache_id
+          done
+
+      - name: Delete all cpm caches
+        if: (!inputs.all) && inputs.cpm
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          gh api -H "Accept: application/vnd.github+json" \
+            /repos/$REPO/actions/caches \
+            --paginate \
+            -q '.actions_caches[] | select(.key | startswith("cpm-")) | .id' |
+          while read cache_id; do
+            echo "Deleting cache id $cache_id"
+            gh api --method DELETE /repos/$REPO/actions/caches/$cache_id
           done
