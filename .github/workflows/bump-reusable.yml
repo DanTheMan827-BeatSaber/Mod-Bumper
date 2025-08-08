@@ -156,9 +156,9 @@ jobs:
             ccache-${{ runner.os }}-${{ inputs.id }}-
 
       - name: Setup ccache
-        if: env.run_build != 'false'
+        if: steps.cache-workspace.outputs.cache-hit != 'true' || env.run_build != 'false' || inputs.qmod_command != ''
         env:
-          DPKG_MAINTSCRIPT_PACKAGE_BLACKLIST: "man-db:libc-bin"
+          DPKG_MAINTSCRIPT_PACKAGE_BLACKLIST: man-db
         run: |
           sudo apt update
           sudo apt install ccache
