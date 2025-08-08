@@ -386,13 +386,11 @@ jobs:
           echo "cache-base=$CACHE_BASE" >> $GITHUB_OUTPUT
           
           if [[ -d "${{ env.CCACHE_DIR }}" ]]; then
-            HASH="$(find "${{ env.CCACHE_DIR }}" -type f ! -name 'stats' -exec sha1sum {} \\; | sha1sum | awk '{print $1}')"
+            FILES=$(find "${{ env.CCACHE_DIR }}" -type f ! -name stats -exec sha1sum {} \;)
+            HASH=$(echo "$FILES" | sha1sum | awk '{print $1}')
             
             echo "hash=$HASH" >> $GITHUB_OUTPUT
             echo "cache-key=$CACHE_BASE$HASH" >> $GITHUB_OUTPUT
-          else
-            echo "hash=" >> $GITHUB_OUTPUT
-            echo "cache-key=$CACHE_BASE" >> $GITHUB_OUTPUT
           fi
           cat $GITHUB_OUTPUT
 
