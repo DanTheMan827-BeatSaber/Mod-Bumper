@@ -377,20 +377,41 @@ jobs:
             ${{ env.HOME }}/installed-mods.txt
 
       - name: Get ccache cache hash
+        if: env.run_build != 'false'
         id: ccache-hash
         run:
+          CACHE_BASE="cache-base=ccache-${{ runner.os }}-${{ inputs.id }}-"
+          echo "cache-base=$CACHE_BASE" >> $GITHUB_OUTPUT
+          
           if [[ -d "${{ env.CCACHE_DIR }}" ]]; then
-            echo "hash=$(find "${{ env.CCACHE_DIR }}" -type f ! -name 'stats' -exec sha1sum {} \; | sha1sum | awk '{print $1}')" >> $GITHUB_OUTPUT
+            HASH="$(find "${{ env.CCACHE_DIR }}" -type f ! -name 'stats' -exec sha1sum {} \; | sha1sum | awk '{print $1}')"
+            
+            echo "hash=$HASH" >> $GITHUB_OUTPUT
+            echo "cache-key=$CACHE_BASE$HASH" >> $GITHUB_OUTPUT
           else
             echo "hash=" >> $GITHUB_OUTPUT
+            echo "cache-key=$CACHE_BASE" >> $GITHUB_OUTPUT
           fi
           cat $GITHUB_OUTPUT
 
       - name: Save ccache cache
+        if: env.run_build != 'false'
         uses: actions/cache/save@v4
         with:
           path: ${{ env.CCACHE_DIR }}
-          key: ccache-${{ runner.os }}-${{ inputs.id }}-${{ ccache-hash.outputs.hash }}
+          key: ${{ steps.ccache-hash.outputs.cache-key }}
+
+      - name: Delete all ccache cache entries except latest
+        if: env.run_build != 'false'
+        run: |
+          gh api -H "Accept: application/vnd.github+json" \
+            /repos/$REPO/actions/caches \
+            --paginate \
+            -q '.actions_caches[] | select(.key | startswith("${{ steps.ccache-hash.outputs.cache-base }}") and .key != "${{ steps.ccache-hash.outputs.cache-key }}") | .id' |
+          while read cache_id; do
+            echo "Deleting cache id $cache_id"
+            gh api --method DELETE /repos/$REPO/actions/caches/$cache_id
+          done
 
       - name: Wait for cache entry to be available
         if: inputs.install == true
