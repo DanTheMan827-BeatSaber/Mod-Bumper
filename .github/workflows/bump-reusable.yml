@@ -42,6 +42,9 @@ on:
         required: false
         type: string
 
+permissions:
+  actions: write
+
 jobs:
   bump:
     runs-on: ubuntu-latest
@@ -90,7 +93,7 @@ jobs:
       - name: Setup qpm
         uses: fernthedev/qpm-action@v1
         with:
-          workflow_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow_token: ${{ github.token }}
           restore: false
           resolve_ndk: false
           cache: false
@@ -355,7 +358,7 @@ jobs:
       - name: Delete all GitHub QPM caches
         if: inputs.install == true
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh api -H "Accept: application/vnd.github+json" \
             /repos/${{ github.repository }}/actions/caches \
@@ -402,7 +405,7 @@ jobs:
       - name: Delete all ccache cache entries except latest
         if: env.run_build != 'false'
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           gh cache list --limit 9999  --json id,key --jq '.[] | select((.key | startswith("${{ steps.ccache-hash.outputs.cache-base }}")) and (.key != "${{ steps.ccache-hash.outputs.cache-key }}")) | .id' |
           while read cache_id; do
@@ -431,7 +434,7 @@ jobs:
           echo "Cache entry not found after $ATTEMPTS attempts."
           exit 1
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
 
       - name: Upload Workspace
         if: env.run_build != 'false'
