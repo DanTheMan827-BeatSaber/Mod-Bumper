@@ -381,7 +381,7 @@ jobs:
       - name: Get ccache cache hash
         if: env.run_build != 'false'
         id: ccache-hash
-        run:
+        run: |
           CACHE_BASE="cache-base=ccache-${{ runner.os }}-${{ inputs.id }}-"
           echo "cache-base=$CACHE_BASE" >> $GITHUB_OUTPUT
           
