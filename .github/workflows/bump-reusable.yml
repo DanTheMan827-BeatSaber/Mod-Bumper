@@ -156,7 +156,7 @@ jobs:
             ccache-${{ runner.os }}-${{ inputs.id }}-
 
       - name: Setup ccache
-        if: steps.cache-workspace.outputs.cache-hit != 'true' || env.run_build != 'false' || inputs.qmod_command != ''
+        if: env.run_build != 'false'
         env:
           DPKG_MAINTSCRIPT_PACKAGE_BLACKLIST: man-db
         run: |
