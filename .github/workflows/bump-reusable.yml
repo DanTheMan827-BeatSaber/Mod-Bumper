@@ -175,12 +175,9 @@ jobs:
           fi
           cat $GITHUB_OUTPUT
 
-      - name: Stat all cache files
-        if: env.run_build != 'false'
-        run: |
-          if [[ -d "${{ env.SCCACHE_DIR }}" ]]; then
-            find "${{ env.SCCACHE_DIR }}" -type f -exec stat {} \;
-          fi
+      - name: Save current time
+        id: sccache-time
+        run: echo "timestamp=$(date +%s)" >> $GITHUB_OUTPUT
 
       - name: Setup sccache
         if: env.run_build != 'false'
@@ -413,7 +410,8 @@ jobs:
       - name: Cleanup sccache entries
         if: env.run_build != 'false' && steps.cache-workspace.outputs.cache-hit != 'true'
         run: |
-          # sccache --evict-older-than 1d
+          echo "SCCACHE_START_TIME: ${{ steps.sccache-time.outputs.timestamp }}"
+          find "${{ env.SCCACHE_DIR }}" -type f ! -newerat "@${{ steps.sccache-time.outputs.timestamp }}" -print -delete
 
       - name: Stat all cache files
         if: env.run_build != 'false'
