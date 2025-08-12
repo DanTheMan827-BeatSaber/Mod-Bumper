@@ -64,7 +64,7 @@ jobs:
         run: |
           echo "HOME=$HOME" | tee -a "$GITHUB_ENV"
           echo "CPM_SOURCE_CACHE=$HOME/.cpm-cache/" | tee -a "$GITHUB_ENV"
-          echo "SCCACHE_DIR=$HOME/.sccache-cache/" | tee -a "$GITHUB_ENV"
+          echo "SCCACHE_DIR=$HOME/.cache/sccache/" | tee -a "$GITHUB_ENV"
           echo "RUSTC_WRAPPER=sccache" | tee -a "$GITHUB_ENV"
           echo "timestamp=$(date +%s)" | tee -a "$GITHUB_ENV"
 
@@ -166,14 +166,19 @@ jobs:
           CACHE_BASE="sccache-${{ runner.os }}-${{ inputs.id }}-"
           echo "cache-base=$CACHE_BASE" >> $GITHUB_OUTPUT
           
-          if [[ -d "${{ env.CCACHE_DIR }}" ]]; then
-            FILES=$(find "${{ env.CCACHE_DIR }}" -type f ! -name stats -exec sha1sum {} \;)
+          if [[ -d "${{ env.SCCACHE_DIR }}" ]]; then
+            FILES=$(find "${{ env.SCCACHE_DIR }}" -type f ! -name stats -exec sha1sum {} \;)
             HASH=$(echo "$FILES" | sha1sum | awk '{print $1}')
             
             echo "hash=$HASH" >> $GITHUB_OUTPUT
             echo "cache-key=$CACHE_BASE$HASH" >> $GITHUB_OUTPUT
           fi
           cat $GITHUB_OUTPUT
+
+      - name: Stat all cache files
+        if: env.run_build != 'false'
+        run: |
+          find "${{ env.SCCACHE_DIR }}" -type f -exec stat {} \;
 
       - name: Setup sccache
         if: env.run_build != 'false'
@@ -193,7 +198,7 @@ jobs:
             # Read the original content of the 'list' file into a variable
             ORIGINAL_DATA=$(cat CMakeLists.txt)
       
-            # Write the ccache lines to the 'list' file
+            # Write the sccache lines to the 'list' file
             echo "set(CMAKE_C_COMPILER_LAUNCHER sccache)" > CMakeLists.txt
             echo "set(CMAKE_CXX_COMPILER_LAUNCHER sccache)" >> CMakeLists.txt
       
@@ -206,7 +211,7 @@ jobs:
           fi
 
       - name: Cache Workspace
-        if: env.run_build != 'false'
+        if: env.run_build != 'never-false'
         id: cache-workspace
         uses: actions/cache@v4
         with:
@@ -396,20 +401,30 @@ jobs:
             ${{ env.HOME }}/.config/QPM-RS
             ${{ env.HOME }}/installed-mods.txt
 
+      - name: Stat all cache files
+        if: env.run_build != 'false'
+        run: |
+          find "${{ env.SCCACHE_DIR }}" -type f -exec stat {} \;
+
       - name: Cleanup sccache entries
         if: env.run_build != 'false' && steps.cache-workspace.outputs.cache-hit != 'true'
         run: |
           # sccache --evict-older-than 1d
 
+      - name: Stat all cache files
+        if: env.run_build != 'false'
+        run: |
+          find "${{ env.SCCACHE_DIR }}" -type f -exec stat {} \;
+
       - name: Get ccache cache hash
         if: env.run_build != 'false'
         id: ccache-hash
         run: |
-          CACHE_BASE="ccache-${{ runner.os }}-${{ inputs.id }}-"
+          CACHE_BASE="sccache-${{ runner.os }}-${{ inputs.id }}-"
           echo "cache-base=$CACHE_BASE" >> $GITHUB_OUTPUT
           
-          if [[ -d "${{ env.CCACHE_DIR }}" ]]; then
-            FILES=$(find "${{ env.CCACHE_DIR }}" -type f ! -name stats -exec sha1sum {} \;)
+          if [[ -d "${{ env.SCCACHE_DIR }}" ]]; then
+            FILES=$(find "${{ env.SCCACHE_DIR }}" -type f ! -name stats -exec sha1sum {} \;)
             HASH=$(echo "$FILES" | sha1sum | awk '{print $1}')
             
             echo "hash=$HASH" >> $GITHUB_OUTPUT
@@ -421,10 +436,10 @@ jobs:
         if: env.run_build != 'false' && steps.ccache-hash.outputs.cache-key != steps.ccache-hash-old.outputs.cache-key
         uses: actions/cache/save@v4
         with:
-          path: ${{ env.CCACHE_DIR }}
-          key: ${{ steps.ccache-hash.outputs.cache-key }}
+          path: ${{ env.SCCACHE_DIR }}
+          key: ${{ steps.sccache-hash.outputs.cache-key }}
 
-      - name: Delete all ccache cache entries except latest
+      - name: Delete all sccache cache entries except latest
         if: env.run_build != 'false'
         env:
           GH_TOKEN: ${{ github.token }}
@@ -432,7 +447,7 @@ jobs:
           gh api -H "Accept: application/vnd.github+json" \
             /repos/${{ github.repository }}/actions/caches \
             --paginate \
-            -q '.actions_caches[] | select((.key | startswith("${{ steps.ccache-hash.outputs.cache-base }}")) and (.key != "${{ steps.ccache-hash.outputs.cache-key }}")) | .id' 2>&1 |
+            -q '.actions_caches[] | select((.key | startswith("${{ steps.sccache-hash.outputs.cache-base }}")) and (.key != "${{ steps.sccache-hash.outputs.cache-key }}")) | .id' 2>&1 |
           while read cache_id; do
             echo "Deleting cache id $cache_id"
             gh api --method DELETE /repos/${{ github.repository }}/actions/caches/$cache_id
@@ -462,7 +477,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
 
       - name: Upload Workspace
-        if: env.run_build == 'neverfalse'
+        if: env.run_build != 'false'
         uses: actions/upload-artifact@v4
         with:
           name: workspace_${{ steps.qpm_id.outputs.id }}
