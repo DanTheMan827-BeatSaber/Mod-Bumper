@@ -399,7 +399,7 @@ jobs:
       - name: Cleanup sccache entries
         if: env.run_build != 'false' && steps.cache-workspace.outputs.cache-hit != 'true'
         run: |
-          sccache --evict-older-than 1d
+          # sccache --evict-older-than 1d
 
       - name: Get ccache cache hash
         if: env.run_build != 'false'
