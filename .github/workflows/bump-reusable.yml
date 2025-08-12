@@ -161,7 +161,7 @@ jobs:
 
       - name: Get sccache cache hash
         if: env.run_build != 'false'
-        id: ccache-hash-old
+        id: sccache-hash-old
         run: |
           CACHE_BASE="sccache-${{ runner.os }}-${{ inputs.id }}-"
           echo "cache-base=$CACHE_BASE" >> $GITHUB_OUTPUT
@@ -422,9 +422,9 @@ jobs:
             find "${{ env.SCCACHE_DIR }}" -type f -exec stat {} \;
           fi
 
-      - name: Get ccache cache hash
+      - name: Get sccache cache hash
         if: env.run_build != 'false'
-        id: ccache-hash
+        id: sccache-hash
         run: |
           CACHE_BASE="sccache-${{ runner.os }}-${{ inputs.id }}-"
           echo "cache-base=$CACHE_BASE" >> $GITHUB_OUTPUT
@@ -438,8 +438,8 @@ jobs:
           fi
           cat $GITHUB_OUTPUT
 
-      - name: Save ccache cache
-        if: env.run_build != 'false' && steps.ccache-hash.outputs.cache-key != steps.ccache-hash-old.outputs.cache-key
+      - name: Save sccache cache
+        if: env.run_build != 'false' && steps.sccache-hash.outputs.cache-key != steps.sccache-hash-old.outputs.cache-key
         uses: actions/cache/save@v4
         with:
           path: ${{ env.SCCACHE_DIR }}
