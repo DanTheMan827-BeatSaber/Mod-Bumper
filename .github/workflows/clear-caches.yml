@@ -29,22 +29,23 @@ jobs:
   clear-caches:
     runs-on: ubuntu-latest
     steps:
+      - name: Set default repo and login
+        run: |
+          gh repo set-default "${{ github.repository }}"
+          echo -e "${{ github.token }}" | gh auth login --with-token
+  
       - name: Delete all caches
         if: inputs.all
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN}}
-          REPO: ${{ github.repository }}
         run: |
           gh cache delete --succeed-on-no-caches --all
 
       - name: Delete all workspace caches
         if: (!inputs.all) && inputs.workspace
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REPO: ${{ github.repository }}
         run: |
           gh api -H "Accept: application/vnd.github+json" \
-            /repos/$REPO/actions/caches \
+            /repos/${{ github.repository }}/actions/caches \
             --paginate \
             -q '.actions_caches[] | select(.key | startswith("workspace-")) | .id' | sort -r |
           while read cache_id; do
@@ -54,12 +55,9 @@ jobs:
 
       - name: Delete all ccache caches
         if: (!inputs.all) && inputs.ccache
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REPO: ${{ github.repository }}
         run: |
           gh api -H "Accept: application/vnd.github+json" \
-            /repos/$REPO/actions/caches \
+            /repos/${{ github.repository }}/actions/caches \
             --paginate \
             -q '.actions_caches[] | select(.key | startswith("ccache-")) | .id' | sort -r |
           while read cache_id; do
@@ -69,12 +67,9 @@ jobs:
 
       - name: Delete all sccache caches
         if: (!inputs.all) && inputs.sccache
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REPO: ${{ github.repository }}
         run: |
           gh api -H "Accept: application/vnd.github+json" \
-            /repos/$REPO/actions/caches \
+            /repos/${{ github.repository }}/actions/caches \
             --paginate \
             -q '.actions_caches[] | select(.key | startswith("sccache-")) | .id' | sort -r |
           while read cache_id; do
@@ -84,12 +79,9 @@ jobs:
 
       - name: Delete all cpm caches
         if: (!inputs.all) && inputs.cpm
-        env:
-          GH_TOKEN: ${{ github.token }}
-          REPO: ${{ github.repository }}
         run: |
           gh api -H "Accept: application/vnd.github+json" \
-            /repos/$REPO/actions/caches \
+            /repos/${{ github.repository }}/actions/caches \
             --paginate \
             -q '.actions_caches[] | select(.key | startswith("cpm-")) | .id' | sort -r |
           while read cache_id; do
