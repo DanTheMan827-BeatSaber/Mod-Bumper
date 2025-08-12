@@ -29,6 +29,8 @@ jobs:
   clear-caches:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+      
       - name: Set default repo and login
         run: |
           gh repo set-default "${{ github.repository }}"
