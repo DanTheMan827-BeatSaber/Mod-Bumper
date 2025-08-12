@@ -64,7 +64,8 @@ jobs:
         run: |
           echo "HOME=$HOME" | tee -a "$GITHUB_ENV"
           echo "CPM_SOURCE_CACHE=$HOME/.cpm-cache/" | tee -a "$GITHUB_ENV"
-          echo "CCACHE_DIR=$HOME/.ccache-cache/" | tee -a "$GITHUB_ENV"
+          echo "SCCACHE_DIR=$HOME/.sccache-cache/" | tee -a "$GITHUB_ENV"
+          echo "RUSTC_WRAPPER=sccache" | tee -a "$GITHUB_ENV"
           echo "timestamp=$(date +%s)" | tee -a "$GITHUB_ENV"
 
       - name: Checkout repository
@@ -150,19 +151,19 @@ jobs:
           fi
           true
 
-      - name: Restore ccache cache
+      - name: Restore sccache cache
         uses: actions/cache/restore@v4
         with:
-          path: ${{ env.CCACHE_DIR }}
-          key: ccache-${{ runner.os }}-${{ inputs.id }}-
+          path: ${{ env.SCCACHE_DIR }}
+          key: sccache-${{ runner.os }}-${{ inputs.id }}-
           restore-keys: |
-            ccache-${{ runner.os }}-${{ inputs.id }}-
+            sccache-${{ runner.os }}-${{ inputs.id }}-
 
-      - name: Get ccache cache hash
+      - name: Get sccache cache hash
         if: env.run_build != 'false'
         id: ccache-hash-old
         run: |
-          CACHE_BASE="ccache-${{ runner.os }}-${{ inputs.id }}-"
+          CACHE_BASE="sccache-${{ runner.os }}-${{ inputs.id }}-"
           echo "cache-base=$CACHE_BASE" >> $GITHUB_OUTPUT
           
           if [[ -d "${{ env.CCACHE_DIR }}" ]]; then
@@ -174,7 +175,7 @@ jobs:
           fi
           cat $GITHUB_OUTPUT
 
-      - name: Setup ccache
+      - name: Setup sccache
         if: env.run_build != 'false'
         env:
           DPKG_MAINTSCRIPT_PACKAGE_BLACKLIST: man-db
@@ -182,9 +183,9 @@ jobs:
           echo 'set man-db/auto-update false' | sudo debconf-communicate >/dev/null
           sudo dpkg-reconfigure man-db
           sudo apt update
-          sudo apt install ccache
+          sudo apt install sccache
 
-      - name: Prepend ccache launcher variables to CMakeLists.txt
+      - name: Prepend sccache launcher variables to CMakeLists.txt
         run: |
           if [ -f CMakeLists.txt ]; then
             echo "Processing list file..."
@@ -193,8 +194,8 @@ jobs:
             ORIGINAL_DATA=$(cat CMakeLists.txt)
       
             # Write the ccache lines to the 'list' file
-            echo "set(CMAKE_C_COMPILER_LAUNCHER ccache)" > CMakeLists.txt
-            echo "set(CMAKE_CXX_COMPILER_LAUNCHER ccache)" >> CMakeLists.txt
+            echo "set(CMAKE_C_COMPILER_LAUNCHER sccache)" > CMakeLists.txt
+            echo "set(CMAKE_CXX_COMPILER_LAUNCHER sccache)" >> CMakeLists.txt
       
             # Append the original content back to the 'list' file
             echo "$ORIGINAL_DATA" >> CMakeLists.txt
@@ -395,10 +396,10 @@ jobs:
             ${{ env.HOME }}/.config/QPM-RS
             ${{ env.HOME }}/installed-mods.txt
 
-      - name: Cleanup ccache entries
+      - name: Cleanup sccache entries
         if: env.run_build != 'false' && steps.cache-workspace.outputs.cache-hit != 'true'
         run: |
-          ccache --evict-older-than 1d
+          sccache --evict-older-than 1d
 
       - name: Get ccache cache hash
         if: env.run_build != 'false'
@@ -461,7 +462,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
 
       - name: Upload Workspace
-        if: env.run_build != 'false'
+        if: env.run_build == 'neverfalse'
         uses: actions/upload-artifact@v4
         with:
           name: workspace_${{ steps.qpm_id.outputs.id }}
