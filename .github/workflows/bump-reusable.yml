@@ -213,7 +213,7 @@ jobs:
           fi
 
       - name: Cache Workspace
-        if: env.run_build != 'never-false'
+        if: env.run_build == 'never-false'
         id: cache-workspace
         uses: actions/cache@v4
         with:
