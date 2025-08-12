@@ -178,7 +178,9 @@ jobs:
       - name: Stat all cache files
         if: env.run_build != 'false'
         run: |
-          find "${{ env.SCCACHE_DIR }}" -type f -exec stat {} \;
+          if [[ -d "${{ env.SCCACHE_DIR }}" ]]; then
+            find "${{ env.SCCACHE_DIR }}" -type f -exec stat {} \;
+          fi
 
       - name: Setup sccache
         if: env.run_build != 'false'
@@ -404,7 +406,9 @@ jobs:
       - name: Stat all cache files
         if: env.run_build != 'false'
         run: |
-          find "${{ env.SCCACHE_DIR }}" -type f -exec stat {} \;
+          if [[ -d "${{ env.SCCACHE_DIR }}" ]]; then
+            find "${{ env.SCCACHE_DIR }}" -type f -exec stat {} \;
+          fi
 
       - name: Cleanup sccache entries
         if: env.run_build != 'false' && steps.cache-workspace.outputs.cache-hit != 'true'
@@ -414,7 +418,9 @@ jobs:
       - name: Stat all cache files
         if: env.run_build != 'false'
         run: |
-          find "${{ env.SCCACHE_DIR }}" -type f -exec stat {} \;
+          if [[ -d "${{ env.SCCACHE_DIR }}" ]]; then
+            find "${{ env.SCCACHE_DIR }}" -type f -exec stat {} \;
+          fi
 
       - name: Get ccache cache hash
         if: env.run_build != 'false'
