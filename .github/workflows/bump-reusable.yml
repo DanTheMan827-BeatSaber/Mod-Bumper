@@ -210,7 +210,7 @@ jobs:
           fi
 
       - name: Cache Workspace
-        if: env.run_build == 'never-false'
+        if: env.run_build != 'false'
         id: cache-workspace
         uses: actions/cache@v4
         with:
@@ -232,7 +232,7 @@ jobs:
       - name: Run pre-bump
         if: env.run_build != 'false' && inputs.prebump_command
         run: |
-          ${{ inputs.prebump_command || true }}
+          ${{ inputs.prebump_command }}
 
       - name: Sort dependencies
         if: env.run_build != 'false'
