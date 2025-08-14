@@ -1,0 +1,74 @@
+name: Cleanup Runs
+
+on:
+  workflow_call:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+permissions:
+  contents: write
+  actions: write
+
+jobs:
+  cleanup-runs:
+    name: Delete all workflow runs for ${{ matrix.workflow_file }}
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        workflow_file: 
+          - trigger.yml
+          - bump-all.yml
+          - bump-needed.yml
+          - cleanup-runs.yml
+          - clear-caches.yml
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Delete all workflow runs for ${{ matrix.workflow_file }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          # Get workflow ID by filename
+          workflow_id=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/$REPO/actions/workflows/${{ matrix.workflow_file }}" \
+            --jq .id)
+
+          echo "Workflow ID: $workflow_id"
+
+          # Get all run IDs for the workflow
+          run_ids=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            "/repos/$REPO/actions/workflows/$workflow_id/runs?per_page=100" \
+            --jq '.workflow_runs[].id')
+
+          for run_id in $run_ids; do
+            echo "Deleting run $run_id"
+            gh run delete "$run_id" || true
+          done
+
+  cleanup-bump-runs:
+    name: Delete cancelled, skipped, or timed out runs for bump.yml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Delete runs
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run list\
+            --limit 9999 \
+            --workflow bump.yml \
+            --json status,databaseId,conclusion | 
+          jq -r '.[] | select(.conclusion == "cancelled" or .conclusion == "skipped" or .conclusion == "timed_out") | .databaseId' |
+          while read run_id; do
+            echo "Deleting run $run_id"
+            gh run delete "$run_id" || true
+          done

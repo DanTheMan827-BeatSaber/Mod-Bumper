@@ -1,0 +1,4 @@
+for f in "$(dirname "${BASH_SOURCE[0]}")"/*.sh.inc; do
+    echo "source $f"
+    source "$f"
+done

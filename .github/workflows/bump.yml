@@ -1,47 +1,23 @@
 name: Bump mods
 
 on:
-  workflow_dispatch:
-    inputs:
-      force_build:
-        type: boolean
-        default: false
+  repository_dispatch:
+    types: [Bump Needed Mods, Bump All Mods]
+
+concurrency:
+  group: ${{ github.event.action }}
+  cancel-in-progress: true
 
 permissions:
   actions: write
 
 jobs:
-  cleanup-trigger-runs:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Delete all workflow runs for push.yml
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          WORKFLOW_FILE: push.yml
-          REPO: ${{ github.repository }}
-        run: |
-          # Get workflow ID by filename
-          workflow_id=$(gh api \
-            -H "Accept: application/vnd.github+json" \
-            "/repos/$REPO/actions/workflows/$WORKFLOW_FILE" \
-            --jq .id)
-      
-          echo "Workflow ID for $WORKFLOW_FILE: $workflow_id"
-      
-          # Get all run IDs for the workflow
-          run_ids=$(gh api \
-            -H "Accept: application/vnd.github+json" \
-            "/repos/$REPO/actions/workflows/$workflow_id/runs?per_page=100" \
-            --jq '.workflow_runs[].id')
-      
-          for run_id in $run_ids; do
-            echo "Deleting run $run_id"
-            gh api \
-              --method DELETE \
-              -H "Accept: application/vnd.github+json" \
-              "/repos/$REPO/actions/runs/$run_id"
-          done
+  cleanup-runs:
+    uses: ./.github/workflows/cleanup-runs.yml
+    secrets: inherit
+    permissions:
+      contents: write
+      actions: write
 
   get-mods:
     runs-on: ubuntu-latest
@@ -107,7 +83,7 @@ jobs:
       build_command: ${{ matrix.build }}
       qmod_command: ${{ matrix.qmod }}
       prebump_command: ${{ matrix.prebump }}
-      force_build: ${{ inputs.force_build }}
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
 
     strategy:
       max-parallel: 1
@@ -131,7 +107,7 @@ jobs:
       build_command: ${{ matrix.build }}
       qmod_command: ${{ matrix.qmod }}
       prebump_command: ${{ matrix.prebump }}
-      force_build: ${{ inputs.force_build }}
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
 
     strategy:
       matrix:
@@ -159,43 +135,12 @@ jobs:
           path: |
             *.qmod
 
-  upload-cache:
-    needs: [get-mods, bump]
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Get home path
-        run: |
-          echo "HOME=$HOME" | tee -a "$GITHUB_ENV"
-
-      - name: Restore QPM Cache
-        uses: actions/cache/restore@v4
-        with:
-          key: qpm-cache-${{ runner.os }}-${{ github.run_id }}-
-          restore-keys: qpm-cache-${{ runner.os }}-${{ github.run_id }}-
-          path: |
-            ${{ env.HOME }}/.local/share/QPM-RS
-            ${{ env.HOME }}/.config/QPM-RS
-
-      - name: Clear NDK cache
-        run: |
-          rm -r "${{ env.HOME }}/.local/share/QPM-RS/ndk" || echo "No NDK cache to clear"
-
-      - name: Upload cache artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: qpm-cache
-          include-hidden-files: true
-          path: |
-            ${{ env.HOME }}/.local/share/QPM-RS
-            ${{ env.HOME }}/.config/QPM-RS
-
   clear-cache-end:
     runs-on: ubuntu-latest
     if: always()
-    needs: [get-mods, bump, upload-cache]
+    needs: [get-mods, bump]
     steps:
-      - name: Delete all QPM caches
+      - name: Delete all shared caches
         env:
           GH_TOKEN: ${{ github.token }}
           REPO: ${{ github.repository }}
@@ -203,7 +148,7 @@ jobs:
           gh api -H "Accept: application/vnd.github+json" \
             /repos/$REPO/actions/caches \
             --paginate \
-            -q '.actions_caches[] | select(.key | startswith("qpm-cache-${{ runner.os }}-${{ github.run_id }}-")) | .id' |
+            -q '.actions_caches[] | select(.key | startswith("shared-${{ github.run_id }}-")) | .id' |
           while read cache_id; do
             echo "Deleting cache id $cache_id"
             gh api --method DELETE /repos/$REPO/actions/caches/$cache_id
