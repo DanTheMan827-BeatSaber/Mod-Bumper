@@ -448,13 +448,13 @@ jobs:
         if: env.run_build != 'false' && steps.cache-workspace.outputs.cache-hit != 'true'
         run: |
           echo "SCCACHE_START_TIME: ${{ steps.sccache-time.outputs.timestamp }}"
-          [[ -d "${{ env.SCCACHE_DIR }}"]] || exit 0
+          [[ -d "${{ env.SCCACHE_DIR }}" ]] || exit 0
           find "${{ env.SCCACHE_DIR }}" -type f ! -newerat "@${{ steps.sccache-time.outputs.timestamp }}" -print -delete
 
       - name: Stat all cache files
         if: env.run_build != 'false'
         run: |
-          [[ -d "${{ env.SCCACHE_DIR }}"]] || exit 0
+          [[ -d "${{ env.SCCACHE_DIR }}" ]] || exit 0
           find "${{ env.SCCACHE_DIR }}" -type f -exec stat {} \;
 
       - name: Get sccache cache hash
