@@ -484,7 +484,7 @@ jobs:
         if: env.run_build != 'false'
         uses: actions/upload-artifact@v4
         with:
-          name: workspace_${{ steps.qpm_id.outputs.id }}
+          name: workspace${{ inputs.install && '-installable' }}_${{ steps.qpm_id.outputs.id }}
           include-hidden-files: true
           path: |
             .
