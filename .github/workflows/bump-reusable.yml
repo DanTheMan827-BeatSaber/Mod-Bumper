@@ -554,7 +554,11 @@ jobs:
             JSON="[]"
           fi
 
+          echo "upload-cache=false" >> $GITHUB_OUTPUT
+
           if [[ "$(ls -1 "${{ env.HOME }}/.local/share/QPM-RS/cache" | wc -l)" -gt 0 ]]; then
+            echo "upload-cache=true" >> $GITHUB_OUTPUT
+            
             for pkg in "${{ env.HOME }}/.local/share/QPM-RS/cache"/*/*; do
               touch "$pkg/.cached" || true
             done
@@ -562,12 +566,7 @@ jobs:
 
           echo "need-cached=$JSON" >> $GITHUB_OUTPUT
 
-          # Check if any cache sub-directories exist
-          if [[ "$(echo "$JSON" | jq length)" -gt 0 ]]; then
-            echo "upload-cache=true" >> $GITHUB_OUTPUT
-          else
-            echo "upload-cache=false" >> $GITHUB_OUTPUT
-          fi
+          cat $GITHUB_OUTPUT
 
       - name: Upload cache
         uses: actions/upload-artifact@v4
