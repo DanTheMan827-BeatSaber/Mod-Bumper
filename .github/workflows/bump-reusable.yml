@@ -115,12 +115,14 @@ jobs:
             echo "qpm.json not found!"
             exit 1
           fi
+          
+          cat $GITHUB_OUTPUT
       
       - name: Get cache name
         id: cache-name
         run: |
           PREFIX="cache_"
-          echo "cache-name=$PREFIX${{ steps.qpm_id.outputs.id }}" >> $GITHUB_OUTPUT
+          echo "cache-name=$PREFIX${{ inputs.id }}" >> $GITHUB_OUTPUT
           echo "cache-prefix=$PREFIX" >> $GITHUB_OUTPUT
           cat $GITHUB_OUTPUT
       
@@ -571,7 +573,6 @@ jobs:
         with:
           name: ${{ steps.cache-name.outputs.cache-name }}
           include-hidden-files: true
-          
           path: |
             ${{ env.HOME }}/.local/share/QPM-RS/cache/*
 
