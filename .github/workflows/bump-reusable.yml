@@ -104,6 +104,25 @@ jobs:
           restore-keys: shared-${{ github.run_id }}-
           path: |
             ${{ env.HOME }}/installed-mods.txt
+
+      - name: Get ID from qpm.json
+        id: qpm_id
+        run: |
+          if [ -f qpm.json ]; then
+            id="$(jq -r '.info.id' qpm.json)"
+            echo "id=$id" >> $GITHUB_OUTPUT
+          else
+            echo "qpm.json not found!"
+            exit 1
+          fi
+      
+      - name: Get cache name
+        id: cache-name
+        run: |
+          PREFIX="cache_"
+          echo "cache-name=$PREFIX${{ steps.qpm_id.outputs.id }}" >> $GITHUB_OUTPUT
+          echo "cache-prefix=$PREFIX" >> $GITHUB_OUTPUT
+          cat $GITHUB_OUTPUT
       
       - name: Download qpm-* artifacts and restore them
         working-directory: ${{ github.workspace }}
@@ -113,10 +132,10 @@ jobs:
         run: |
           source ".github/source-all"
           mkdir -p artifacts
-          gh run download ${{ github.run_id }} -p 'qpm-*' -D artifacts || exit 0
+          gh run download ${{ github.run_id }} -p '${{ steps.cache-name.outputs.cache-prefix }}*' -D artifacts || exit 0
           cd artifacts
-          for mod in *; do
-            restore-qpm-cache "$mod" --mv
+          for mod in */*/*; do
+            restore-qpm-cache "$mod" --mv || true
           done
           
       - name: Setup qpm
@@ -133,23 +152,6 @@ jobs:
           sudo mkdir -p "$NDK_PATH"
           sudo chmod +rwx "$NDK_PATH"
           qpm config ndk-path "$NDK_PATH"
-
-      - name: Get ID from qpm.json
-        id: qpm_id
-        run: |
-          if [ -f qpm.json ]; then
-            id="$(jq -r '.info.id' qpm.json)"
-            echo "id=$id" >> $GITHUB_OUTPUT
-          else
-            echo "qpm.json not found!"
-            exit 1
-          fi
-      
-      - name: Get cache name
-        id: cache-name
-        run: |
-          echo "cache-name=cache_${{ steps.qpm_id.outputs.id }}" >> $GITHUB_OUTPUT
-          cat $GITHUB_OUTPUT
 
       - name: QPM cache clear
         run: |
@@ -536,10 +538,23 @@ jobs:
           RUN_ID: ${{ github.run_id }}
         run: |
           source ".github/source-all"
-          JSON="$(qpm-prep-cache --rm | jq -Rsc '[split("\n")[] | select(length > 0) | {name: ("qpm-"+(. | gsub("/";"@"))), path: .}]')"
+
+          for pkg in "${{ env.HOME }}/.local/share/QPM-RS/cache"/*/*; do
+            if [[ -f "$pkg/.cached" ]]; then
+              rm -rf "$pkg"
+            fi
+          done
+
+          rmdir "${{ env.HOME }}/.local/share/QPM-RS/cache"/* || true
+          
+          JSON="$(qpm-prep-cache | jq -Rsc '[split("\n")[] | select(length > 0) | {name: ("qpm-"+(. | gsub("/";"@"))), path: .}]')"
           if [[ -z "$JSON" ]]; then
             JSON="[]"
           fi
+
+          for pkg in "${{ env.HOME }}/.local/share/QPM-RS/cache"/*/*; do
+            touch "$pkg/.cached"
+          done
 
           echo "need-cached=$JSON" >> $GITHUB_OUTPUT
 
@@ -572,7 +587,7 @@ jobs:
     name: Upload cache for ${{ matrix.name }}
     runs-on: ubuntu-latest
     needs: bump
-    if: needs.bump.outputs.upload-cache == 'true'
+    if: false && needs.bump.outputs.upload-cache == 'true'
     outputs:
       cache-name: ${{ steps.info.outputs.cache-name }}
 
