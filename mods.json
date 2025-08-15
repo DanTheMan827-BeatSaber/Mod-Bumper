@@ -1,4 +1,5 @@
 {
+  "$schema": "https://github.com/DanTheMan827-BeatSaber/Mod-Bumper/raw/refs/heads/main/mods.json",
   "newestDependencies": {
     "beatsaber-hook": "6.4.2",
     "beatsaverplusplus": "0.2.1",

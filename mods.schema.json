@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "mods.schema.json",
+  "title": "ModsJson",
+  "type": "object",
+  "description": "Schema for a mods.json configuration file.",
+  "properties": {
+    "newestDependencies": {
+      "type": "object",
+      "description": "A list of dependencies and the version to set when bumping",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "installedMods": {
+      "type": "object",
+      "description": "Mods that need to be built before any others, these are built sequentially one at a time",
+      "additionalProperties": {
+        "$ref": "#/$defs/Mod"
+      }
+    },
+    "mods": {
+      "type": "object",
+      "description": "Mods that can be built in parallel",
+      "additionalProperties": {
+        "$ref": "#/$defs/Mod"
+      }
+    }
+  },
+  "required": [
+    "newestDependencies",
+    "installedMods",
+    "mods"
+  ],
+  "$defs": {
+    "Mod": {
+      "type": "object",
+      "properties": {
+        "repo": {
+          "type": "string",
+          "description": "The repo containing the mod"
+        },
+        "version": {
+          "type": "string",
+          "description": "The version to tag the built artifact with"
+        },
+        "dependencies": {
+          "type": "array",
+          "description": "An optional list of mod IDs that must be built before this mod can be built",
+          "items": {
+            "type": "string"
+          }
+        },
+        "build": {
+          "type": "string",
+          "description": "The command to run for building the mod"
+        },
+        "qmod": {
+          "type": "string",
+          "description": "The command to run for packaging the qmod"
+        },
+        "branch": {
+          "type": "string",
+          "description": "The branch or tag to checkout"
+        },
+        "prebump": {
+          "type": "string",
+          "description": "The command to run before bumping the version"
+        }
+      },
+      "required": ["repo"]
+    }
+  }
+}
