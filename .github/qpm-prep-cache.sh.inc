@@ -14,7 +14,7 @@ qpm-prep-cache() {
     local QPM_REPO_PATH="$HOME/.config/QPM-RS/qpm.repository.json"
     local QPM_REPO_JSON="$(cat "$QPM_REPO_PATH")"
     local ARTIFACT_PREFIX="qpm-"
-    local ARTIFACTS="$(get-artifacts)"
+    local ARTIFACTS="$([[ "$RM_EXISTING" == true ]] && get-artifacts)"
     local QPM_CACHE_ITEMS="$(show-qpm-cache)"
     local QPM_CACHE_ARTIFACTS="$(show-qpm-cache @ | prefix-lines "$ARTIFACT_PREFIX")"
 
