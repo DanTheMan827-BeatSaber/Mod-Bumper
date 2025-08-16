@@ -12,7 +12,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.PAT }}
+          ssh-key: ${{ secrets.DEPLOY_KEY }}
       
       - name: Install Deno
         uses: denoland/setup-deno@v2
@@ -48,14 +48,15 @@ jobs:
           git add mods.json .github/workflows/bump.yml
 
           if [[ "${{ steps.scripts.outputs.mods-hash-pre }}" != "${{ steps.scripts.outputs.mods-hash-post }}" ]] && [[ "${{ steps.scripts.outputs.bump-hash-pre }}" != "${{ steps.scripts.outputs.bump-hash-post }}" ]]; then
-            git commit -m "[Automated] Update mods.json and bump.yml"
+            git commit -m "Update mods.json and bump.yml [skip ci]"
           elif [[ "${{ steps.scripts.outputs.mods-hash-pre }}" != "${{ steps.scripts.outputs.mods-hash-post }}" ]]; then
-            git commit -m "[Automated] Update mods.json"
+            git commit -m "Update mods.json [skip ci]"
           elif [[ "${{ steps.scripts.outputs.bump-hash-pre }}" != "${{ steps.scripts.outputs.bump-hash-post }}" ]]; then
-            git commit -m "[Automated] Update bump.yml"
+            git commit -m "Update bump.yml [skip ci]"
           fi
           
           git push
+
   dispatch:
     needs: update
     permissions:
