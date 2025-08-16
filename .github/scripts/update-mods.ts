@@ -28,10 +28,10 @@ async function writeJson(mods: ModsJson): Promise<void> {
  * @param mods - The record of mods to update.
  */
 async function setRepoData(mods: Record<string, Mod>): Promise<void> {
-  for (const [modId, mod] of Object.entries(mods)) {
+  await Promise.all(Object.entries(mods).map(async ([modId, mod]) => {
     const match = getRepo(mod.repo);
     if (!match) {
-      continue;
+      return;
     }
 
     let { owner, repo } = match;
@@ -51,8 +51,8 @@ async function setRepoData(mods: Record<string, Mod>): Promise<void> {
       console.error(`Failed to fetch default branch for ${owner}/${repo}:`, error);
     }
 
-    continue;
-  }
+    return;
+  }));
 }
 
 /**
@@ -115,11 +115,11 @@ async function downloadPackageJson(url: string): Promise<PackageConfig> {
  */
 async function setNeeds(mods: Record<string, Mod>): Promise<void> {
   const allModIds = Object.keys(mods);
-  
-  for (const [modId, mod] of Object.entries(mods)) {
+
+  await Promise.all(Object.entries(mods).map(async ([modId, mod]) => {
     const match = getRepo(mod.repo);
     if (!match) {
-      continue;
+      return;
     }
 
     let { owner, repo } = match;
@@ -137,8 +137,8 @@ async function setNeeds(mods: Record<string, Mod>): Promise<void> {
       console.error(`Failed to fetch default branch for ${owner}/${repo}:`, error);
     }
 
-    continue;
-  }
+    return;
+  }));
 }
 
 if (import.meta.main) {
@@ -152,7 +152,8 @@ if (import.meta.main) {
   for (const [modId, mod] of Object.entries(mods.mods)) {
     if (mod.version) {
       delete mods.newestDependencies[modId];
-    } 
+    }
+    delete mod.dependencies;
   }
   
   delete mods.installedMods;
