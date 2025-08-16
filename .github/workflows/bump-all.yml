@@ -2,6 +2,7 @@ name: "Trigger: Bump All Mods"
 
 on:
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: write

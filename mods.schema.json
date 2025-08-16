@@ -12,16 +12,9 @@
         "type": "string"
       }
     },
-    "installedMods": {
-      "type": "object",
-      "description": "Mods that need to be built before any others, these are built sequentially one at a time",
-      "additionalProperties": {
-        "$ref": "#/$defs/Mod"
-      }
-    },
     "mods": {
       "type": "object",
-      "description": "Mods that can be built in parallel",
+      "description": "A list of mods to be built",
       "additionalProperties": {
         "$ref": "#/$defs/Mod"
       }
@@ -29,7 +22,6 @@
   },
   "required": [
     "newestDependencies",
-    "installedMods",
     "mods"
   ],
   "$defs": {

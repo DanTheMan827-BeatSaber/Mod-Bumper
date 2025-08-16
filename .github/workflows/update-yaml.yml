@@ -1,0 +1,67 @@
+name: Generate bump.yml
+
+on:
+  workflow_dispatch:
+  push:
+    branches: '*'
+
+jobs:
+  update:
+    permissions:
+      contents: write
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Install Deno
+        uses: denoland/setup-deno@v2
+      
+
+      - name: Run Deno Scripts
+        id: scripts
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          echo "pre-hash=$(sha1sum mods.json .github/workflows/bump.yml | sha1sum | awk '{print $1}')" >> $GITHUB_OUTPUT
+          
+          echo "mods-hash-pre=$(sha1sum mods.json | awk '{print $1}')" >> $GITHUB_OUTPUT
+          deno run --allow-env --allow-read --allow-write --allow-net ./.github/scripts/update-mods.ts
+          echo "mods-hash-post=$(sha1sum mods.json | awk '{print $1}')" >> $GITHUB_OUTPUT
+          
+          echo "bump-hash-pre=$(sha1sum .github/workflows/bump.yml | awk '{print $1}')" >> $GITHUB_OUTPUT
+          deno run --allow-read ./.github/scripts/generate-bump-yaml.ts > .github/workflows/bump.yml
+          echo "bump-hash-post=$(sha1sum .github/workflows/bump.yml | awk '{print $1}')" >> $GITHUB_OUTPUT
+
+          echo "post-hash=$(sha1sum mods.json .github/workflows/bump.yml | sha1sum | awk '{print $1}')" >> $GITHUB_OUTPUT
+          
+          cat $GITHUB_OUTPUT
+
+      - name: Configure git user
+        if: steps.scripts.outputs.pre-hash != steps.scripts.outputs.post-hash
+        uses: DanTheMan827/config-git-user-action@v1
+        with:
+          user_name: ${{ github.actor }}
+
+      - name: Auto-commit changes
+        if: steps.scripts.outputs.pre-hash != steps.scripts.outputs.post-hash
+        run: |
+          git add mods.json .github/workflows/bump.yml
+
+          if [[ "${{ steps.scripts.outputs.mods-hash-pre }}" != "${{ steps.scripts.outputs.mods-hash-post }}" ]] && [[ "${{ steps.scripts.outputs.bump-hash-pre }}" != "${{ steps.scripts.outputs.bump-hash-post }}" ]]; then
+            git commit -m "[Automated] Update mods.json and bump.yml"
+          elif [[ "${{ steps.scripts.outputs.mods-hash-pre }}" != "${{ steps.scripts.outputs.mods-hash-post }}" ]]; then
+            git commit -m "[Automated] Update mods.json"
+          elif [[ "${{ steps.scripts.outputs.bump-hash-pre }}" != "${{ steps.scripts.outputs.bump-hash-post }}" ]]; then
+            git commit -m "[Automated] Update bump.yml"
+          fi
+
+          git push
+  dispatch:
+    needs: update
+    permissions:
+      contents: write
+      actions: write
+    
+    uses: ./.github/workflows/bump-needed.yml
