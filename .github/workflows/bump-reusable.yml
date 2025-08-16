@@ -127,12 +127,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           source ".github/source-all"
-          mkdir -p artifacts
-          gh run download ${{ github.run_id }} -p '${{ steps.cache-name.outputs.cache-prefix }}*' -D artifacts || exit 0
-          cd artifacts
+          artifacts_temp="$(mktemp -d)"
+          gh run download ${{ github.run_id }} -p '${{ steps.cache-name.outputs.cache-prefix }}*' -D "$artifacts_temp" || exit 0
+          cd "$artifacts_temp"
           for mod in */*/*; do
             restore-qpm-cache "$mod" --mv || true
           done
+          
+          rm -rf "$artifacts_temp"
           
       - name: Setup qpm
         uses: fernthedev/qpm-action@v1
@@ -166,16 +168,19 @@ jobs:
           fi
 
           if [[ "${{ inputs.version }}" != '' ]]; then
-            mkdir -p /tmp/package-check
-            cd /tmp/package-check
-            qpm package create "package-test" "0.1.0"
-            qpm dependency add bs-cordl -v "${{ inputs.bs_cordl }}"
-            qpm dependency add "${{ steps.qpm_id.outputs.id }}" -v "^${{ inputs.version }}"
-            if qpm restore --update; then
-              echo "run_build=false" >> $GITHUB_ENV
-            else
-              echo "Package ${{ steps.qpm_id.outputs.id }} v${{ inputs.version }} is not available."
-            fi
+            pkg_temp="$(mktemp -d)"
+            (
+              cd "$pkg_temp"
+              qpm package create "package-test" "0.1.0"
+              qpm dependency add bs-cordl -v "${{ inputs.bs_cordl }}"
+              qpm dependency add "${{ steps.qpm_id.outputs.id }}" -v "^${{ inputs.version }}"
+              if qpm restore --update; then
+                echo "run_build=false" >> $GITHUB_ENV
+              else
+                echo "Package ${{ steps.qpm_id.outputs.id }} v${{ inputs.version }} is not available."
+              fi
+            )
+            rm -rf "$pkg_temp"
           fi
 
           if curl -s "https://mods.bsquest.xyz/${{ inputs.game_version }}.json" | jq -r '. | to_entries | map(.key) | .[]' | grep -xq "${{ inputs.id }}"; then
