@@ -79,6 +79,7 @@ async function getBumpJobs(mods: ModsJson) {
         "build_command": mod.build,
         "qmod_command": mod.qmod,
         "prebump_command": mod.prebump,
+        "installed_mods": JSON.stringify(mod.dependencies || []),
         "force_build": "${{ github.event.action == 'Bump All Mods' && true }}"
       },
     };

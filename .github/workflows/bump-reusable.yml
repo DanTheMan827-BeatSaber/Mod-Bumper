@@ -41,6 +41,9 @@ on:
       qmod_command:
         required: false
         type: string
+      installed_mods:
+        required: true
+        type: string
 
 permissions:
   actions: write
@@ -95,15 +98,6 @@ jobs:
 
           # Output the current commit hash
           echo "git_commit=$(git rev-parse HEAD)" >> $GITHUB_ENV
-
-      
-      - name: Restore Shared Cache
-        uses: actions/cache/restore@v4
-        with:
-          key: shared-${{ github.run_id }}-
-          restore-keys: shared-${{ github.run_id }}-
-          path: |
-            ${{ env.HOME }}/installed-mods.txt
 
       - name: Get ID from qpm.json
         id: qpm_id
@@ -326,14 +320,19 @@ jobs:
               '.packageVersion = $game_version' mod.json > mod.json.tmp && mv mod.json.tmp mod.json
           fi
 
-      - name: Exclude installed mods from qmod
+      - name: Include installed mods in qmod
         if: env.run_build != 'false'
+        env:
+          INSTALLED_MODS: ${{ inputs.installed_mods }}
         run: |
-          if [ -f "${{ env.HOME }}/installed-mods.txt" ]; then
-            jq --argjson ids_to_update "$(jq -R . "${{ env.HOME }}/installed-mods.txt" | jq -sM .)" '.dependencies |= map(if .id | IN($ids_to_update[]) then .additionalData.includeQmod = false else . end)' qpm.json > qpm.json.tmp && mv qpm.json.tmp qpm.json
-          else
-            echo "No installed mods file found, skipping exclusion"
-          fi
+          temp_file="$(mktemp)"
+          jq --argjson ids_to_update "$INSTALLED_MODS" \
+            '.dependencies |= map(
+              if .id | IN($ids_to_update[]) 
+                then .additionalData.includeQmod = true
+                else . 
+              end
+          )' qpm.json > "$temp_file" && mv "$temp_file" qpm.json
 
       - name: QPM restore
         if: env.run_build != 'false'
@@ -393,6 +392,42 @@ jobs:
             jq --arg game_version "${{ inputs.game_version }}" \
               '.packageVersion = $game_version' mod.json > mod.json.tmp && mv mod.json.tmp mod.json
           fi
+      
+      - name: Unzip first qmod to temporary dir
+        id: extract-qmod
+        if: env.run_build != 'false' && inputs.install == true
+        run: |
+          work="$(mktemp -d)"
+          qmod="$(find . -type f -name '*.qmod' | head -n 1)"
+          
+          if [[ ! -z "$qmod" ]]; then
+            unzip -q "$qmod" -d "$work"
+          fi
+          
+          echo "extracted=$work" >> $GITHUB_OUTPUT
+          
+          find . -name '*.qmod'
+
+      - name: Upload unzipped qmod
+        if: env.run_build != 'false' && inputs.install == true
+        id: upload-qzip
+        uses: actions/upload-artifact@v4
+        with:
+          name: qzip_${{ steps.qpm_id.outputs.id }}
+          include-hidden-files: true
+          path: |
+            ${{ steps.extract-qmod.outputs.extracted }}/*
+            
+      - name: Update modLink
+        if: env.run_build != 'false' && inputs.install == true
+        env:
+          link: https://nightly.link/${{ github.repository }}/actions/artifacts/${{ steps.upload-qzip.outputs.artifact-id }}.zip?/${{ steps.qpm_id.outputs.id }}.qmod
+        run: |
+          temp_file="$(mktemp)"
+          
+          jq --arg link "$link" \
+            '.info.additionalData = (.info.additionalData // {}) | .info.additionalData.modLink = $link' \
+            qpm.json > "$temp_file" && mv "$temp_file" qpm.json
 
       - name: QPM restore
         if: env.run_build != 'false'
@@ -403,7 +438,6 @@ jobs:
         if: env.run_build != 'false' && inputs.install == true
         run: |
           qpm install
-          echo "${{ steps.qpm_id.outputs.id }}" >> "${{ env.HOME }}/installed-mods.txt"
 
       - name: Display qpm.shared.json
         if: env.run_build != 'false'
@@ -413,33 +447,6 @@ jobs:
       - name: List QPM cache
         run: |
           qpm cache list || echo "No cache to list"
-
-      - name: Delete all shared caches QPM caches
-        if: inputs.install == true
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          gh api -H "Accept: application/vnd.github+json" \
-            /repos/${{ github.repository }}/actions/caches \
-            --paginate \
-            -q '.actions_caches[] | select(.key | startswith("shared-${{ github.run_id }}-")) | .id' |
-          while read cache_id; do
-            echo "Deleting cache id $cache_id"
-            gh api --method DELETE /repos/${{ github.repository }}/actions/caches/$cache_id
-          done
-
-      - name: Touch installed-mods.txt
-        run: |
-          touch "${{ env.HOME }}/installed-mods.txt"
-          cat "${{ env.HOME }}/installed-mods.txt"
-
-      - name: Save Shared Cache
-        if: inputs.install == true
-        uses: actions/cache/save@v4
-        with:
-          key: shared-${{ github.run_id }}-${{ env.timestamp }}
-          path: |
-            ${{ env.HOME }}/installed-mods.txt
 
       - name: Stat all cache files
         if: env.run_build != 'false'
@@ -497,30 +504,6 @@ jobs:
             echo "Deleting cache id $cache_id"
             gh api --method DELETE /repos/${{ github.repository }}/actions/caches/$cache_id
           done
-
-      - name: Wait for cache entry to be available
-        if: inputs.install == true
-        id: wait-for-cache
-        run: |
-          ATTEMPTS=120
-          for i in $(seq 1 $ATTEMPTS); do
-            echo "Attempt $i: trying to find cache entry shared-${{ github.run_id }}-${{ env.timestamp }}"
-            CACHE_RESULT=$(gh api \
-              -H "Accept: application/vnd.github+json" \
-              /repos/${{ github.repository }}/actions/caches \
-              --jq '.actions_caches[] | select(.key=="shared-${{ github.run_id }}-${{ env.timestamp }}")')
-            if [ -n "$CACHE_RESULT" ]; then
-              echo "Cache entry found!"
-              exit 0
-            fi
-            echo "Cache not found, waiting 5 seconds..."
-            sleep 5
-          done
-          echo "Cache entry not found after $ATTEMPTS attempts."
-          exit 1
-        env:
-          GH_TOKEN: ${{ github.token }}
-
 
       - name: Upload Workspace
         if: env.run_build != 'false'
@@ -584,6 +567,7 @@ jobs:
           path: |
             ${{ inputs.id }}/*.qmod
           name: qmod_${{ steps.qpm_id.outputs.id }}
+      
 
   upload-cache:
     name: Upload cache for ${{ matrix.name }}

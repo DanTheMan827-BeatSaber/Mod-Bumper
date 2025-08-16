@@ -72,3 +72,24 @@ jobs:
             echo "Deleting run $run_id"
             gh run delete "$run_id" || true
           done
+
+  cleanup-update-yaml-runs:
+    name: Delete successful, cancelled, skipped, or timed out runs for update-yaml.yml
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Delete runs
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run list\
+            --limit 9999 \
+            --workflow update-yaml.yml \
+            --json status,databaseId,conclusion | 
+          jq -r '.[] | select(.conclusion == "success" or .conclusion == "cancelled" or .conclusion == "skipped" or .conclusion == "timed_out") | .databaseId' |
+          while read run_id; do
+            echo "Deleting run $run_id"
+            gh run delete "$run_id" || true
+          done

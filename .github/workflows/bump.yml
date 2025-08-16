@@ -68,6 +68,7 @@ jobs:
       repo: https://github.com/FrozenAlex/AntiVertigo.git
       branch: master
       install: false
+      installed_mods: '["bsml","lapiz"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-anytext:
     needs:
@@ -84,6 +85,7 @@ jobs:
       repo: https://github.com/CatsaCode/AnyText.git
       branch: main
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-BeatLeader:
     needs:
@@ -103,6 +105,7 @@ jobs:
       repo: https://github.com/BeatLeader/beatleader-qmod.git
       branch: master
       install: false
+      installed_mods: '["bsml","metacore","playlistcore","songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-BeatTogether:
     needs:
@@ -123,6 +126,7 @@ jobs:
       install: false
       build_command: pwsh build.ps1
       qmod_command: pwsh buildQMOD.ps1 BeatTogether
+      installed_mods: '["bsml","lapiz","multiplayer-core"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-BetterSongSearch:
     needs:
@@ -140,6 +144,7 @@ jobs:
       repo: https://github.com/bsq-ports/BetterSongSearchQuest.git
       branch: main
       install: false
+      installed_mods: '["bsml","songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-bomb-qolorer:
     needs:
@@ -156,6 +161,7 @@ jobs:
       repo: https://github.com/FrozenAlex/bomb-qolorer.git
       branch: main
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-bsl:
     needs:
@@ -174,6 +180,7 @@ jobs:
       repo: https://github.com/bsq-ports/BetterSongList.git
       branch: main
       install: false
+      installed_mods: '["bsml","playlistcore","songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-bsml:
     needs:
@@ -190,6 +197,7 @@ jobs:
       version: 0.4.55
       branch: master
       install: true
+      installed_mods: "[]"
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-BSNightcoreQuest:
     needs:
@@ -206,6 +214,7 @@ jobs:
       repo: https://github.com/Tatenshi/BSNightcoreQuest.git
       branch: main
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-bts-yeeter:
     needs:
@@ -221,6 +230,7 @@ jobs:
       repo: https://github.com/DanTheMan827-BeatSaber/Quest.BtsYeeter.git
       branch: master
       install: false
+      installed_mods: "[]"
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-camera-utils:
     needs:
@@ -237,6 +247,7 @@ jobs:
       version: 1.1.11
       branch: master
       install: false
+      installed_mods: "[]"
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-chatplex-sdk-bs:
     needs:
@@ -255,6 +266,7 @@ jobs:
       version: 6.4.1
       branch: master
       install: true
+      installed_mods: '["bsml","songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-chroma:
     needs:
@@ -274,6 +286,7 @@ jobs:
       repo: https://github.com/bsq-ports/Chroma.git
       branch: main
       install: false
+      installed_mods: '["bsml","custom-json-data","songcore","tracks"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-ClockMod:
     needs:
@@ -291,6 +304,7 @@ jobs:
       branch: main
       install: false
       build_command: pwsh build.ps1
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-crashreporter:
     needs:
@@ -307,6 +321,7 @@ jobs:
       repo: https://github.com/darknight1050/CrashReporter.git
       branch: master
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-custom-json-data:
     needs:
@@ -324,6 +339,7 @@ jobs:
       version: 0.24.3
       branch: main
       install: true
+      installed_mods: '["songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-custommodels:
     needs:
@@ -343,6 +359,7 @@ jobs:
       branch: main
       install: false
       qmod_command: pwsh ./scripts/createqmod.ps1
+      installed_mods: '["bsml","lapiz","metacore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-datakeeper:
     needs:
@@ -358,6 +375,7 @@ jobs:
       repo: https://github.com/Metalit/PlayerDataKeeper.git
       branch: master
       install: false
+      installed_mods: "[]"
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-DlcSorter:
     needs:
@@ -373,6 +391,7 @@ jobs:
       repo: https://github.com/DanTheMan827-BeatSaber/Quest.DlcSorter.git
       branch: master
       install: false
+      installed_mods: "[]"
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-emulator-fpfc:
     needs:
@@ -389,6 +408,7 @@ jobs:
       repo: https://github.com/kodenamekrak/Emulator-FPFC.git
       branch: master
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-FakeId:
     needs:
@@ -404,6 +424,7 @@ jobs:
       repo: https://github.com/DanTheMan827-BeatSaber/Quest.FakeID.git
       branch: main
       install: false
+      installed_mods: "[]"
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-FasterScroll:
     needs:
@@ -420,6 +441,7 @@ jobs:
       repo: https://github.com/christopherweinhardt/FasterScrollQuest.git
       branch: main
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-graphicstweaks:
     needs:
@@ -436,6 +458,7 @@ jobs:
       repo: https://github.com/FrozenAlex/GraphicsTweaks.git
       branch: main
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-HitScoreVisualizer:
     needs:
@@ -453,6 +476,7 @@ jobs:
       repo: https://github.com/christopherweinhardt/HitScoreVisualizer.git
       branch: master
       install: false
+      installed_mods: '["bsml","metacore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-HitsoundTweaqs:
     needs:
@@ -469,6 +493,7 @@ jobs:
       repo: https://github.com/NSGolova/HitsoundTweaqs.git
       branch: master
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-hollywood:
     needs:
@@ -487,6 +512,7 @@ jobs:
       branch: master
       install: true
       build_command: pip install PyGithub && pip install requests && python3 ./update_ffmpeg.py && qpm s build
+      installed_mods: '["metacore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-imagecoverexpander:
     needs:
@@ -503,6 +529,7 @@ jobs:
       repo: https://github.com/vcmikuu/ImageCoverExpander.git
       branch: main
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-IntroSkip:
     needs:
@@ -521,6 +548,7 @@ jobs:
       branch: main
       install: false
       build_command: pwsh ./build.ps1
+      installed_mods: '["bsml","lapiz"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-jdfixer:
     needs:
@@ -538,6 +566,7 @@ jobs:
       repo: https://github.com/Metalit/QuestJDFixer.git
       branch: master
       install: false
+      installed_mods: '["bsml","metacore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-lapiz:
     needs:
@@ -554,6 +583,7 @@ jobs:
       version: 0.2.23
       branch: main
       install: true
+      installed_mods: "[]"
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-MappingExtensions:
     needs:
@@ -573,6 +603,7 @@ jobs:
       build_command: ln -s extern/libs/* .; NDK="$(cat ndkpath.txt)" make libmappingextensions.so
       qmod_command: qpm qmod zip --skip_build -i . -i extern/libs
       prebump_command: make .obj/mod.json && jq '.dependencies = []' .obj/mod.json > mod.template.json
+      installed_mods: '["songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-metacore:
     needs:
@@ -589,6 +620,7 @@ jobs:
       version: 1.5.0
       branch: main
       install: true
+      installed_mods: "[]"
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-mod-list:
     needs:
@@ -605,6 +637,7 @@ jobs:
       repo: https://github.com/DanTheMan827-BeatSaber/Quest.ModList.git
       branch: main
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-morebuttons:
     needs:
@@ -621,6 +654,7 @@ jobs:
       branch: main
       install: false
       qmod_command: pwsh ./scripts/createqmod.ps1
+      installed_mods: "[]"
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-multiplayer-core:
     needs:
@@ -640,6 +674,7 @@ jobs:
       version: 1.6.2
       branch: master
       install: true
+      installed_mods: '["bsml","lapiz","songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-NoodleExtensions:
     needs:
@@ -659,6 +694,7 @@ jobs:
       repo: https://github.com/bsq-ports/NoodleExtensions.git
       branch: master
       install: false
+      installed_mods: '["bsml","custom-json-data","songcore","tracks"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-NoPromo:
     needs:
@@ -674,6 +710,7 @@ jobs:
       repo: https://github.com/DanTheMan827-BeatSaber/Quest.NoPromo.git
       branch: master
       install: false
+      installed_mods: "[]"
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-Nya:
     needs:
@@ -690,6 +727,7 @@ jobs:
       repo: https://github.com/FrozenAlex/Nya-quest.git
       branch: main
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-particletuner:
     needs:
@@ -706,6 +744,7 @@ jobs:
       repo: https://github.com/kodenamekrak/ParticleTuner.git
       branch: master
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-Play3rdPer:
     needs:
@@ -722,6 +761,7 @@ jobs:
       repo: https://github.com/Epic17plyz/3rd-Person-Mod.git
       branch: main
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-playlistcore:
     needs:
@@ -741,6 +781,7 @@ jobs:
       version: 1.5.5
       branch: main
       install: true
+      installed_mods: '["bsml","metacore","songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-playlistdownloader:
     needs:
@@ -760,6 +801,7 @@ jobs:
       repo: https://github.com/Metalit/PlaylistDownloader.git
       branch: main
       install: false
+      installed_mods: '["bsml","metacore","playlistcore","songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-playlistmanager:
     needs:
@@ -780,6 +822,7 @@ jobs:
       branch: main
       install: false
       qmod_command: pwsh ./scripts/createqmod.ps1
+      installed_mods: '["bsml","metacore","playlistcore","songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-qbeatsaberplus-gametweaker:
     needs:
@@ -796,6 +839,7 @@ jobs:
       repo: https://github.com/hardcpp/QBeatSaberPlus-GameTweaker.git
       branch: master
       install: false
+      installed_mods: '["chatplex-sdk-bs"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-qbeatsaberplus-menumusic:
     needs:
@@ -813,6 +857,7 @@ jobs:
       repo: https://github.com/hardcpp/QBeatSaberPlus-MenuMusic.git
       branch: master
       install: false
+      installed_mods: '["chatplex-sdk-bs","songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-qbeatsaberplus-notetweaker:
     needs:
@@ -829,6 +874,7 @@ jobs:
       repo: https://github.com/hardcpp/QBeatSaberPlus-NoteTweaker.git
       branch: master
       install: false
+      installed_mods: '["chatplex-sdk-bs"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-qonsistentsabercolors:
     needs:
@@ -845,6 +891,7 @@ jobs:
       repo: https://github.com/kodenamekrak/QonsistentSaberColors.git
       branch: master
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-Qounters:
     needs:
@@ -864,6 +911,7 @@ jobs:
       branch: main
       install: false
       qmod_command: pwsh ./scripts/createqmod.ps1
+      installed_mods: '["bsml","metacore","songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-QuestSounds:
     needs:
@@ -882,6 +930,7 @@ jobs:
       install: false
       build_command: pwsh ./build.ps1
       qmod_command: qpm qmod zip --skip_build -i build -i extern/libs -i Examples
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-RandomSongPicker:
     needs:
@@ -898,6 +947,7 @@ jobs:
       repo: https://github.com/Tatenshi/RandomSongPicker.git
       branch: main
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-RecentlyPlayed:
     needs:
@@ -916,6 +966,7 @@ jobs:
       repo: https://github.com/Tatenshi/RecentlyPlayed.git
       branch: main
       install: false
+      installed_mods: '["bsml","metacore","songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-redbar:
     needs:
@@ -932,6 +983,7 @@ jobs:
       repo: https://github.com/vcmikuu/Red-bar.git
       branch: master
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-replay:
     needs:
@@ -950,6 +1002,7 @@ jobs:
       repo: https://github.com/Metalit/Replay.git
       branch: master
       install: false
+      installed_mods: '["bsml","hollywood","metacore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-scorepercentage:
     needs:
@@ -968,6 +1021,7 @@ jobs:
       branch: main
       install: false
       build_command: pwsh ./build.ps1
+      installed_mods: '["bsml","metacore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-slicedetails:
     needs:
@@ -986,6 +1040,7 @@ jobs:
       branch: main
       install: false
       build_command: pwsh ./build.ps1
+      installed_mods: '["bsml","lapiz"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-SmallQubes:
     needs:
@@ -1002,6 +1057,7 @@ jobs:
       repo: https://github.com/NSGolova/SmallQubes.git
       branch: master
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-smoothedcontroller:
     needs:
@@ -1018,6 +1074,7 @@ jobs:
       repo: https://github.com/FrozenAlex/SmoothedController.git
       branch: main
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-songchartvisualizer:
     needs:
@@ -1035,6 +1092,7 @@ jobs:
       repo: https://github.com/kodenamekrak/SongChartVisualizer.git
       branch: master
       install: false
+      installed_mods: '["bsml","lapiz"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-songcore:
     needs:
@@ -1053,6 +1111,7 @@ jobs:
       version: 1.1.24
       branch: main
       install: true
+      installed_mods: '["bsml","lapiz"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-songdownloader:
     needs:
@@ -1071,6 +1130,7 @@ jobs:
       repo: https://github.com/darknight1050/SongDownloader.git
       branch: master
       install: false
+      installed_mods: '["bsml","playlistcore","songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-songrankedbadge:
     needs:
@@ -1087,6 +1147,7 @@ jobs:
       repo: https://github.com/kodenamekrak/SongRankedBadge.git
       branch: main
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-stream-mod:
     needs:
@@ -1105,6 +1166,7 @@ jobs:
       repo: https://github.com/DanTheMan827/StreamMod.git
       branch: cmake-updates
       install: false
+      installed_mods: '["bsml","hollywood","metacore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-too-many-fireworks:
     needs:
@@ -1121,6 +1183,7 @@ jobs:
       repo: https://github.com/CatsaCode/TooManyFireworks.git
       branch: main
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-tracks:
     needs:
@@ -1140,6 +1203,7 @@ jobs:
       branch: master
       install: true
       build_command: rustup install nightly && rustup target add aarch64-linux-android --toolchain nightly && cargo install bindgen-cli && cargo install --locked --git https://github.com/bbqsrc/cargo-ndk.git cargo-ndk && qpm s build
+      installed_mods: '["custom-json-data","songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-transitions:
     needs:
@@ -1156,6 +1220,7 @@ jobs:
       repo: https://github.com/Metalit/Transitions.git
       branch: master
       install: false
+      installed_mods: '["bsml"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-tricksaber-lite:
     needs:
@@ -1173,6 +1238,7 @@ jobs:
       repo: https://github.com/vcmikuu/TrickSaber-Lite.git
       branch: main
       install: false
+      installed_mods: '["bsml","metacore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-unicode:
     needs:
@@ -1190,6 +1256,7 @@ jobs:
       branch: main
       install: false
       qmod_command: pwsh ./scripts/createqmod.ps1
+      installed_mods: '["metacore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   combine-artifacts:
     needs:
