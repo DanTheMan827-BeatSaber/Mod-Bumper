@@ -522,6 +522,7 @@ jobs:
 
       - name: Prep QPM Cache
         id: cached-deps
+        if: inputs.install == true
         working-directory: ${{ github.workspace }}
         env:
           GH_TOKEN: ${{ github.token }}
@@ -558,7 +559,7 @@ jobs:
 
       - name: Upload cache
         uses: actions/upload-artifact@v4
-        if: steps.cached-deps.outputs.upload-cache == 'true'
+        if: inputs.install == true && steps.cached-deps.outputs.upload-cache == 'true'
         with:
           name: ${{ steps.cache-name.outputs.cache-name }}
           include-hidden-files: true
@@ -572,33 +573,3 @@ jobs:
           path: |
             ${{ inputs.id }}/*.qmod
           name: qmod_${{ steps.qpm_id.outputs.id }}
-      
-
-  upload-cache:
-    name: Upload cache for ${{ matrix.name }}
-    runs-on: ubuntu-latest
-    needs: bump
-    if: false && needs.bump.outputs.upload-cache == 'true'
-    outputs:
-      cache-name: ${{ steps.info.outputs.cache-name }}
-
-    strategy:
-      matrix:
-        include: ${{ fromJson(needs.bump.outputs.need-cached || '[]')}}
-
-    steps: 
-      - uses: actions/checkout@v4
-
-      - name: Download cache artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ needs.bump.outputs.cache-name }}
-          path: cache
-
-      - name: Upload individual cache artifact
-        uses: actions/upload-artifact@v4
-        continue-on-error: true
-        with:
-          include-hidden-files: true
-          name: ${{ matrix.name }}
-          path: cache/${{ matrix.path }}/
