@@ -7,18 +7,16 @@ on:
 
 jobs:
   update:
-    permissions:
-      contents: write
-
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT }}
       
       - name: Install Deno
         uses: denoland/setup-deno@v2
       
-
       - name: Run Deno Scripts
         id: scripts
         env:
@@ -56,15 +54,7 @@ jobs:
           elif [[ "${{ steps.scripts.outputs.bump-hash-pre }}" != "${{ steps.scripts.outputs.bump-hash-post }}" ]]; then
             git commit -m "[Automated] Update bump.yml"
           fi
-
-      - uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.PAT }}
-          clean: false
-
-      - name: Push
-        if: steps.scripts.outputs.pre-hash != steps.scripts.outputs.post-hash
-        run: |
+          
           git push
   dispatch:
     needs: update
