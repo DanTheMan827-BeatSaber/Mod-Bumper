@@ -146,16 +146,16 @@ const bumpData = {
           "run": trimAndDedent(`
             echo "newestDependencies=$newestDependencies" >> $GITHUB_OUTPUT
             echo "bs-cordl=$cordl" >> $GITHUB_OUTPUT
+            pkg_tmp="$(mktemp -d)"
             
-            mkdir -p /tmp/package-check
             (
-              cd /tmp/package-check
+              cd "$pkg_tmp"
               qpm package create "package-test" "0.1.0"
               qpm dependency add bs-cordl -v "$cordl"
               qpm restore --update
               echo "packageVersion=$(cat extern/includes/bs-cordl/include/version.txt)" >> $GITHUB_OUTPUT
             )
-            rm -r /tmp/package-check
+            rm -r "$pkg_tmp"
             
             cat $GITHUB_OUTPUT
           `)
