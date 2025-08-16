@@ -15,7 +15,7 @@ async function writeJson(mods: ModsJson): Promise<void> {
   const newJson: ModsJson = {
     "$schema": "https://github.com/DanTheMan827-BeatSaber/Mod-Bumper/raw/refs/heads/main/mods.schema.json",
     newestDependencies: sortRecordsByKey(mods.newestDependencies, true),
-    mods: await cleanMods(mods.mods)
+    mods: await cleanMods(mods.mods, true)
   };
 
   // Write the new mods.json file
@@ -159,6 +159,7 @@ if (import.meta.main) {
 
   await setRepoData(mods.mods);
   await setNeeds(mods.mods);
+  
 
   await writeJson(mods);
 }

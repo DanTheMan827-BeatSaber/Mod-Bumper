@@ -22,95 +22,6 @@
     "web-utils": "0.6.7"
   },
   "mods": {
-    "bsml": {
-      "repo": "https://github.com/bsq-ports/Quest-BSML.git",
-      "branch": "master",
-      "version": "0.4.55",
-      "dependencies": []
-    },
-    "lapiz": {
-      "repo": "https://github.com/raineaeternal/Lapiz.git",
-      "branch": "main",
-      "version": "0.2.23",
-      "dependencies": []
-    },
-    "songcore": {
-      "repo": "https://github.com/raineaeternal/Quest-SongCore.git",
-      "branch": "main",
-      "version": "1.1.24",
-      "dependencies": [
-        "bsml",
-        "lapiz"
-      ]
-    },
-    "metacore": {
-      "repo": "https://github.com/Metalit/MetaCore.git",
-      "branch": "main",
-      "version": "1.3.4",
-      "dependencies": []
-    },
-    "playlistcore": {
-      "repo": "https://github.com/Metalit/PlaylistCore.git",
-      "branch": "main",
-      "version": "1.5.5",
-      "dependencies": [
-        "bsml",
-        "metacore",
-        "songcore"
-      ]
-    },
-    "custom-json-data": {
-      "repo": "https://github.com/bsq-ports/CustomJSONData.git",
-      "branch": "main",
-      "version": "0.24.4",
-      "dependencies": [
-        "songcore"
-      ]
-    },
-    "chatplex-sdk-bs": {
-      "repo": "https://github.com/hardcpp/QuestChatPlexSDK-BS.git",
-      "branch": "master",
-      "version": "6.4.1",
-      "dependencies": [
-        "bsml",
-        "songcore"
-      ]
-    },
-    "multiplayer-core": {
-      "repo": "https://github.com/EnderdracheLP/MultiplayerCore.Quest.git",
-      "branch": "master",
-      "version": "1.6.3",
-      "dependencies": [
-        "bsml",
-        "lapiz",
-        "songcore"
-      ]
-    },
-    "camera-utils": {
-      "repo": "https://github.com/Reezonate/CameraUtils-Quest.git",
-      "branch": "master",
-      "version": "1.1.9",
-      "dependencies": []
-    },
-    "hollywood": {
-      "repo": "https://github.com/Fernthedev/HollywoodQuest.git",
-      "branch": "master",
-      "version": "1.2.2",
-      "dependencies": [
-        "metacore"
-      ],
-      "build": "pip install PyGithub && pip install requests && python3 ./update_ffmpeg.py && qpm s build"
-    },
-    "tracks": {
-      "repo": "https://github.com/bsq-ports/Tracks.git",
-      "branch": "master",
-      "version": "2.4.5",
-      "dependencies": [
-        "custom-json-data",
-        "songcore"
-      ],
-      "build": "rustup install nightly && rustup target add aarch64-linux-android --toolchain nightly && cargo install bindgen-cli && cargo install --locked --git https://github.com/bbqsrc/cargo-ndk.git cargo-ndk && qpm s build"
-    },
     "AntiVertigo": {
       "repo": "https://github.com/FrozenAlex/AntiVertigo.git",
       "branch": "master",
@@ -171,6 +82,12 @@
         "songcore"
       ]
     },
+    "bsml": {
+      "repo": "https://github.com/bsq-ports/Quest-BSML.git",
+      "branch": "master",
+      "version": "0.4.55",
+      "dependencies": []
+    },
     "BSNightcoreQuest": {
       "repo": "https://github.com/Tatenshi/BSNightcoreQuest.git",
       "branch": "main",
@@ -182,6 +99,21 @@
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.BtsYeeter.git",
       "branch": "master",
       "dependencies": []
+    },
+    "camera-utils": {
+      "repo": "https://github.com/Reezonate/CameraUtils-Quest.git",
+      "branch": "master",
+      "version": "1.1.11",
+      "dependencies": []
+    },
+    "chatplex-sdk-bs": {
+      "repo": "https://github.com/hardcpp/QuestChatPlexSDK-BS.git",
+      "branch": "master",
+      "version": "6.4.1",
+      "dependencies": [
+        "bsml",
+        "songcore"
+      ]
     },
     "chroma": {
       "repo": "https://github.com/bsq-ports/Chroma.git",
@@ -206,6 +138,14 @@
       "branch": "master",
       "dependencies": [
         "bsml"
+      ]
+    },
+    "custom-json-data": {
+      "repo": "https://github.com/bsq-ports/CustomJSONData.git",
+      "branch": "main",
+      "version": "0.24.3",
+      "dependencies": [
+        "songcore"
       ]
     },
     "custommodels": {
@@ -269,6 +209,15 @@
         "bsml"
       ]
     },
+    "hollywood": {
+      "repo": "https://github.com/Fernthedev/HollywoodQuest.git",
+      "branch": "master",
+      "version": "1.2.2",
+      "dependencies": [
+        "metacore"
+      ],
+      "build": "pip install PyGithub && pip install requests && python3 ./update_ffmpeg.py && qpm s build"
+    },
     "imagecoverexpander": {
       "repo": "https://github.com/vcmikuu/ImageCoverExpander.git",
       "branch": "main",
@@ -293,6 +242,12 @@
         "metacore"
       ]
     },
+    "lapiz": {
+      "repo": "https://github.com/raineaeternal/Lapiz.git",
+      "branch": "main",
+      "version": "0.2.23",
+      "dependencies": []
+    },
     "MappingExtensions": {
       "repo": "https://github.com/rcelyte/MappingExtensions.git",
       "branch": "master",
@@ -302,6 +257,12 @@
       "prebump": "make .obj/mod.json && jq '.dependencies = []' .obj/mod.json > mod.template.json",
       "build": "ln -s extern/libs/* .; NDK=\"$(cat ndkpath.txt)\" make libmappingextensions.so",
       "qmod": "qpm qmod zip --skip_build -i . -i extern/libs"
+    },
+    "metacore": {
+      "repo": "https://github.com/Metalit/MetaCore.git",
+      "branch": "main",
+      "version": "1.5.0",
+      "dependencies": []
     },
     "mod-list": {
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.ModList.git",
@@ -315,6 +276,16 @@
       "branch": "main",
       "dependencies": [],
       "qmod": "pwsh ./scripts/createqmod.ps1"
+    },
+    "multiplayer-core": {
+      "repo": "https://github.com/EnderdracheLP/MultiplayerCore.Quest.git",
+      "branch": "master",
+      "version": "1.6.2",
+      "dependencies": [
+        "bsml",
+        "lapiz",
+        "songcore"
+      ]
     },
     "NoodleExtensions": {
       "repo": "https://github.com/bsq-ports/NoodleExtensions.git",
@@ -350,6 +321,16 @@
       "branch": "main",
       "dependencies": [
         "bsml"
+      ]
+    },
+    "playlistcore": {
+      "repo": "https://github.com/Metalit/PlaylistCore.git",
+      "branch": "main",
+      "version": "1.5.5",
+      "dependencies": [
+        "bsml",
+        "metacore",
+        "songcore"
       ]
     },
     "playlistdownloader": {
@@ -493,6 +474,15 @@
         "lapiz"
       ]
     },
+    "songcore": {
+      "repo": "https://github.com/raineaeternal/Quest-SongCore.git",
+      "branch": "main",
+      "version": "1.1.24",
+      "dependencies": [
+        "bsml",
+        "lapiz"
+      ]
+    },
     "songdownloader": {
       "repo": "https://github.com/darknight1050/SongDownloader.git",
       "branch": "master",
@@ -524,6 +514,16 @@
       "dependencies": [
         "bsml"
       ]
+    },
+    "tracks": {
+      "repo": "https://github.com/bsq-ports/Tracks.git",
+      "branch": "master",
+      "version": "2.4.4",
+      "dependencies": [
+        "custom-json-data",
+        "songcore"
+      ],
+      "build": "rustup install nightly && rustup target add aarch64-linux-android --toolchain nightly && cargo install bindgen-cli && cargo install --locked --git https://github.com/bbqsrc/cargo-ndk.git cargo-ndk && qpm s build"
     },
     "transitions": {
       "repo": "https://github.com/Metalit/Transitions.git",
