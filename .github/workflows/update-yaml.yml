@@ -9,6 +9,7 @@ jobs:
   update:
     permissions:
       contents: write
+      actions: write
 
     runs-on: ubuntu-latest
     steps:
