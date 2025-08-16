@@ -9,7 +9,6 @@ jobs:
   update:
     permissions:
       contents: write
-      workflows: write
 
     runs-on: ubuntu-latest
     steps:
@@ -38,6 +37,11 @@ jobs:
           echo "post-hash=$(sha1sum mods.json .github/workflows/bump.yml | sha1sum | awk '{print $1}')" >> $GITHUB_OUTPUT
           
           cat $GITHUB_OUTPUT
+
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT }}
+          clean: false
 
       - name: Configure git user
         if: steps.scripts.outputs.pre-hash != steps.scripts.outputs.post-hash
