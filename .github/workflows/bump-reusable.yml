@@ -248,7 +248,7 @@ jobs:
         with:
           key: workspace-${{ runner.os }}-${{ inputs.id }}-${{ inputs.game_version }}-${{ inputs.version }}-${{ env.git_commit }}
           path: |
-            .
+            ${{ github.workspace }}/${{ inputs.id }}
 
       - name: Resolve NDK
         if: env.run_build != 'false'
@@ -421,7 +421,7 @@ jobs:
       - name: Update modLink
         if: env.run_build != 'false' && inputs.install == true
         env:
-          link: https://nightly.link/${{ github.repository }}/actions/artifacts/${{ steps.upload-qzip.outputs.artifact-id }}.zip?/${{ steps.qpm_id.outputs.id }}.qmod
+          link: https://nightly.link/${{ github.repository }}/actions/artifacts/${{ steps.upload-qzip.outputs.artifact-id }}.zip
         run: |
           temp_file="$(mktemp)"
           
