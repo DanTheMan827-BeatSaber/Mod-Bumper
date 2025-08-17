@@ -72,10 +72,11 @@ async function getBumpJobs(mods: ModsJson) {
     .sort((a, b) => (dependencyUsageCount[b[0]] || 0) - (dependencyUsageCount[a[0]] || 0)); // Sort by usage count
 
   const dependents = Object.entries(mods.mods)
-    .filter(m => (m[1].dependencies || []).length)
-    .filter(m => !allDependencies.includes(m[0]));
+    .filter(m => !allDependencies.includes(m[0]))
+    .filter(m => (m[1].dependencies || []).length);
 
   const standaloneMods = Object.entries(mods.mods)
+    .filter(m => !allDependencies.includes(m[0]))
     .filter(m => (m[1].dependencies || []).length == 0);
   
   for (const [modId, mod] of [...standaloneMods, ...dependencies, ...dependents]) {
