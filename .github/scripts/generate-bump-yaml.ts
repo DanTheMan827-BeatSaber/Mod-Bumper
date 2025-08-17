@@ -27,7 +27,16 @@ interface BumpJob {
 const modsJson = await readModsJson();
 modsJson.mods = sortRecordsByKey(modsJson.mods, true);
 
-const allDependencies = Object.values(modsJson.mods).map(mod => mod.dependencies || []).flat().filter((dep, index, arr) => arr.indexOf(dep) === index);
+// Calculate dependency usage count
+const dependencyUsageCount: Record<string, number> = {};
+
+for (const mod of Object.values(mods.mods)) {
+  for (const dependency of mod.dependencies || []) {
+    dependencyUsageCount[dependency] = (dependencyUsageCount[dependency] || 0) + 1;
+  }
+}
+
+const allDependencies = Object.keys(dependencyUsageCount);
 
 for (const [modId, mod] of Object.entries(modsJson.mods)) {
   if (allDependencies.includes(modId) && mod.version) {
@@ -57,14 +66,15 @@ function trimAndDedent(str: string): string {
 
 async function getBumpJobs(mods: ModsJson) {
   const jobContainer: Record<string, any> = {};
-  const dependencies = Object.entries(mods.mods).filter(m => allDependencies.includes(m[0])).sort((a, b) => 
-    (b[1].dependencies?.length || 0) - (a[1].dependencies?.length || 0)
-  );
-  const dependents = Object.entries(mods.mods).filter(m => !allDependencies.includes(m[0])).sort((a, b) => 
-    (a[1].dependencies?.length || 0) - (b[1].dependencies?.length || 0)
-  );
-  
-  for (const [modId, mod] of [...dependencies, ...dependents]) {
+
+  const dependencies = Object.entries(mods.mods)
+    .filter(m => allDependencies.includes(m[0]))
+    .sort((a, b) => (dependencyUsageCount[b[0]] || 0) - (dependencyUsageCount[a[0]] || 0)); // Sort by usage count
+
+  const standaloneMods = Object.entries(mods.mods)
+    .filter(m => !allDependencies.includes(m[0]));
+
+  for (const [modId, mod] of [...dependencies, ...standaloneMods]) {
     jobContainer[`bump-${modId}`] = {
       "needs": [
         "get-mods",
