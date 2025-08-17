@@ -30,7 +30,7 @@ modsJson.mods = sortRecordsByKey(modsJson.mods, true);
 // Calculate dependency usage count
 const dependencyUsageCount: Record<string, number> = {};
 
-for (const mod of Object.values(mods.mods)) {
+for (const mod of Object.values(modsJson.mods)) {
   for (const dependency of mod.dependencies || []) {
     dependencyUsageCount[dependency] = (dependencyUsageCount[dependency] || 0) + 1;
   }
