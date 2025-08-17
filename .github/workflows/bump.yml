@@ -352,25 +352,911 @@ jobs:
       install: true
       installed_mods: '["bsml","lapiz","songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
-  bump-AntiVertigo,[object Object]:
+  bump-AntiVertigo:
     needs:
       - get-mods
+      - bump-bsml
+      - bump-lapiz
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump AntiVertigo,[object Object]
+    name: Bump AntiVertigo
     with:
-      id:
-        - AntiVertigo
-        - repo: https://github.com/FrozenAlex/AntiVertigo.git
-          branch: master
-          dependencies:
-            - bsml
-            - lapiz
+      id: AntiVertigo
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
       bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
       newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/FrozenAlex/AntiVertigo.git
+      branch: master
       install: false
-      installed_mods: "[]"
+      installed_mods: '["bsml","lapiz"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-anytext:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump anytext
+    with:
+      id: anytext
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/CatsaCode/AnyText.git
+      branch: main
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-BeatLeader:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-metacore
+      - bump-playlistcore
+      - bump-songcore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump BeatLeader
+    with:
+      id: BeatLeader
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/BeatLeader/beatleader-qmod.git
+      branch: master
+      install: false
+      installed_mods: '["bsml","metacore","playlistcore","songcore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-BeatTogether:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-lapiz
+      - bump-multiplayer-core
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump BeatTogether
+    with:
+      id: BeatTogether
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/BeatTogether/BeatTogether.Quest.git
+      branch: master
+      install: false
+      build_command: pwsh build.ps1
+      qmod_command: pwsh buildQMOD.ps1 BeatTogether
+      installed_mods: '["bsml","lapiz","multiplayer-core"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-BetterSongSearch:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-songcore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump BetterSongSearch
+    with:
+      id: BetterSongSearch
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/bsq-ports/BetterSongSearchQuest.git
+      branch: main
+      install: false
+      installed_mods: '["bsml","songcore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-bomb-qolorer:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump bomb-qolorer
+    with:
+      id: bomb-qolorer
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/FrozenAlex/bomb-qolorer.git
+      branch: main
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-bsl:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-playlistcore
+      - bump-songcore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump bsl
+    with:
+      id: bsl
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/bsq-ports/BetterSongList.git
+      branch: main
+      install: false
+      installed_mods: '["bsml","playlistcore","songcore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-BSNightcoreQuest:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump BSNightcoreQuest
+    with:
+      id: BSNightcoreQuest
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Tatenshi/BSNightcoreQuest.git
+      branch: main
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-chroma:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-custom-json-data
+      - bump-songcore
+      - bump-tracks
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump chroma
+    with:
+      id: chroma
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/bsq-ports/Chroma.git
+      branch: main
+      install: false
+      installed_mods: '["bsml","custom-json-data","songcore","tracks"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-ClockMod:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump ClockMod
+    with:
+      id: ClockMod
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/EnderdracheLP/ClockMod.git
+      branch: main
+      install: false
+      build_command: pwsh build.ps1
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-crashreporter:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump crashreporter
+    with:
+      id: crashreporter
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/darknight1050/CrashReporter.git
+      branch: master
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-custommodels:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-lapiz
+      - bump-metacore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump custommodels
+    with:
+      id: custommodels
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Metalit/CustomModels.git
+      branch: main
+      install: false
+      qmod_command: pwsh ./scripts/createqmod.ps1
+      installed_mods: '["bsml","lapiz","metacore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-emulator-fpfc:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump emulator-fpfc
+    with:
+      id: emulator-fpfc
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/kodenamekrak/Emulator-FPFC.git
+      branch: master
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-FasterScroll:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump FasterScroll
+    with:
+      id: FasterScroll
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/christopherweinhardt/FasterScrollQuest.git
+      branch: main
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-graphicstweaks:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump graphicstweaks
+    with:
+      id: graphicstweaks
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/FrozenAlex/GraphicsTweaks.git
+      branch: main
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-HitScoreVisualizer:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-metacore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump HitScoreVisualizer
+    with:
+      id: HitScoreVisualizer
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/christopherweinhardt/HitScoreVisualizer.git
+      branch: master
+      install: false
+      installed_mods: '["bsml","metacore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-HitsoundTweaqs:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump HitsoundTweaqs
+    with:
+      id: HitsoundTweaqs
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/NSGolova/HitsoundTweaqs.git
+      branch: master
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-imagecoverexpander:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump imagecoverexpander
+    with:
+      id: imagecoverexpander
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/vcmikuu/ImageCoverExpander.git
+      branch: main
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-IntroSkip:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-lapiz
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump IntroSkip
+    with:
+      id: IntroSkip
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Royston1999/IntroSkip-Quest.git
+      branch: main
+      install: false
+      build_command: pwsh ./build.ps1
+      installed_mods: '["bsml","lapiz"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-jdfixer:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-metacore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump jdfixer
+    with:
+      id: jdfixer
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Metalit/QuestJDFixer.git
+      branch: master
+      install: false
+      installed_mods: '["bsml","metacore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-MappingExtensions:
+    needs:
+      - get-mods
+      - bump-songcore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump MappingExtensions
+    with:
+      id: MappingExtensions
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/rcelyte/MappingExtensions.git
+      branch: master
+      install: false
+      build_command: ln -s extern/libs/* .; NDK="$(cat ndkpath.txt)" make libmappingextensions.so
+      qmod_command: qpm qmod zip --skip_build -i . -i extern/libs
+      prebump_command: make .obj/mod.json && jq '.dependencies = []' .obj/mod.json > mod.template.json
+      installed_mods: '["songcore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-mod-list:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump mod-list
+    with:
+      id: mod-list
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/DanTheMan827-BeatSaber/Quest.ModList.git
+      branch: main
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-NoodleExtensions:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-custom-json-data
+      - bump-songcore
+      - bump-tracks
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump NoodleExtensions
+    with:
+      id: NoodleExtensions
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/bsq-ports/NoodleExtensions.git
+      branch: master
+      install: false
+      installed_mods: '["bsml","custom-json-data","songcore","tracks"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-Nya:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump Nya
+    with:
+      id: Nya
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/FrozenAlex/Nya-quest.git
+      branch: main
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-particletuner:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump particletuner
+    with:
+      id: particletuner
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/kodenamekrak/ParticleTuner.git
+      branch: master
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-Play3rdPer:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump Play3rdPer
+    with:
+      id: Play3rdPer
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Epic17plyz/3rd-Person-Mod.git
+      branch: main
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-playlistdownloader:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-metacore
+      - bump-playlistcore
+      - bump-songcore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump playlistdownloader
+    with:
+      id: playlistdownloader
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Metalit/PlaylistDownloader.git
+      branch: main
+      install: false
+      installed_mods: '["bsml","metacore","playlistcore","songcore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-playlistmanager:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-metacore
+      - bump-playlistcore
+      - bump-songcore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump playlistmanager
+    with:
+      id: playlistmanager
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Metalit/PlaylistManager.git
+      branch: main
+      install: false
+      qmod_command: pwsh ./scripts/createqmod.ps1
+      installed_mods: '["bsml","metacore","playlistcore","songcore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-qbeatsaberplus-gametweaker:
+    needs:
+      - get-mods
+      - bump-chatplex-sdk-bs
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump qbeatsaberplus-gametweaker
+    with:
+      id: qbeatsaberplus-gametweaker
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/hardcpp/QBeatSaberPlus-GameTweaker.git
+      branch: master
+      install: false
+      installed_mods: '["chatplex-sdk-bs"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-qbeatsaberplus-menumusic:
+    needs:
+      - get-mods
+      - bump-chatplex-sdk-bs
+      - bump-songcore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump qbeatsaberplus-menumusic
+    with:
+      id: qbeatsaberplus-menumusic
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/hardcpp/QBeatSaberPlus-MenuMusic.git
+      branch: master
+      install: false
+      installed_mods: '["chatplex-sdk-bs","songcore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-qbeatsaberplus-notetweaker:
+    needs:
+      - get-mods
+      - bump-chatplex-sdk-bs
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump qbeatsaberplus-notetweaker
+    with:
+      id: qbeatsaberplus-notetweaker
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/hardcpp/QBeatSaberPlus-NoteTweaker.git
+      branch: master
+      install: false
+      installed_mods: '["chatplex-sdk-bs"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-qonsistentsabercolors:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump qonsistentsabercolors
+    with:
+      id: qonsistentsabercolors
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/kodenamekrak/QonsistentSaberColors.git
+      branch: master
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-Qounters:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-metacore
+      - bump-songcore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump Qounters
+    with:
+      id: Qounters
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Metalit/Qounters.git
+      branch: main
+      install: false
+      qmod_command: pwsh ./scripts/createqmod.ps1
+      installed_mods: '["bsml","metacore","songcore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-QuestSounds:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump QuestSounds
+    with:
+      id: QuestSounds
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/EnderdracheLP/QuestSounds.git
+      branch: master
+      install: false
+      build_command: pwsh ./build.ps1
+      qmod_command: qpm qmod zip --skip_build -i build -i extern/libs -i Examples
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-RandomSongPicker:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump RandomSongPicker
+    with:
+      id: RandomSongPicker
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Tatenshi/RandomSongPicker.git
+      branch: main
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-RecentlyPlayed:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-metacore
+      - bump-songcore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump RecentlyPlayed
+    with:
+      id: RecentlyPlayed
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Tatenshi/RecentlyPlayed.git
+      branch: main
+      install: false
+      installed_mods: '["bsml","metacore","songcore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-redbar:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump redbar
+    with:
+      id: redbar
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/vcmikuu/Red-bar.git
+      branch: master
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-replay:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-hollywood
+      - bump-metacore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump replay
+    with:
+      id: replay
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Metalit/Replay.git
+      branch: master
+      install: false
+      installed_mods: '["bsml","hollywood","metacore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-scorepercentage:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-metacore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump scorepercentage
+    with:
+      id: scorepercentage
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Royston1999/ScorePercentage-Quest.git
+      branch: main
+      install: false
+      build_command: pwsh ./build.ps1
+      installed_mods: '["bsml","metacore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-slicedetails:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-lapiz
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump slicedetails
+    with:
+      id: slicedetails
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Royston1999/SliceDetails-Quest.git
+      branch: main
+      install: false
+      build_command: pwsh ./build.ps1
+      installed_mods: '["bsml","lapiz"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-SmallQubes:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump SmallQubes
+    with:
+      id: SmallQubes
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/NSGolova/SmallQubes.git
+      branch: master
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-smoothedcontroller:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump smoothedcontroller
+    with:
+      id: smoothedcontroller
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/FrozenAlex/SmoothedController.git
+      branch: main
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-songchartvisualizer:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-lapiz
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump songchartvisualizer
+    with:
+      id: songchartvisualizer
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/kodenamekrak/SongChartVisualizer.git
+      branch: master
+      install: false
+      installed_mods: '["bsml","lapiz"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-songdownloader:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-playlistcore
+      - bump-songcore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump songdownloader
+    with:
+      id: songdownloader
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/darknight1050/SongDownloader.git
+      branch: master
+      install: false
+      installed_mods: '["bsml","playlistcore","songcore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-songrankedbadge:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump songrankedbadge
+    with:
+      id: songrankedbadge
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/kodenamekrak/SongRankedBadge.git
+      branch: main
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-stream-mod:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-hollywood
+      - bump-metacore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump stream-mod
+    with:
+      id: stream-mod
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/DanTheMan827/StreamMod.git
+      branch: cmake-updates
+      install: false
+      installed_mods: '["bsml","hollywood","metacore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-too-many-fireworks:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump too-many-fireworks
+    with:
+      id: too-many-fireworks
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/CatsaCode/TooManyFireworks.git
+      branch: main
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-transitions:
+    needs:
+      - get-mods
+      - bump-bsml
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump transitions
+    with:
+      id: transitions
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Metalit/Transitions.git
+      branch: master
+      install: false
+      installed_mods: '["bsml"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-tricksaber-lite:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-metacore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump tricksaber-lite
+    with:
+      id: tricksaber-lite
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/vcmikuu/TrickSaber-Lite.git
+      branch: main
+      install: false
+      installed_mods: '["bsml","metacore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-unicode:
+    needs:
+      - get-mods
+      - bump-metacore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump unicode
+    with:
+      id: unicode
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Metalit/UnicodeQuest.git
+      branch: main
+      install: false
+      qmod_command: pwsh ./scripts/createqmod.ps1
+      installed_mods: '["metacore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   combine-artifacts:
     needs:
