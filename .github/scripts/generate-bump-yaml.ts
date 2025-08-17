@@ -57,8 +57,12 @@ function trimAndDedent(str: string): string {
 
 async function getBumpJobs(mods: ModsJson) {
   const jobContainer: Record<string, any> = {};
-  const dependencies = Object.entries(mods.mods).filter(m => allDependencies.includes(m[0]));
-  const dependents = Object.entries(mods.mods).filter(m => !allDependencies.includes(m[0]));
+  const dependencies = Object.entries(mods.mods).filter(m => allDependencies.includes(m[0])).sort((a, b) => 
+    (b[1].dependencies?.length || 0) - (a[1].dependencies?.length || 0)
+  );
+  const dependents = Object.entries(mods.mods).filter(m => !allDependencies.includes(m[0])).sort((a, b) => 
+    (a[1].dependencies?.length || 0) - (b[1].dependencies?.length || 0)
+  );
   
   for (const [modId, mod] of [...dependencies, ...dependents]) {
     jobContainer[`bump-${modId}`] = {
