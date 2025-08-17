@@ -74,7 +74,7 @@ async function getBumpJobs(mods: ModsJson) {
   const standaloneMods = Object.entries(mods.mods)
     .filter(m => !allDependencies.includes(m[0]));
 
-  for (const [modId, mod] of [...dependencies, ...standaloneMods]) {
+  for (const [modId, mod] of [...standaloneMods, ...dependencies]) {
     jobContainer[`bump-${modId}`] = {
       "needs": [
         "get-mods",
