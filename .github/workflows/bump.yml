@@ -52,192 +52,6 @@ jobs:
           rm -r "$pkg_tmp"
 
           cat $GITHUB_OUTPUT
-  bump-bsml:
-    needs:
-      - get-mods
-    uses: ./.github/workflows/bump-reusable.yml
-    secrets: inherit
-    name: Bump bsml
-    with:
-      id: bsml
-      game_version: ${{ needs.get-mods.outputs.packageVersion }}
-      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
-      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/bsq-ports/Quest-BSML.git
-      version: 0.4.55
-      branch: master
-      install: true
-      installed_mods: "[]"
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
-  bump-songcore:
-    needs:
-      - get-mods
-      - bump-bsml
-      - bump-lapiz
-    uses: ./.github/workflows/bump-reusable.yml
-    secrets: inherit
-    name: Bump songcore
-    with:
-      id: songcore
-      game_version: ${{ needs.get-mods.outputs.packageVersion }}
-      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
-      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/raineaeternal/Quest-SongCore.git
-      version: 1.1.24
-      branch: main
-      install: true
-      installed_mods: '["bsml","lapiz"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
-  bump-metacore:
-    needs:
-      - get-mods
-    uses: ./.github/workflows/bump-reusable.yml
-    secrets: inherit
-    name: Bump metacore
-    with:
-      id: metacore
-      game_version: ${{ needs.get-mods.outputs.packageVersion }}
-      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
-      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/Metalit/MetaCore.git
-      version: 1.5.0
-      branch: main
-      install: true
-      installed_mods: "[]"
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
-  bump-lapiz:
-    needs:
-      - get-mods
-    uses: ./.github/workflows/bump-reusable.yml
-    secrets: inherit
-    name: Bump lapiz
-    with:
-      id: lapiz
-      game_version: ${{ needs.get-mods.outputs.packageVersion }}
-      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
-      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/raineaeternal/Lapiz.git
-      version: 0.2.23
-      branch: main
-      install: true
-      installed_mods: "[]"
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
-  bump-playlistcore:
-    needs:
-      - get-mods
-      - bump-bsml
-      - bump-metacore
-      - bump-songcore
-    uses: ./.github/workflows/bump-reusable.yml
-    secrets: inherit
-    name: Bump playlistcore
-    with:
-      id: playlistcore
-      game_version: ${{ needs.get-mods.outputs.packageVersion }}
-      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
-      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/Metalit/PlaylistCore.git
-      version: 1.5.5
-      branch: main
-      install: true
-      installed_mods: '["bsml","metacore","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
-  bump-chatplex-sdk-bs:
-    needs:
-      - get-mods
-      - bump-bsml
-      - bump-songcore
-    uses: ./.github/workflows/bump-reusable.yml
-    secrets: inherit
-    name: Bump chatplex-sdk-bs
-    with:
-      id: chatplex-sdk-bs
-      game_version: ${{ needs.get-mods.outputs.packageVersion }}
-      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
-      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/hardcpp/QuestChatPlexSDK-BS.git
-      version: 6.4.1
-      branch: master
-      install: true
-      installed_mods: '["bsml","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
-  bump-custom-json-data:
-    needs:
-      - get-mods
-      - bump-songcore
-    uses: ./.github/workflows/bump-reusable.yml
-    secrets: inherit
-    name: Bump custom-json-data
-    with:
-      id: custom-json-data
-      game_version: ${{ needs.get-mods.outputs.packageVersion }}
-      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
-      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/bsq-ports/CustomJSONData.git
-      version: 0.24.3
-      branch: main
-      install: true
-      installed_mods: '["songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
-  bump-hollywood:
-    needs:
-      - get-mods
-      - bump-metacore
-    uses: ./.github/workflows/bump-reusable.yml
-    secrets: inherit
-    name: Bump hollywood
-    with:
-      id: hollywood
-      game_version: ${{ needs.get-mods.outputs.packageVersion }}
-      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
-      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/Fernthedev/HollywoodQuest.git
-      version: 1.2.2
-      branch: master
-      install: true
-      build_command: pip install PyGithub && pip install requests && python3 ./update_ffmpeg.py && qpm s build
-      installed_mods: '["metacore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
-  bump-tracks:
-    needs:
-      - get-mods
-      - bump-custom-json-data
-      - bump-songcore
-    uses: ./.github/workflows/bump-reusable.yml
-    secrets: inherit
-    name: Bump tracks
-    with:
-      id: tracks
-      game_version: ${{ needs.get-mods.outputs.packageVersion }}
-      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
-      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/bsq-ports/Tracks.git
-      version: 2.4.4
-      branch: master
-      install: true
-      build_command: rustup install nightly && rustup target add aarch64-linux-android --toolchain nightly && cargo install bindgen-cli && cargo install --locked --git https://github.com/bbqsrc/cargo-ndk.git cargo-ndk && qpm s build
-      installed_mods: '["custom-json-data","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
-  bump-multiplayer-core:
-    needs:
-      - get-mods
-      - bump-bsml
-      - bump-lapiz
-      - bump-songcore
-    uses: ./.github/workflows/bump-reusable.yml
-    secrets: inherit
-    name: Bump multiplayer-core
-    with:
-      id: multiplayer-core
-      game_version: ${{ needs.get-mods.outputs.packageVersion }}
-      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
-      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/EnderdracheLP/MultiplayerCore.Quest.git
-      version: 1.6.2
-      branch: master
-      install: true
-      installed_mods: '["bsml","lapiz","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-AntiVertigo:
     needs:
       - get-mods
@@ -1257,6 +1071,192 @@ jobs:
       install: false
       qmod_command: pwsh ./scripts/createqmod.ps1
       installed_mods: '["metacore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-bsml:
+    needs:
+      - get-mods
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump bsml
+    with:
+      id: bsml
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/bsq-ports/Quest-BSML.git
+      version: 0.4.55
+      branch: master
+      install: true
+      installed_mods: "[]"
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-songcore:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-lapiz
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump songcore
+    with:
+      id: songcore
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/raineaeternal/Quest-SongCore.git
+      version: 1.1.24
+      branch: main
+      install: true
+      installed_mods: '["bsml","lapiz"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-metacore:
+    needs:
+      - get-mods
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump metacore
+    with:
+      id: metacore
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Metalit/MetaCore.git
+      version: 1.5.0
+      branch: main
+      install: true
+      installed_mods: "[]"
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-lapiz:
+    needs:
+      - get-mods
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump lapiz
+    with:
+      id: lapiz
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/raineaeternal/Lapiz.git
+      version: 0.2.23
+      branch: main
+      install: true
+      installed_mods: "[]"
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-playlistcore:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-metacore
+      - bump-songcore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump playlistcore
+    with:
+      id: playlistcore
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Metalit/PlaylistCore.git
+      version: 1.5.5
+      branch: main
+      install: true
+      installed_mods: '["bsml","metacore","songcore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-chatplex-sdk-bs:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-songcore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump chatplex-sdk-bs
+    with:
+      id: chatplex-sdk-bs
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/hardcpp/QuestChatPlexSDK-BS.git
+      version: 6.4.1
+      branch: master
+      install: true
+      installed_mods: '["bsml","songcore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-custom-json-data:
+    needs:
+      - get-mods
+      - bump-songcore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump custom-json-data
+    with:
+      id: custom-json-data
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/bsq-ports/CustomJSONData.git
+      version: 0.24.3
+      branch: main
+      install: true
+      installed_mods: '["songcore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-hollywood:
+    needs:
+      - get-mods
+      - bump-metacore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump hollywood
+    with:
+      id: hollywood
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Fernthedev/HollywoodQuest.git
+      version: 1.2.2
+      branch: master
+      install: true
+      build_command: pip install PyGithub && pip install requests && python3 ./update_ffmpeg.py && qpm s build
+      installed_mods: '["metacore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-tracks:
+    needs:
+      - get-mods
+      - bump-custom-json-data
+      - bump-songcore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump tracks
+    with:
+      id: tracks
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/bsq-ports/Tracks.git
+      version: 2.4.4
+      branch: master
+      install: true
+      build_command: rustup install nightly && rustup target add aarch64-linux-android --toolchain nightly && cargo install bindgen-cli && cargo install --locked --git https://github.com/bbqsrc/cargo-ndk.git cargo-ndk && qpm s build
+      installed_mods: '["custom-json-data","songcore"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-multiplayer-core:
+    needs:
+      - get-mods
+      - bump-bsml
+      - bump-lapiz
+      - bump-songcore
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump multiplayer-core
+    with:
+      id: multiplayer-core
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/EnderdracheLP/MultiplayerCore.Quest.git
+      version: 1.6.2
+      branch: master
+      install: true
+      installed_mods: '["bsml","lapiz","songcore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   combine-artifacts:
     needs:
