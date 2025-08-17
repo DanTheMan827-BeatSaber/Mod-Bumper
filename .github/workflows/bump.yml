@@ -52,23 +52,6 @@ jobs:
           rm -r "$pkg_tmp"
 
           cat $GITHUB_OUTPUT
-  bump-bsml:
-    needs:
-      - get-mods
-    uses: ./.github/workflows/bump-reusable.yml
-    secrets: inherit
-    name: Bump bsml
-    with:
-      id: bsml
-      game_version: ${{ needs.get-mods.outputs.packageVersion }}
-      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
-      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/bsq-ports/Quest-BSML.git
-      version: 0.4.55
-      branch: master
-      install: true
-      installed_mods: "[]"
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-bts-yeeter:
     needs:
       - get-mods
@@ -150,40 +133,6 @@ jobs:
       install: false
       installed_mods: "[]"
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
-  bump-lapiz:
-    needs:
-      - get-mods
-    uses: ./.github/workflows/bump-reusable.yml
-    secrets: inherit
-    name: Bump lapiz
-    with:
-      id: lapiz
-      game_version: ${{ needs.get-mods.outputs.packageVersion }}
-      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
-      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/raineaeternal/Lapiz.git
-      version: 0.2.23
-      branch: main
-      install: true
-      installed_mods: "[]"
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
-  bump-metacore:
-    needs:
-      - get-mods
-    uses: ./.github/workflows/bump-reusable.yml
-    secrets: inherit
-    name: Bump metacore
-    with:
-      id: metacore
-      game_version: ${{ needs.get-mods.outputs.packageVersion }}
-      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
-      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/Metalit/MetaCore.git
-      version: 1.5.0
-      branch: main
-      install: true
-      installed_mods: "[]"
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-morebuttons:
     needs:
       - get-mods
@@ -217,6 +166,23 @@ jobs:
       install: false
       installed_mods: "[]"
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-bsml:
+    needs:
+      - get-mods
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump bsml
+    with:
+      id: bsml
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/bsq-ports/Quest-BSML.git
+      version: 0.4.55
+      branch: master
+      install: true
+      installed_mods: "[]"
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-songcore:
     needs:
       - get-mods
@@ -235,6 +201,40 @@ jobs:
       branch: main
       install: true
       installed_mods: '["bsml","lapiz"]'
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-metacore:
+    needs:
+      - get-mods
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump metacore
+    with:
+      id: metacore
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Metalit/MetaCore.git
+      version: 1.5.0
+      branch: main
+      install: true
+      installed_mods: "[]"
+      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+  bump-lapiz:
+    needs:
+      - get-mods
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: Bump lapiz
+    with:
+      id: lapiz
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/raineaeternal/Lapiz.git
+      version: 0.2.23
+      branch: main
+      install: true
+      installed_mods: "[]"
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}
   bump-playlistcore:
     needs:
