@@ -23,6 +23,7 @@
   },
   "mods": {
     "AntiVertigo": {
+      "name": "AntiVertigo",
       "repo": "https://github.com/FrozenAlex/AntiVertigo.git",
       "branch": "master",
       "dependencies": [
@@ -31,6 +32,7 @@
       ]
     },
     "anytext": {
+      "name": "AnyText",
       "repo": "https://github.com/CatsaCode/AnyText.git",
       "branch": "main",
       "dependencies": [
@@ -38,6 +40,7 @@
       ]
     },
     "BeatLeader": {
+      "name": "BeatLeader",
       "repo": "https://github.com/BeatLeader/beatleader-qmod.git",
       "branch": "master",
       "dependencies": [
@@ -48,6 +51,7 @@
       ]
     },
     "BeatTogether": {
+      "name": "BeatTogether",
       "repo": "https://github.com/BeatTogether/BeatTogether.Quest.git",
       "branch": "master",
       "dependencies": [
@@ -59,6 +63,7 @@
       "qmod": "pwsh buildQMOD.ps1 BeatTogether"
     },
     "BetterSongSearch": {
+      "name": "BetterSongSearch",
       "repo": "https://github.com/bsq-ports/BetterSongSearchQuest.git",
       "branch": "main",
       "dependencies": [
@@ -67,6 +72,7 @@
       ]
     },
     "bomb-qolorer": {
+      "name": "Bomb Qolorer",
       "repo": "https://github.com/FrozenAlex/bomb-qolorer.git",
       "branch": "main",
       "dependencies": [
@@ -74,6 +80,7 @@
       ]
     },
     "bsl": {
+      "name": "Better Song List",
       "repo": "https://github.com/bsq-ports/BetterSongList.git",
       "branch": "main",
       "dependencies": [
@@ -83,12 +90,14 @@
       ]
     },
     "bsml": {
+      "name": "BSML",
       "repo": "https://github.com/bsq-ports/Quest-BSML.git",
       "branch": "master",
       "version": "0.4.55",
       "dependencies": []
     },
     "BSNightcoreQuest": {
+      "name": "BSNightcoreQuest",
       "repo": "https://github.com/Tatenshi/BSNightcoreQuest.git",
       "branch": "main",
       "dependencies": [
@@ -96,17 +105,20 @@
       ]
     },
     "bts-yeeter": {
+      "name": "BTS Yeeter",
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.BtsYeeter.git",
       "branch": "master",
       "dependencies": []
     },
     "camera-utils": {
+      "name": "CameraUtils",
       "repo": "https://github.com/Reezonate/CameraUtils-Quest.git",
       "branch": "master",
       "version": "1.1.11",
       "dependencies": []
     },
     "chatplex-sdk-bs": {
+      "name": "ChatPlexSDK-BS",
       "repo": "https://github.com/hardcpp/QuestChatPlexSDK-BS.git",
       "branch": "master",
       "version": "6.4.1",
@@ -116,6 +128,7 @@
       ]
     },
     "chroma": {
+      "name": "Chroma",
       "repo": "https://github.com/bsq-ports/Chroma.git",
       "branch": "main",
       "dependencies": [
@@ -126,6 +139,7 @@
       ]
     },
     "ClockMod": {
+      "name": "Clock Mod",
       "repo": "https://github.com/EnderdracheLP/ClockMod.git",
       "branch": "main",
       "dependencies": [
@@ -134,6 +148,7 @@
       "build": "pwsh build.ps1"
     },
     "crashreporter": {
+      "name": "CrashReporter",
       "repo": "https://github.com/darknight1050/CrashReporter.git",
       "branch": "master",
       "dependencies": [
@@ -141,6 +156,7 @@
       ]
     },
     "custom-json-data": {
+      "name": "CustomJSONData",
       "repo": "https://github.com/bsq-ports/CustomJSONData.git",
       "branch": "main",
       "version": "0.24.3",
@@ -149,6 +165,7 @@
       ]
     },
     "custommodels": {
+      "name": "Custom Models",
       "repo": "https://github.com/Metalit/CustomModels.git",
       "branch": "main",
       "dependencies": [
@@ -159,16 +176,19 @@
       "qmod": "pwsh ./scripts/createqmod.ps1"
     },
     "datakeeper": {
+      "name": "PlayerDataKeeper",
       "repo": "https://github.com/Metalit/PlayerDataKeeper.git",
       "branch": "master",
       "dependencies": []
     },
     "DlcSorter": {
+      "name": "DlcSorter",
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.DlcSorter.git",
       "branch": "master",
       "dependencies": []
     },
     "emulator-fpfc": {
+      "name": "Emulator FPFC",
       "repo": "https://github.com/kodenamekrak/Emulator-FPFC.git",
       "branch": "master",
       "dependencies": [
@@ -176,11 +196,13 @@
       ]
     },
     "FakeId": {
+      "name": "Fake ID",
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.FakeID.git",
       "branch": "main",
       "dependencies": []
     },
     "FasterScroll": {
+      "name": "Faster Scroll",
       "repo": "https://github.com/christopherweinhardt/FasterScrollQuest.git",
       "branch": "main",
       "dependencies": [
@@ -188,6 +210,7 @@
       ]
     },
     "graphicstweaks": {
+      "name": "GraphicsTweaks",
       "repo": "https://github.com/FrozenAlex/GraphicsTweaks.git",
       "branch": "main",
       "dependencies": [
@@ -195,6 +218,7 @@
       ]
     },
     "HitScoreVisualizer": {
+      "name": "HitScoreVisualizer",
       "repo": "https://github.com/christopherweinhardt/HitScoreVisualizer.git",
       "branch": "master",
       "dependencies": [
@@ -203,6 +227,7 @@
       ]
     },
     "HitsoundTweaqs": {
+      "name": "HitsoundTweaqs",
       "repo": "https://github.com/NSGolova/HitsoundTweaqs.git",
       "branch": "master",
       "dependencies": [
@@ -210,6 +235,7 @@
       ]
     },
     "hollywood": {
+      "name": "Hollywood",
       "repo": "https://github.com/Fernthedev/HollywoodQuest.git",
       "branch": "master",
       "version": "1.2.2",
@@ -219,6 +245,7 @@
       "build": "pip install PyGithub && pip install requests && python3 ./update_ffmpeg.py && qpm s build"
     },
     "imagecoverexpander": {
+      "name": "ImageCoverExpander",
       "repo": "https://github.com/vcmikuu/ImageCoverExpander.git",
       "branch": "main",
       "dependencies": [
@@ -226,6 +253,7 @@
       ]
     },
     "IntroSkip": {
+      "name": "Intro Skip",
       "repo": "https://github.com/Royston1999/IntroSkip-Quest.git",
       "branch": "main",
       "dependencies": [
@@ -235,6 +263,7 @@
       "build": "pwsh ./build.ps1"
     },
     "jdfixer": {
+      "name": "JDFixer",
       "repo": "https://github.com/Metalit/QuestJDFixer.git",
       "branch": "master",
       "dependencies": [
@@ -243,12 +272,14 @@
       ]
     },
     "lapiz": {
+      "name": "Lapiz",
       "repo": "https://github.com/raineaeternal/Lapiz.git",
       "branch": "main",
       "version": "0.2.23",
       "dependencies": []
     },
     "MappingExtensions": {
+      "name": "MappingExtensions",
       "repo": "https://github.com/rcelyte/MappingExtensions.git",
       "branch": "master",
       "dependencies": [
@@ -259,12 +290,14 @@
       "qmod": "qpm qmod zip --skip_build -i . -i extern/libs"
     },
     "metacore": {
+      "name": "MetaCore",
       "repo": "https://github.com/Metalit/MetaCore.git",
       "branch": "main",
       "version": "1.5.0",
       "dependencies": []
     },
     "mod-list": {
+      "name": "ModList",
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.ModList.git",
       "branch": "main",
       "dependencies": [
@@ -272,12 +305,14 @@
       ]
     },
     "morebuttons": {
+      "name": "MoreButtons",
       "repo": "https://github.com/Metalit/MoreButtons.git",
       "branch": "main",
       "dependencies": [],
       "qmod": "pwsh ./scripts/createqmod.ps1"
     },
     "multiplayer-core": {
+      "name": "MultiplayerCore",
       "repo": "https://github.com/EnderdracheLP/MultiplayerCore.Quest.git",
       "branch": "master",
       "version": "1.6.2",
@@ -288,6 +323,7 @@
       ]
     },
     "NoodleExtensions": {
+      "name": "Noodle Extensions",
       "repo": "https://github.com/bsq-ports/NoodleExtensions.git",
       "branch": "master",
       "dependencies": [
@@ -298,11 +334,13 @@
       ]
     },
     "NoPromo": {
+      "name": "NoPromo",
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.NoPromo.git",
       "branch": "master",
       "dependencies": []
     },
     "Nya": {
+      "name": "Nya",
       "repo": "https://github.com/FrozenAlex/Nya-quest.git",
       "branch": "main",
       "dependencies": [
@@ -310,6 +348,7 @@
       ]
     },
     "particletuner": {
+      "name": "ParticleTuner",
       "repo": "https://github.com/kodenamekrak/ParticleTuner.git",
       "branch": "master",
       "dependencies": [
@@ -317,6 +356,7 @@
       ]
     },
     "Play3rdPer": {
+      "name": "Third Person Mod",
       "repo": "https://github.com/Epic17plyz/3rd-Person-Mod.git",
       "branch": "main",
       "dependencies": [
@@ -324,6 +364,7 @@
       ]
     },
     "playlistcore": {
+      "name": "PlaylistCore",
       "repo": "https://github.com/Metalit/PlaylistCore.git",
       "branch": "main",
       "version": "1.5.5",
@@ -334,6 +375,7 @@
       ]
     },
     "playlistdownloader": {
+      "name": "PlaylistDownloader",
       "repo": "https://github.com/Metalit/PlaylistDownloader.git",
       "branch": "main",
       "dependencies": [
@@ -344,6 +386,7 @@
       ]
     },
     "playlistmanager": {
+      "name": "PlaylistManager",
       "repo": "https://github.com/Metalit/PlaylistManager.git",
       "branch": "main",
       "dependencies": [
@@ -355,6 +398,7 @@
       "qmod": "pwsh ./scripts/createqmod.ps1"
     },
     "qbeatsaberplus-gametweaker": {
+      "name": "QBeatSaberPlus-GameTweaker",
       "repo": "https://github.com/hardcpp/QBeatSaberPlus-GameTweaker.git",
       "branch": "master",
       "dependencies": [
@@ -362,6 +406,7 @@
       ]
     },
     "qbeatsaberplus-menumusic": {
+      "name": "QBeatSaberPlus-MenuMusic",
       "repo": "https://github.com/hardcpp/QBeatSaberPlus-MenuMusic.git",
       "branch": "master",
       "dependencies": [
@@ -370,6 +415,7 @@
       ]
     },
     "qbeatsaberplus-notetweaker": {
+      "name": "QBeatSaberPlus-NoteTweaker",
       "repo": "https://github.com/hardcpp/QBeatSaberPlus-NoteTweaker.git",
       "branch": "master",
       "dependencies": [
@@ -377,6 +423,7 @@
       ]
     },
     "qonsistentsabercolors": {
+      "name": "QonsistentSaberColors",
       "repo": "https://github.com/kodenamekrak/QonsistentSaberColors.git",
       "branch": "master",
       "dependencies": [
@@ -384,6 +431,7 @@
       ]
     },
     "Qounters": {
+      "name": "Qounters++",
       "repo": "https://github.com/Metalit/Qounters.git",
       "branch": "main",
       "dependencies": [
@@ -394,6 +442,7 @@
       "qmod": "pwsh ./scripts/createqmod.ps1"
     },
     "QuestSounds": {
+      "name": "QuestSounds",
       "repo": "https://github.com/EnderdracheLP/QuestSounds.git",
       "branch": "master",
       "dependencies": [
@@ -403,6 +452,7 @@
       "qmod": "qpm qmod zip --skip_build -i build -i extern/libs -i Examples"
     },
     "RandomSongPicker": {
+      "name": "RandomSongPicker",
       "repo": "https://github.com/Tatenshi/RandomSongPicker.git",
       "branch": "main",
       "dependencies": [
@@ -410,6 +460,7 @@
       ]
     },
     "RecentlyPlayed": {
+      "name": "RecentlyPlayed",
       "repo": "https://github.com/Tatenshi/RecentlyPlayed.git",
       "branch": "main",
       "dependencies": [
@@ -419,6 +470,7 @@
       ]
     },
     "redbar": {
+      "name": "RedBar",
       "repo": "https://github.com/vcmikuu/Red-bar.git",
       "branch": "master",
       "dependencies": [
@@ -426,6 +478,7 @@
       ]
     },
     "replay": {
+      "name": "Replay",
       "repo": "https://github.com/Metalit/Replay.git",
       "branch": "master",
       "dependencies": [
@@ -435,6 +488,7 @@
       ]
     },
     "scorepercentage": {
+      "name": "Score Percentage",
       "repo": "https://github.com/Royston1999/ScorePercentage-Quest.git",
       "branch": "main",
       "dependencies": [
@@ -444,6 +498,7 @@
       "build": "pwsh ./build.ps1"
     },
     "slicedetails": {
+      "name": "Slice Details",
       "repo": "https://github.com/Royston1999/SliceDetails-Quest.git",
       "branch": "main",
       "dependencies": [
@@ -453,6 +508,7 @@
       "build": "pwsh ./build.ps1"
     },
     "SmallQubes": {
+      "name": "SmallQubes",
       "repo": "https://github.com/NSGolova/SmallQubes.git",
       "branch": "master",
       "dependencies": [
@@ -460,6 +516,7 @@
       ]
     },
     "smoothedcontroller": {
+      "name": "Smoothed Controller",
       "repo": "https://github.com/FrozenAlex/SmoothedController.git",
       "branch": "main",
       "dependencies": [
@@ -467,6 +524,7 @@
       ]
     },
     "songchartvisualizer": {
+      "name": "SongChartVisualizer",
       "repo": "https://github.com/kodenamekrak/SongChartVisualizer.git",
       "branch": "master",
       "dependencies": [
@@ -475,6 +533,7 @@
       ]
     },
     "songcore": {
+      "name": "Quest-SongCore",
       "repo": "https://github.com/raineaeternal/Quest-SongCore.git",
       "branch": "main",
       "version": "1.1.24",
@@ -484,6 +543,7 @@
       ]
     },
     "songdownloader": {
+      "name": "SongDownloader",
       "repo": "https://github.com/darknight1050/SongDownloader.git",
       "branch": "master",
       "dependencies": [
@@ -493,6 +553,7 @@
       ]
     },
     "songrankedbadge": {
+      "name": "SongRankedBadge",
       "repo": "https://github.com/kodenamekrak/SongRankedBadge.git",
       "branch": "main",
       "dependencies": [
@@ -500,6 +561,7 @@
       ]
     },
     "stream-mod": {
+      "name": "BeatStreamer",
       "repo": "https://github.com/Metalit/StreamMod.git",
       "branch": "main",
       "dependencies": [
@@ -509,6 +571,7 @@
       ]
     },
     "too-many-fireworks": {
+      "name": "TooManyFireworks",
       "repo": "https://github.com/CatsaCode/TooManyFireworks.git",
       "branch": "main",
       "dependencies": [
@@ -516,6 +579,7 @@
       ]
     },
     "tracks": {
+      "name": "Tracks",
       "repo": "https://github.com/bsq-ports/Tracks.git",
       "branch": "master",
       "version": "2.4.4",
@@ -526,6 +590,7 @@
       "build": "rustup install nightly && rustup target add aarch64-linux-android --toolchain nightly && cargo install bindgen-cli && cargo install --locked --git https://github.com/bbqsrc/cargo-ndk.git cargo-ndk && qpm s build"
     },
     "transitions": {
+      "name": "Transitions",
       "repo": "https://github.com/Metalit/Transitions.git",
       "branch": "master",
       "dependencies": [
@@ -533,6 +598,7 @@
       ]
     },
     "tricksaber-lite": {
+      "name": "TrickSaber Lite",
       "repo": "https://github.com/vcmikuu/TrickSaber-Lite.git",
       "branch": "main",
       "dependencies": [
@@ -541,6 +607,7 @@
       ]
     },
     "unicode": {
+      "name": "Unicode",
       "repo": "https://github.com/Metalit/UnicodeQuest.git",
       "branch": "main",
       "dependencies": [
