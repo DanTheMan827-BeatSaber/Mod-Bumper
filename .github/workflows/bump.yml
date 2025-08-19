@@ -61,7 +61,7 @@ jobs:
       - get-mods
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump bts-yeeter
+    name: BTS Yeeter
     with:
       id: bts-yeeter
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -77,7 +77,7 @@ jobs:
       - get-mods
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump camera-utils
+    name: CameraUtils
     with:
       id: camera-utils
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -94,7 +94,7 @@ jobs:
       - get-mods
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump datakeeper
+    name: PlayerDataKeeper
     with:
       id: datakeeper
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -110,7 +110,7 @@ jobs:
       - get-mods
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump DlcSorter
+    name: DlcSorter
     with:
       id: DlcSorter
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -126,7 +126,7 @@ jobs:
       - get-mods
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump FakeId
+    name: Fake ID
     with:
       id: FakeId
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -142,7 +142,7 @@ jobs:
       - get-mods
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump morebuttons
+    name: MoreButtons
     with:
       id: morebuttons
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -159,7 +159,7 @@ jobs:
       - get-mods
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump NoPromo
+    name: NoPromo
     with:
       id: NoPromo
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -175,7 +175,7 @@ jobs:
       - get-mods
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump bsml
+    name: BSML
     with:
       id: bsml
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -194,7 +194,7 @@ jobs:
       - bump-lapiz
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump songcore
+    name: Quest-SongCore
     with:
       id: songcore
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -211,7 +211,7 @@ jobs:
       - get-mods
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump metacore
+    name: MetaCore
     with:
       id: metacore
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -228,7 +228,7 @@ jobs:
       - get-mods
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump lapiz
+    name: Lapiz
     with:
       id: lapiz
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -248,7 +248,7 @@ jobs:
       - bump-songcore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump playlistcore
+    name: PlaylistCore
     with:
       id: playlistcore
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -267,7 +267,7 @@ jobs:
       - bump-songcore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump chatplex-sdk-bs
+    name: ChatPlexSDK-BS
     with:
       id: chatplex-sdk-bs
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -285,7 +285,7 @@ jobs:
       - bump-songcore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump custom-json-data
+    name: CustomJSONData
     with:
       id: custom-json-data
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -303,7 +303,7 @@ jobs:
       - bump-metacore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump hollywood
+    name: Hollywood
     with:
       id: hollywood
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -323,7 +323,7 @@ jobs:
       - bump-songcore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump tracks
+    name: Tracks
     with:
       id: tracks
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -344,7 +344,7 @@ jobs:
       - bump-songcore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump multiplayer-core
+    name: MultiplayerCore
     with:
       id: multiplayer-core
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -363,7 +363,7 @@ jobs:
       - bump-lapiz
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump AntiVertigo
+    name: AntiVertigo
     with:
       id: AntiVertigo
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -380,7 +380,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump anytext
+    name: AnyText
     with:
       id: anytext
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -400,7 +400,7 @@ jobs:
       - bump-songcore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump BeatLeader
+    name: BeatLeader
     with:
       id: BeatLeader
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -419,7 +419,7 @@ jobs:
       - bump-multiplayer-core
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump BeatTogether
+    name: BeatTogether
     with:
       id: BeatTogether
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -439,7 +439,7 @@ jobs:
       - bump-songcore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump BetterSongSearch
+    name: BetterSongSearch
     with:
       id: BetterSongSearch
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -456,7 +456,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump bomb-qolorer
+    name: Bomb Qolorer
     with:
       id: bomb-qolorer
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -475,7 +475,7 @@ jobs:
       - bump-songcore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump bsl
+    name: Better Song List
     with:
       id: bsl
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -492,7 +492,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump BSNightcoreQuest
+    name: BSNightcoreQuest
     with:
       id: BSNightcoreQuest
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -512,7 +512,7 @@ jobs:
       - bump-tracks
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump chroma
+    name: Chroma
     with:
       id: chroma
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -529,7 +529,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump ClockMod
+    name: Clock Mod
     with:
       id: ClockMod
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -547,7 +547,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump crashreporter
+    name: CrashReporter
     with:
       id: crashreporter
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -566,7 +566,7 @@ jobs:
       - bump-metacore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump custommodels
+    name: Custom Models
     with:
       id: custommodels
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -584,7 +584,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump emulator-fpfc
+    name: Emulator FPFC
     with:
       id: emulator-fpfc
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -601,7 +601,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump FasterScroll
+    name: Faster Scroll
     with:
       id: FasterScroll
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -618,7 +618,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump graphicstweaks
+    name: GraphicsTweaks
     with:
       id: graphicstweaks
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -636,7 +636,7 @@ jobs:
       - bump-metacore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump HitScoreVisualizer
+    name: HitScoreVisualizer
     with:
       id: HitScoreVisualizer
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -653,7 +653,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump HitsoundTweaqs
+    name: HitsoundTweaqs
     with:
       id: HitsoundTweaqs
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -670,7 +670,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump imagecoverexpander
+    name: ImageCoverExpander
     with:
       id: imagecoverexpander
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -688,7 +688,7 @@ jobs:
       - bump-lapiz
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump IntroSkip
+    name: Intro Skip
     with:
       id: IntroSkip
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -707,7 +707,7 @@ jobs:
       - bump-metacore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump jdfixer
+    name: JDFixer
     with:
       id: jdfixer
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -724,7 +724,7 @@ jobs:
       - bump-songcore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump MappingExtensions
+    name: MappingExtensions
     with:
       id: MappingExtensions
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -744,7 +744,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump mod-list
+    name: ModList
     with:
       id: mod-list
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -764,7 +764,7 @@ jobs:
       - bump-tracks
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump NoodleExtensions
+    name: Noodle Extensions
     with:
       id: NoodleExtensions
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -781,7 +781,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump Nya
+    name: Nya
     with:
       id: Nya
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -798,7 +798,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump particletuner
+    name: ParticleTuner
     with:
       id: particletuner
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -815,7 +815,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump Play3rdPer
+    name: Third Person Mod
     with:
       id: Play3rdPer
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -835,7 +835,7 @@ jobs:
       - bump-songcore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump playlistdownloader
+    name: PlaylistDownloader
     with:
       id: playlistdownloader
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -855,7 +855,7 @@ jobs:
       - bump-songcore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump playlistmanager
+    name: PlaylistManager
     with:
       id: playlistmanager
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -873,7 +873,7 @@ jobs:
       - bump-chatplex-sdk-bs
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump qbeatsaberplus-gametweaker
+    name: QBeatSaberPlus-GameTweaker
     with:
       id: qbeatsaberplus-gametweaker
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -891,7 +891,7 @@ jobs:
       - bump-songcore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump qbeatsaberplus-menumusic
+    name: QBeatSaberPlus-MenuMusic
     with:
       id: qbeatsaberplus-menumusic
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -908,7 +908,7 @@ jobs:
       - bump-chatplex-sdk-bs
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump qbeatsaberplus-notetweaker
+    name: QBeatSaberPlus-NoteTweaker
     with:
       id: qbeatsaberplus-notetweaker
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -925,7 +925,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump qonsistentsabercolors
+    name: QonsistentSaberColors
     with:
       id: qonsistentsabercolors
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -944,7 +944,7 @@ jobs:
       - bump-songcore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump Qounters
+    name: Qounters++
     with:
       id: Qounters
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -962,7 +962,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump QuestSounds
+    name: QuestSounds
     with:
       id: QuestSounds
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -981,7 +981,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump RandomSongPicker
+    name: RandomSongPicker
     with:
       id: RandomSongPicker
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -1000,7 +1000,7 @@ jobs:
       - bump-songcore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump RecentlyPlayed
+    name: RecentlyPlayed
     with:
       id: RecentlyPlayed
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -1017,7 +1017,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump redbar
+    name: RedBar
     with:
       id: redbar
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -1036,7 +1036,7 @@ jobs:
       - bump-metacore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump replay
+    name: Replay
     with:
       id: replay
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -1054,7 +1054,7 @@ jobs:
       - bump-metacore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump scorepercentage
+    name: Score Percentage
     with:
       id: scorepercentage
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -1073,7 +1073,7 @@ jobs:
       - bump-lapiz
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump slicedetails
+    name: Slice Details
     with:
       id: slicedetails
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -1091,7 +1091,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump SmallQubes
+    name: SmallQubes
     with:
       id: SmallQubes
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -1108,7 +1108,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump smoothedcontroller
+    name: Smoothed Controller
     with:
       id: smoothedcontroller
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -1126,7 +1126,7 @@ jobs:
       - bump-lapiz
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump songchartvisualizer
+    name: SongChartVisualizer
     with:
       id: songchartvisualizer
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -1145,7 +1145,7 @@ jobs:
       - bump-songcore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump songdownloader
+    name: SongDownloader
     with:
       id: songdownloader
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -1162,7 +1162,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump songrankedbadge
+    name: SongRankedBadge
     with:
       id: songrankedbadge
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -1181,7 +1181,7 @@ jobs:
       - bump-metacore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump stream-mod
+    name: BeatStreamer
     with:
       id: stream-mod
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -1198,7 +1198,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump too-many-fireworks
+    name: TooManyFireworks
     with:
       id: too-many-fireworks
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -1215,7 +1215,7 @@ jobs:
       - bump-bsml
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump transitions
+    name: Transitions
     with:
       id: transitions
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -1233,7 +1233,7 @@ jobs:
       - bump-metacore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump tricksaber-lite
+    name: TrickSaber Lite
     with:
       id: tricksaber-lite
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
@@ -1250,7 +1250,7 @@ jobs:
       - bump-metacore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
-    name: Bump unicode
+    name: Unicode
     with:
       id: unicode
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
