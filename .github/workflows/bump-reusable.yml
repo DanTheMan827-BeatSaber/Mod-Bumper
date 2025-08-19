@@ -544,6 +544,7 @@ jobs:
           }
 
           delete-if-exists "build/CMakeFiles"
+          delete-if-exists "build/_deps"
           delete-if-exists "extern"
           delete-if-exists ".git"
 
