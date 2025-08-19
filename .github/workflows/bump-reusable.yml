@@ -255,6 +255,16 @@ jobs:
           path: |
             ${{ github.workspace }}/${{ inputs.id }}
 
+      - name: Extract Workspace
+        working-directory: ${{ github.workspace }}
+        if: env.run_build != 'false' && steps.cache-workspace.outputs.cache-hit == 'true'
+        run: |
+          mv "${{ inputs.id }}/workspace.txz" .
+          rm -rf "${{ inputs.id }}"
+          mkdir -p "${{ inputs.id }}"
+          tar -xJvf workspace.txz -C "${{ inputs.id }}"
+          rm workspace.txz
+
       - name: Resolve NDK
         if: env.run_build != 'false'
         run: |
@@ -509,6 +519,28 @@ jobs:
             echo "Deleting cache id $cache_id"
             gh api --method DELETE /repos/${{ github.repository }}/actions/caches/$cache_id
           done
+
+      - name: Cleanup Workspace
+        if: env.run_build != 'false'
+        run: |
+          delete-if-exists() {
+            if [[ -e "$1" ]]; then
+              rm -rf "$1"
+            fi
+          }
+
+          delete-if-exists "build/CMakeFiles"
+          delete-if-exists "extern"
+          delete-if-exists ".git"
+
+      - name: Archive Workspace
+        if: env.run_build != 'false'
+        working-directory: ${{ github.workspace }}
+        run: |
+          tar -cJvf workspace.txz -C "${{ inputs.id }}" .
+          rm -rf "${{ inputs.id }}"
+          mkdir -p "${{ inputs.id }}"
+          mv workspace.txz "${{ inputs.id }}/"
 
       - name: Upload Workspace
         if: env.run_build != 'false'
