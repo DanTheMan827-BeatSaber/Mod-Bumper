@@ -87,7 +87,7 @@ async function getBumpJobs(mods: ModsJson) {
       ],
       "uses": "./.github/workflows/bump-reusable.yml",
       "secrets": "inherit",
-      "name": `Bump ${modId}`,
+      "name": `${mod.name || modId}`,
       "with": {
         "id": modId,
         "game_version": "${{ needs.get-mods.outputs.packageVersion }}",
