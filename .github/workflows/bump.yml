@@ -52,6 +52,10 @@ jobs:
           rm -r "$pkg_tmp"
 
           cat $GITHUB_OUTPUT
+      - name: Upload QPM Cache
+        uses: ./.github/actions/upload-qpm-cache
+        with:
+          artifact-name: cache_bs-cordl
   bump-bts-yeeter:
     needs:
       - get-mods
