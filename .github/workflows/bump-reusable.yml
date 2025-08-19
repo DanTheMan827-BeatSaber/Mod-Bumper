@@ -64,7 +64,7 @@ jobs:
 
     env:
       run_build: true
-      XZ_OPT: -9 --lzma2=dict=1.5G
+      XZ_OPT: --lzma2=dict=1610612736
 
     steps:
       - uses: actions/checkout@v4
