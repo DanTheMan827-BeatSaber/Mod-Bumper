@@ -52,7 +52,7 @@ jobs:
   bump:
     runs-on: ubuntu-latest
     continue-on-error: true
-    name: bump ${{ inputs.id }}
+    name: Bump ${{ inputs.id }}
     defaults:
       run:
         working-directory: ${{ github.workspace }}/${{ inputs.id }}
