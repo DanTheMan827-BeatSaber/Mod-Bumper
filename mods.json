@@ -500,8 +500,7 @@
       ]
     },
     "stream-mod": {
-      "repo": "https://github.com/DanTheMan827/StreamMod.git",
-      "branch": "cmake-updates",
+      "repo": "https://github.com/Metalit/StreamMod.git",
       "dependencies": [
         "bsml",
         "hollywood",
