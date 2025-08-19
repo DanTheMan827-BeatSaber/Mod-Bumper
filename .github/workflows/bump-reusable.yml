@@ -520,6 +520,20 @@ jobs:
             gh api --method DELETE /repos/${{ github.repository }}/actions/caches/$cache_id
           done
 
+      - name: Upload QPM Cache
+        if: inputs.install == true
+        uses: ./.github/actions/upload-qpm-cache
+        with:
+          artifact-name: ${{ steps.cache-name.outputs.cache-name }}
+
+      - name: Upload Build
+        if: env.run_build != 'false'
+        uses: actions/upload-artifact@v4
+        with:
+          path: |
+            ${{ inputs.id }}/*.qmod
+          name: qmod_${{ steps.qpm_id.outputs.id }}
+
       - name: Cleanup Workspace
         if: env.run_build != 'false'
         run: |
@@ -551,17 +565,3 @@ jobs:
           path: |
             ${{ inputs.id }}
             !${{ inputs.id }}/extern
-
-      - name: Upload QPM Cache
-        if: inputs.install == true
-        uses: ./.github/actions/upload-qpm-cache
-        with:
-          artifact-name: ${{ steps.cache-name.outputs.cache-name }}
-
-      - name: Upload Build
-        if: env.run_build != 'false'
-        uses: actions/upload-artifact@v4
-        with:
-          path: |
-            ${{ inputs.id }}/*.qmod
-          name: qmod_${{ steps.qpm_id.outputs.id }}
