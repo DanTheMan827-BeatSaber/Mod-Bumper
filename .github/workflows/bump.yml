@@ -1183,8 +1183,8 @@ jobs:
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
       bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
       newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/DanTheMan827/StreamMod.git
-      branch: cmake-updates
+      repo: https://github.com/Metalit/StreamMod.git
+      branch: main
       install: false
       installed_mods: '["bsml","hollywood","metacore"]'
       force_build: ${{ github.event.action == 'Bump All Mods' && true }}

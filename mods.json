@@ -501,6 +501,7 @@
     },
     "stream-mod": {
       "repo": "https://github.com/Metalit/StreamMod.git",
+      "branch": "main",
       "dependencies": [
         "bsml",
         "hollywood",
