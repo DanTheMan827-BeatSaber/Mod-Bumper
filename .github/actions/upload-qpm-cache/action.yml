@@ -1,0 +1,60 @@
+name: Prep QPM Cache
+
+inputs:
+  artifact-name:
+    description: The name of the cache artifact.
+outputs:
+  upload-cache:
+    description: "Whether a cache should be uploaded"
+    value: ${{ steps.prep.outputs.upload-cache }}
+  need-cached:
+    description: "JSON of packages that need to be cached"
+    value: ${{ steps.prep.outputs.need-cached }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Prep QPM Cache
+      id: prep
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      env:
+        GH_TOKEN: ${{ github.token }}
+        RUN_ID: ${{ github.run_id }}
+      run: |
+        source ".github/source-all"
+
+        for pkg in "${HOME}/.local/share/QPM-RS/cache"/*/*; do
+          if [[ -f "$pkg/.cached" ]]; then
+            rm -rf "$pkg"
+          fi
+        done
+
+        rmdir "${HOME}/.local/share/QPM-RS/cache"/* || true
+
+        JSON="$(qpm-prep-cache | jq -Rsc '[split("\n")[] | select(length > 0) | {name: ("qpm-"+(. | gsub("/";"@"))), path: .}]')"
+        if [[ -z "$JSON" ]]; then
+          JSON="[]"
+        fi
+
+        echo "home=$HOME" >> $GITHUB_OUTPUT
+        echo "upload-cache=false" >> $GITHUB_OUTPUT
+
+        if [[ "$(ls -1 "${HOME}/.local/share/QPM-RS/cache" | wc -l)" -gt 0 ]]; then
+          echo "upload-cache=true" >> $GITHUB_OUTPUT
+          
+          for pkg in "${HOME}/.local/share/QPM-RS/cache"/*/*; do
+            touch "$pkg/.cached" || true
+          done
+        fi
+
+        echo "need-cached=$JSON" >> $GITHUB_OUTPUT
+
+    - name: Upload cache
+      if: ${{ steps.prep.outputs.upload-cache == 'true' }}
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ inputs.artifact-name }}
+        include-hidden-files: true
+        path: |
+          ${{ steps.prep.outputs.home }}/.local/share/QPM-RS/cache/*
