@@ -64,8 +64,9 @@ async function setRepoData(mods: Record<string, Mod>): Promise<void> {
 function cleanMods(mods: Record<string, Mod>, sort: boolean = false): Record<string, Mod> {
   const newMods: [string, Mod][] = [];
 
-  for (const [modId, { repo, version, dependencies, build, qmod, branch, prebump }] of Object.entries(mods)) {
+  for (const [modId, { name, repo, version, dependencies, build, qmod, branch, prebump }] of Object.entries(mods)) {
     const newMod: Mod = {
+      name,
       repo,
       branch,
       version,
@@ -133,6 +134,7 @@ async function setNeeds(mods: Record<string, Mod>): Promise<void> {
 
       mod.dependencies = mod.dependencies.filter((v, i, a) => a.indexOf(v) === i); // Remove duplicates
       mod.dependencies.sort(caseInsensitiveAbcSorter);
+      mod.name = qpmPackage.info.name;
     } catch (error) {
       console.error(`Failed to fetch default branch for ${owner}/${repo}:`, error);
     }
