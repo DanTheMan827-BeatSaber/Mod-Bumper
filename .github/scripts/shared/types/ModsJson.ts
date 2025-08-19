@@ -1,4 +1,7 @@
 export interface Mod<DependencyType = string> {
+  /** The name of the mod */
+  name?: string;
+
   /** The repo containing the mod */
   repo: string;
 
