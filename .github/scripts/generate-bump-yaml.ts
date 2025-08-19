@@ -180,7 +180,14 @@ const bumpData = {
             
             cat $GITHUB_OUTPUT
           `)
-        }
+        },
+        {
+          "name": "Upload QPM Cache",
+          "uses": "./.github/actions/upload-qpm-cache",
+          "with": {
+            "artifact-name": "cache_bs-cordl"
+          }
+        },
       ]
     },
     ...await getBumpJobs(modsJson),
