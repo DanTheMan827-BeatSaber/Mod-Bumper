@@ -144,6 +144,7 @@ jobs:
           restore: false
           resolve_ndk: false
           cache: false
+          qpm_version: 'version@1.5.2'
 
       - name: Setup qpm ndk path
         run: |
