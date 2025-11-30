@@ -22,15 +22,6 @@
     "web-utils": "0.6.7"
   },
   "mods": {
-    "bs-cordl": {
-      "name": "bs-cordl",
-      "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.Cordl.git",
-      "branch": "dev/1.41.0_11623",
-      "dependencies": [
-        "beatsaber-hook",
-        "libil2cpp"
-      ]
-    },
     "AntiVertigo": {
       "name": "AntiVertigo",
       "repo": "https://github.com/FrozenAlex/AntiVertigo.git",
@@ -93,6 +84,12 @@
         "bs-cordl",
         "bsml"
       ]
+    },
+    "bs-cordl": {
+      "name": "bs-cordl",
+      "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.Cordl.git",
+      "branch": "dev/1.41.0_11623",
+      "dependencies": []
     },
     "bsl": {
       "name": "Better Song List",
@@ -544,7 +541,6 @@
       "repo": "https://github.com/vcmikuu/Red-bar.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
