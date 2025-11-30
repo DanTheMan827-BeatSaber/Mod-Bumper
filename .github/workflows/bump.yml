@@ -35,7 +35,7 @@ jobs:
       - name: Parse mods.json
         id: parse-mods
         env:
-          newestDependencies: '["beatsaber-hook:7.2.0","beatsaverplusplus:0.2.1","bs-cordl:4100.*","bs-utils:0.8.6","conditional-dependencies:0.3.0","config-utils:2.0.3","cpp-semver:0.1.2","custom-types:0.18.3","fmt:11.0.2","kaleb:0.1.9","libcryptopp:8.5.0","libil2cpp:0.4.0","paper2_scotland2:4.6.4","rapidjson-macros:2.1.0","scotland2:0.1.6","sombrero:0.1.43","song-details:1.0.2","tinyxml2:10.0.0","web-utils:0.6.7","bsml:0.4.55","chatplex-sdk-bs:6.4.1","custom-json-data:0.24.3","hollywood:1.2.2","lapiz:0.2.23","metacore:1.5.0","multiplayer-core:1.6.2","playlistcore:1.5.5","songcore:1.1.24","tracks:2.4.4"]'
+          newestDependencies: '["beatsaber-hook:7.2.0","bs-cordl:4100.*","bsml:0.4.55","chatplex-sdk-bs:6.4.1","custom-json-data:0.24.3","hollywood:1.2.2","lapiz:0.2.23","metacore:1.5.0","multiplayer-core:1.6.2","playlistcore:1.5.5","songcore:1.1.24","tracks:2.4.4"]'
           cordl: 4100.*
         run: |-
           echo "newestDependencies=$newestDependencies" >> $GITHUB_OUTPUT
