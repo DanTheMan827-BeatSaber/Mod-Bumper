@@ -118,7 +118,7 @@ const bumpInputs = {
 };
 
 const bumpData = {
-  "name": "${{ inputs.type }}",
+  "name": "Bump mods",
   "on": {
     "workflow_dispatch": {
       "inputs": bumpInputs
