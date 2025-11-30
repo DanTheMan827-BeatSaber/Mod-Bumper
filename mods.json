@@ -72,6 +72,7 @@
       "name": "bs-cordl",
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.Cordl.git",
       "branch": "dev/1.41.0_11623",
+      "version": "4100.0.0",
       "dependencies": []
     },
     "bsl": {
