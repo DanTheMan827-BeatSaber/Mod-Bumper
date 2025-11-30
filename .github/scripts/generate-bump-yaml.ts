@@ -101,7 +101,7 @@ async function getBumpJobs(mods: ModsJson) {
         "qmod_command": mod.qmod,
         "prebump_command": mod.prebump,
         "installed_mods": JSON.stringify(mod.dependencies || []),
-        "force_build": "${{ github.event.action == 'Bump All Mods' && true }}"
+        "force_build": "${{ inputs.type == 'Bump All Mods' && true }}"
       },
     };
   }
@@ -109,14 +109,19 @@ async function getBumpJobs(mods: ModsJson) {
   return jobContainer;
 }
 
+const bumpInputs = {
+  "type": {
+    "required": true,
+    "type": "string",
+    "default": "Bump Needed Mods"
+  }
+};
+
 const bumpData = {
   "name": "Bump mods",
   "on": {
-    "repository_dispatch": {
-      "types": [
-        "Bump Needed Mods",
-        "Bump All Mods"
-      ]
+    "workflow_call": {
+      "inputs": bumpInputs
     }
   },
   "concurrency": {
