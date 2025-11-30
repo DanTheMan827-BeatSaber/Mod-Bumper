@@ -2,7 +2,7 @@ name: "Trigger: Bump Needed Mods"
 
 on:
   workflow_dispatch:
-  workflow_cNeeded:
+  workflow_call:
 
 permissions:
   contents: write
