@@ -1,9 +1,11 @@
 name: Bump mods
 on:
-  repository_dispatch:
-    types:
-      - Bump Needed Mods
-      - Bump All Mods
+  workflow_call:
+    inputs:
+      type:
+        required: true
+        type: string
+        default: Bump Needed Mods
 concurrency:
   group: ${{ github.event.action }}
   cancel-in-progress: true
@@ -72,7 +74,7 @@ jobs:
       branch: dev/1.41.0_11623
       install: true
       installed_mods: "[]"
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-bsml:
     needs:
       - get-mods
@@ -90,7 +92,7 @@ jobs:
       branch: master
       install: true
       installed_mods: '["bs-cordl"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-songcore:
     needs:
       - get-mods
@@ -110,7 +112,7 @@ jobs:
       branch: main
       install: true
       installed_mods: '["bs-cordl","bsml","lapiz"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-metacore:
     needs:
       - get-mods
@@ -128,7 +130,7 @@ jobs:
       branch: main
       install: true
       installed_mods: '["bs-cordl"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-lapiz:
     needs:
       - get-mods
@@ -146,7 +148,7 @@ jobs:
       branch: main
       install: true
       installed_mods: '["bs-cordl"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-playlistcore:
     needs:
       - get-mods
@@ -167,7 +169,7 @@ jobs:
       branch: main
       install: true
       installed_mods: '["bs-cordl","bsml","metacore","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-chatplex-sdk-bs:
     needs:
       - get-mods
@@ -187,7 +189,7 @@ jobs:
       branch: master
       install: true
       installed_mods: '["bs-cordl","bsml","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-custom-json-data:
     needs:
       - get-mods
@@ -206,7 +208,7 @@ jobs:
       branch: main
       install: true
       installed_mods: '["bs-cordl","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-hollywood:
     needs:
       - get-mods
@@ -226,7 +228,7 @@ jobs:
       install: true
       build_command: pip install PyGithub && pip install requests && python3 ./update_ffmpeg.py && qpm s build
       installed_mods: '["bs-cordl","metacore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-tracks:
     needs:
       - get-mods
@@ -247,7 +249,7 @@ jobs:
       install: true
       build_command: rustup install nightly && rustup target add aarch64-linux-android --toolchain nightly && cargo install bindgen-cli && cargo install --locked --git https://github.com/bbqsrc/cargo-ndk.git cargo-ndk && qpm s build
       installed_mods: '["bs-cordl","custom-json-data","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-multiplayer-core:
     needs:
       - get-mods
@@ -268,7 +270,7 @@ jobs:
       branch: master
       install: true
       installed_mods: '["bs-cordl","bsml","lapiz","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-AntiVertigo:
     needs:
       - get-mods
@@ -287,7 +289,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","bsml","lapiz"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-anytext:
     needs:
       - get-mods
@@ -305,7 +307,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-BeatLeader:
     needs:
       - get-mods
@@ -326,7 +328,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","bsml","metacore","playlistcore","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-BeatTogether:
     needs:
       - get-mods
@@ -348,7 +350,7 @@ jobs:
       build_command: pwsh build.ps1
       qmod_command: pwsh buildQMOD.ps1 BeatTogether
       installed_mods: '["bs-cordl","bsml","lapiz","multiplayer-core"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-BetterSongSearch:
     needs:
       - get-mods
@@ -367,7 +369,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-bomb-qolorer:
     needs:
       - get-mods
@@ -385,7 +387,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-bsl:
     needs:
       - get-mods
@@ -405,7 +407,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml","playlistcore","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-BSNightcoreQuest:
     needs:
       - get-mods
@@ -423,7 +425,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-bts-yeeter:
     needs:
       - get-mods
@@ -440,7 +442,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-camera-utils:
     needs:
       - get-mods
@@ -458,7 +460,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-chroma:
     needs:
       - get-mods
@@ -479,7 +481,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml","custom-json-data","songcore","tracks"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-ClockMod:
     needs:
       - get-mods
@@ -498,7 +500,7 @@ jobs:
       install: false
       build_command: pwsh build.ps1
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-crashreporter:
     needs:
       - get-mods
@@ -516,7 +518,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-custommodels:
     needs:
       - get-mods
@@ -537,7 +539,7 @@ jobs:
       install: false
       qmod_command: pwsh ./scripts/createqmod.ps1
       installed_mods: '["bs-cordl","bsml","lapiz","metacore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-datakeeper:
     needs:
       - get-mods
@@ -554,7 +556,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-DlcSorter:
     needs:
       - get-mods
@@ -571,7 +573,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-emulator-fpfc:
     needs:
       - get-mods
@@ -589,7 +591,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-FakeId:
     needs:
       - get-mods
@@ -606,7 +608,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-FasterScroll:
     needs:
       - get-mods
@@ -624,7 +626,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-graphicstweaks:
     needs:
       - get-mods
@@ -642,7 +644,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-HitScoreVisualizer:
     needs:
       - get-mods
@@ -661,7 +663,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","bsml","metacore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-HitsoundTweaqs:
     needs:
       - get-mods
@@ -679,7 +681,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-imagecoverexpander:
     needs:
       - get-mods
@@ -697,7 +699,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-IntroSkip:
     needs:
       - get-mods
@@ -717,7 +719,7 @@ jobs:
       install: false
       build_command: pwsh ./build.ps1
       installed_mods: '["bs-cordl","bsml","lapiz"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-jdfixer:
     needs:
       - get-mods
@@ -736,7 +738,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","bsml","metacore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-MappingExtensions:
     needs:
       - get-mods
@@ -757,7 +759,7 @@ jobs:
       qmod_command: qpm qmod zip --skip_build -i . -i extern/libs
       prebump_command: make .obj/mod.json && jq '.dependencies = []' .obj/mod.json > mod.template.json
       installed_mods: '["bs-cordl","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-mod-list:
     needs:
       - get-mods
@@ -775,7 +777,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-morebuttons:
     needs:
       - get-mods
@@ -793,7 +795,7 @@ jobs:
       install: false
       qmod_command: pwsh ./scripts/createqmod.ps1
       installed_mods: '["bs-cordl"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-NoodleExtensions:
     needs:
       - get-mods
@@ -814,7 +816,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","bsml","custom-json-data","songcore","tracks"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-NoPromo:
     needs:
       - get-mods
@@ -831,7 +833,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-Nya:
     needs:
       - get-mods
@@ -849,7 +851,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-particletuner:
     needs:
       - get-mods
@@ -867,7 +869,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-Play3rdPer:
     needs:
       - get-mods
@@ -885,7 +887,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-playlistdownloader:
     needs:
       - get-mods
@@ -906,7 +908,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml","metacore","playlistcore","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-playlistmanager:
     needs:
       - get-mods
@@ -928,7 +930,7 @@ jobs:
       install: false
       qmod_command: pwsh ./scripts/createqmod.ps1
       installed_mods: '["bs-cordl","bsml","metacore","playlistcore","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-qbeatsaberplus-gametweaker:
     needs:
       - get-mods
@@ -946,7 +948,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","chatplex-sdk-bs"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-qbeatsaberplus-menumusic:
     needs:
       - get-mods
@@ -965,7 +967,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","chatplex-sdk-bs","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-qbeatsaberplus-notetweaker:
     needs:
       - get-mods
@@ -983,7 +985,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","chatplex-sdk-bs"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-qonsistentsabercolors:
     needs:
       - get-mods
@@ -1001,7 +1003,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-Qounters:
     needs:
       - get-mods
@@ -1022,7 +1024,7 @@ jobs:
       install: false
       qmod_command: pwsh ./scripts/createqmod.ps1
       installed_mods: '["bs-cordl","bsml","metacore","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-QuestSounds:
     needs:
       - get-mods
@@ -1042,7 +1044,7 @@ jobs:
       build_command: pwsh ./build.ps1
       qmod_command: qpm qmod zip --skip_build -i build -i extern/libs -i Examples
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-RandomSongPicker:
     needs:
       - get-mods
@@ -1060,7 +1062,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-RecentlyPlayed:
     needs:
       - get-mods
@@ -1080,7 +1082,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml","metacore","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-redbar:
     needs:
       - get-mods
@@ -1097,7 +1099,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-replay:
     needs:
       - get-mods
@@ -1117,7 +1119,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","bsml","hollywood","metacore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-scorepercentage:
     needs:
       - get-mods
@@ -1137,7 +1139,7 @@ jobs:
       install: false
       build_command: pwsh ./build.ps1
       installed_mods: '["bs-cordl","bsml","metacore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-slicedetails:
     needs:
       - get-mods
@@ -1157,7 +1159,7 @@ jobs:
       install: false
       build_command: pwsh ./build.ps1
       installed_mods: '["bs-cordl","bsml","lapiz"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-SmallQubes:
     needs:
       - get-mods
@@ -1175,7 +1177,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-smoothedcontroller:
     needs:
       - get-mods
@@ -1193,7 +1195,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-songchartvisualizer:
     needs:
       - get-mods
@@ -1212,7 +1214,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","bsml","lapiz"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-songdownloader:
     needs:
       - get-mods
@@ -1232,7 +1234,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","bsml","playlistcore","songcore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-songrankedbadge:
     needs:
       - get-mods
@@ -1250,7 +1252,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-stream-mod:
     needs:
       - get-mods
@@ -1270,7 +1272,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml","hollywood","metacore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-too-many-fireworks:
     needs:
       - get-mods
@@ -1288,7 +1290,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-transitions:
     needs:
       - get-mods
@@ -1306,7 +1308,7 @@ jobs:
       branch: master
       install: false
       installed_mods: '["bs-cordl","bsml"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-tricksaber-lite:
     needs:
       - get-mods
@@ -1325,7 +1327,7 @@ jobs:
       branch: main
       install: false
       installed_mods: '["bs-cordl","bsml","metacore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-unicode:
     needs:
       - get-mods
@@ -1344,7 +1346,7 @@ jobs:
       install: false
       qmod_command: pwsh ./scripts/createqmod.ps1
       installed_mods: '["bs-cordl","metacore"]'
-      force_build: ${{ github.event.action == 'Bump All Mods' && true }}
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   combine-artifacts:
     needs:
       - bump-AntiVertigo
