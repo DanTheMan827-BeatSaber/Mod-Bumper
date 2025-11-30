@@ -125,7 +125,7 @@ const bumpData = {
     }
   },
   "concurrency": {
-    "group": "${{ github.event.action }}",
+    "group": "${{ inputs.type }}",
     "cancel-in-progress": true
   },
   "permissions": {
