@@ -1,7 +1,25 @@
 {
   "$schema": "https://github.com/DanTheMan827-BeatSaber/Mod-Bumper/raw/refs/heads/main/mods.schema.json",
   "newestDependencies": {
-    "beatsaber-hook": "7.2.0"
+    "beatsaber-hook": "6.4.2",
+    "beatsaverplusplus": "0.2.1",
+    "bs-cordl": "4008.*",
+    "bs-utils": "0.8.6",
+    "conditional-dependencies": "0.3.0",
+    "config-utils": "2.0.3",
+    "cpp-semver": "0.1.2",
+    "custom-types": "0.18.3",
+    "fmt": "11.0.2",
+    "kaleb": "0.1.9",
+    "libcryptopp": "8.5.0",
+    "libil2cpp": "0.4.0",
+    "paper2_scotland2": "4.6.4",
+    "rapidjson-macros": "2.1.0",
+    "scotland2": "0.1.6",
+    "sombrero": "0.1.43",
+    "song-details": "1.0.2",
+    "tinyxml2": "10.0.0",
+    "web-utils": "0.6.7"
   },
   "mods": {
     "AntiVertigo": {
@@ -9,7 +27,6 @@
       "repo": "https://github.com/FrozenAlex/AntiVertigo.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "lapiz"
       ]
@@ -19,7 +36,6 @@
       "repo": "https://github.com/CatsaCode/AnyText.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -28,7 +44,6 @@
       "repo": "https://github.com/BeatLeader/beatleader-qmod.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "metacore",
         "playlistcore",
@@ -40,7 +55,6 @@
       "repo": "https://github.com/BeatTogether/BeatTogether.Quest.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "lapiz",
         "multiplayer-core"
@@ -53,7 +67,6 @@
       "repo": "https://github.com/bsq-ports/BetterSongSearchQuest.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "songcore"
       ]
@@ -63,23 +76,14 @@
       "repo": "https://github.com/FrozenAlex/bomb-qolorer.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
-    },
-    "bs-cordl": {
-      "name": "bs-cordl",
-      "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.Cordl.git",
-      "branch": "dev/1.41.0_11623",
-      "version": "4100.0.0",
-      "dependencies": []
     },
     "bsl": {
       "name": "Better Song List",
       "repo": "https://github.com/bsq-ports/BetterSongList.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "playlistcore",
         "songcore"
@@ -90,16 +94,13 @@
       "repo": "https://github.com/bsq-ports/Quest-BSML.git",
       "branch": "master",
       "version": "0.4.55",
-      "dependencies": [
-        "bs-cordl"
-      ]
+      "dependencies": []
     },
     "BSNightcoreQuest": {
       "name": "BSNightcoreQuest",
       "repo": "https://github.com/Tatenshi/BSNightcoreQuest.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -107,18 +108,14 @@
       "name": "BTS Yeeter",
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.BtsYeeter.git",
       "branch": "master",
-      "dependencies": [
-        "bs-cordl"
-      ]
+      "dependencies": []
     },
     "camera-utils": {
       "name": "CameraUtils",
       "repo": "https://github.com/Reezonate/CameraUtils-Quest.git",
       "branch": "master",
       "version": "1.1.11",
-      "dependencies": [
-        "bs-cordl"
-      ]
+      "dependencies": []
     },
     "chatplex-sdk-bs": {
       "name": "ChatPlexSDK-BS",
@@ -126,7 +123,6 @@
       "branch": "master",
       "version": "6.4.1",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "songcore"
       ]
@@ -136,7 +132,6 @@
       "repo": "https://github.com/bsq-ports/Chroma.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "custom-json-data",
         "songcore",
@@ -148,7 +143,6 @@
       "repo": "https://github.com/EnderdracheLP/ClockMod.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ],
       "build": "pwsh build.ps1"
@@ -158,7 +152,6 @@
       "repo": "https://github.com/darknight1050/CrashReporter.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -168,7 +161,6 @@
       "branch": "main",
       "version": "0.24.3",
       "dependencies": [
-        "bs-cordl",
         "songcore"
       ]
     },
@@ -177,7 +169,6 @@
       "repo": "https://github.com/Metalit/CustomModels.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "lapiz",
         "metacore"
@@ -188,24 +179,19 @@
       "name": "PlayerDataKeeper",
       "repo": "https://github.com/Metalit/PlayerDataKeeper.git",
       "branch": "master",
-      "dependencies": [
-        "bs-cordl"
-      ]
+      "dependencies": []
     },
     "DlcSorter": {
       "name": "DlcSorter",
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.DlcSorter.git",
       "branch": "master",
-      "dependencies": [
-        "bs-cordl"
-      ]
+      "dependencies": []
     },
     "emulator-fpfc": {
       "name": "Emulator FPFC",
       "repo": "https://github.com/kodenamekrak/Emulator-FPFC.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -213,16 +199,13 @@
       "name": "Fake ID",
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.FakeID.git",
       "branch": "main",
-      "dependencies": [
-        "bs-cordl"
-      ]
+      "dependencies": []
     },
     "FasterScroll": {
       "name": "Faster Scroll",
       "repo": "https://github.com/christopherweinhardt/FasterScrollQuest.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -231,7 +214,6 @@
       "repo": "https://github.com/FrozenAlex/GraphicsTweaks.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -240,7 +222,6 @@
       "repo": "https://github.com/christopherweinhardt/HitScoreVisualizer.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "metacore"
       ]
@@ -250,7 +231,6 @@
       "repo": "https://github.com/NSGolova/HitsoundTweaqs.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -260,7 +240,6 @@
       "branch": "master",
       "version": "1.2.2",
       "dependencies": [
-        "bs-cordl",
         "metacore"
       ],
       "build": "pip install PyGithub && pip install requests && python3 ./update_ffmpeg.py && qpm s build"
@@ -270,7 +249,6 @@
       "repo": "https://github.com/vcmikuu/ImageCoverExpander.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -279,7 +257,6 @@
       "repo": "https://github.com/Royston1999/IntroSkip-Quest.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "lapiz"
       ],
@@ -290,7 +267,6 @@
       "repo": "https://github.com/Metalit/QuestJDFixer.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "metacore"
       ]
@@ -300,16 +276,13 @@
       "repo": "https://github.com/raineaeternal/Lapiz.git",
       "branch": "main",
       "version": "0.2.23",
-      "dependencies": [
-        "bs-cordl"
-      ]
+      "dependencies": []
     },
     "MappingExtensions": {
       "name": "MappingExtensions",
       "repo": "https://github.com/rcelyte/MappingExtensions.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "songcore"
       ],
       "prebump": "make .obj/mod.json && jq '.dependencies = []' .obj/mod.json > mod.template.json",
@@ -321,16 +294,13 @@
       "repo": "https://github.com/Metalit/MetaCore.git",
       "branch": "main",
       "version": "1.5.0",
-      "dependencies": [
-        "bs-cordl"
-      ]
+      "dependencies": []
     },
     "mod-list": {
       "name": "ModList",
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.ModList.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -338,9 +308,7 @@
       "name": "MoreButtons",
       "repo": "https://github.com/Metalit/MoreButtons.git",
       "branch": "main",
-      "dependencies": [
-        "bs-cordl"
-      ],
+      "dependencies": [],
       "qmod": "pwsh ./scripts/createqmod.ps1"
     },
     "multiplayer-core": {
@@ -349,7 +317,6 @@
       "branch": "master",
       "version": "1.6.2",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "lapiz",
         "songcore"
@@ -360,7 +327,6 @@
       "repo": "https://github.com/bsq-ports/NoodleExtensions.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "custom-json-data",
         "songcore",
@@ -371,16 +337,13 @@
       "name": "NoPromo",
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.NoPromo.git",
       "branch": "master",
-      "dependencies": [
-        "bs-cordl"
-      ]
+      "dependencies": []
     },
     "Nya": {
       "name": "Nya",
       "repo": "https://github.com/FrozenAlex/Nya-quest.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -389,7 +352,6 @@
       "repo": "https://github.com/kodenamekrak/ParticleTuner.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -398,7 +360,6 @@
       "repo": "https://github.com/Epic17plyz/3rd-Person-Mod.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -408,7 +369,6 @@
       "branch": "main",
       "version": "1.5.5",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "metacore",
         "songcore"
@@ -419,7 +379,6 @@
       "repo": "https://github.com/Metalit/PlaylistDownloader.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "metacore",
         "playlistcore",
@@ -431,7 +390,6 @@
       "repo": "https://github.com/Metalit/PlaylistManager.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "metacore",
         "playlistcore",
@@ -444,7 +402,6 @@
       "repo": "https://github.com/hardcpp/QBeatSaberPlus-GameTweaker.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "chatplex-sdk-bs"
       ]
     },
@@ -453,7 +410,6 @@
       "repo": "https://github.com/hardcpp/QBeatSaberPlus-MenuMusic.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "chatplex-sdk-bs",
         "songcore"
       ]
@@ -463,7 +419,6 @@
       "repo": "https://github.com/hardcpp/QBeatSaberPlus-NoteTweaker.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "chatplex-sdk-bs"
       ]
     },
@@ -472,7 +427,6 @@
       "repo": "https://github.com/kodenamekrak/QonsistentSaberColors.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -481,7 +435,6 @@
       "repo": "https://github.com/Metalit/Qounters.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "metacore",
         "songcore"
@@ -493,7 +446,6 @@
       "repo": "https://github.com/EnderdracheLP/QuestSounds.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ],
       "build": "pwsh ./build.ps1",
@@ -504,7 +456,6 @@
       "repo": "https://github.com/Tatenshi/RandomSongPicker.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -513,7 +464,6 @@
       "repo": "https://github.com/Tatenshi/RecentlyPlayed.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "metacore",
         "songcore"
@@ -532,7 +482,6 @@
       "repo": "https://github.com/Metalit/Replay.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "hollywood",
         "metacore"
@@ -543,7 +492,6 @@
       "repo": "https://github.com/Royston1999/ScorePercentage-Quest.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "metacore"
       ],
@@ -554,7 +502,6 @@
       "repo": "https://github.com/Royston1999/SliceDetails-Quest.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "lapiz"
       ],
@@ -565,7 +512,6 @@
       "repo": "https://github.com/NSGolova/SmallQubes.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -574,7 +520,6 @@
       "repo": "https://github.com/FrozenAlex/SmoothedController.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -583,7 +528,6 @@
       "repo": "https://github.com/kodenamekrak/SongChartVisualizer.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "lapiz"
       ]
@@ -594,7 +538,6 @@
       "branch": "main",
       "version": "1.1.24",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "lapiz"
       ]
@@ -604,7 +547,6 @@
       "repo": "https://github.com/darknight1050/SongDownloader.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "playlistcore",
         "songcore"
@@ -615,7 +557,6 @@
       "repo": "https://github.com/kodenamekrak/SongRankedBadge.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -624,7 +565,6 @@
       "repo": "https://github.com/Metalit/StreamMod.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "hollywood",
         "metacore"
@@ -635,7 +575,6 @@
       "repo": "https://github.com/CatsaCode/TooManyFireworks.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -645,7 +584,6 @@
       "branch": "master",
       "version": "2.4.4",
       "dependencies": [
-        "bs-cordl",
         "custom-json-data",
         "songcore"
       ],
@@ -656,7 +594,6 @@
       "repo": "https://github.com/Metalit/Transitions.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl",
         "bsml"
       ]
     },
@@ -665,7 +602,6 @@
       "repo": "https://github.com/vcmikuu/TrickSaber-Lite.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "bsml",
         "metacore"
       ]
@@ -675,7 +611,6 @@
       "repo": "https://github.com/Metalit/UnicodeQuest.git",
       "branch": "main",
       "dependencies": [
-        "bs-cordl",
         "metacore"
       ],
       "qmod": "pwsh ./scripts/createqmod.ps1"
