@@ -120,7 +120,7 @@ const bumpInputs = {
 const bumpData = {
   "name": "Bump mods",
   "on": {
-    "workflow_call": {
+    "workflow_dispatch": {
       "inputs": bumpInputs
     }
   },
