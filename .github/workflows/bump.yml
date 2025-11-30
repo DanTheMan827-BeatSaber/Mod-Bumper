@@ -35,8 +35,8 @@ jobs:
       - name: Parse mods.json
         id: parse-mods
         env:
-          newestDependencies: '["beatsaber-hook:7.2.0","bs-cordl:4100.*","bsml:0.4.55","chatplex-sdk-bs:6.4.1","custom-json-data:0.24.3","hollywood:1.2.2","lapiz:0.2.23","metacore:1.5.0","multiplayer-core:1.6.2","playlistcore:1.5.5","songcore:1.1.24","tracks:2.4.4"]'
-          cordl: 4100.*
+          newestDependencies: '["beatsaber-hook:7.2.0","bs-cordl:4100.0.0","bsml:0.4.55","chatplex-sdk-bs:6.4.1","custom-json-data:0.24.3","hollywood:1.2.2","lapiz:0.2.23","metacore:1.5.0","multiplayer-core:1.6.2","playlistcore:1.5.5","songcore:1.1.24","tracks:2.4.4"]'
+          cordl: 4100.0.0
         run: |-
           echo "newestDependencies=$newestDependencies" >> $GITHUB_OUTPUT
           echo "bs-cordl=$cordl" >> $GITHUB_OUTPUT
@@ -68,6 +68,7 @@ jobs:
       bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
       newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
       repo: https://github.com/DanTheMan827-BeatSaber/Quest.Cordl.git
+      version: 4100.0.0
       branch: dev/1.41.0_11623
       install: true
       installed_mods: "[]"

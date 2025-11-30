@@ -1,8 +1,7 @@
 {
   "$schema": "https://github.com/DanTheMan827-BeatSaber/Mod-Bumper/raw/refs/heads/main/mods.schema.json",
   "newestDependencies": {
-    "beatsaber-hook": "7.2.0",
-    "bs-cordl": "4100.*"
+    "beatsaber-hook": "7.2.0"
   },
   "mods": {
     "AntiVertigo": {
