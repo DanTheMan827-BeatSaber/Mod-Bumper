@@ -1,6 +1,6 @@
 name: Bump mods
 on:
-  workflow_call:
+  workflow_dispatch:
     inputs:
       type:
         required: true
