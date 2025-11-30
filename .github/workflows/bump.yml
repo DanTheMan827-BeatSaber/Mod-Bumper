@@ -80,7 +80,7 @@ jobs:
       game_version: ${{ needs.get-mods.outputs.packageVersion }}
       bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
       newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/QuestPackageManager/Il2CppQuestTypePatching.git
+      repo: https://github.com/kodenamekrak/Il2CppQuestTypePatching.git
       version: 0.19.0
       branch: master
       install: true
