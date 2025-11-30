@@ -1,4 +1,4 @@
-name: Bump mods
+name: ${{ inputs.type }}
 on:
   workflow_dispatch:
     inputs:
