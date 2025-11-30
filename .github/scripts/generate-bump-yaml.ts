@@ -90,7 +90,7 @@ async function getBumpJobs(mods: ModsJson) {
       "name": `${mod.name || modId}`,
       "with": {
         "id": modId,
-        "game_version": "${{ needs.get-mods.outputs.packageVersion }}",
+        "game_version": modsJson.gameVersion || "${{ needs.get-mods.outputs.packageVersion }}",
         "bs_cordl": "${{ needs.get-mods.outputs.bs-cordl }}",
         "newest_mods": "${{ needs.get-mods.outputs.newestDependencies }}",
         "repo": mod.repo,
@@ -143,7 +143,7 @@ const bumpData = {
     "get-mods": {
       "runs-on": "ubuntu-latest",
       "outputs": {
-        "packageVersion": "${{ steps.parse-mods.outputs.packageVersion }}",
+        "packageVersion": modsJson.gameVersion || "${{ steps.parse-mods.outputs.packageVersion }}",
         "newestDependencies": "${{ steps.parse-mods.outputs.newestDependencies }}",
         "bs-cordl": "${{ steps.parse-mods.outputs.bs-cordl }}",
       },
@@ -172,27 +172,33 @@ const bumpData = {
           "run": trimAndDedent(`
             echo "newestDependencies=$newestDependencies" >> $GITHUB_OUTPUT
             echo "bs-cordl=$cordl" >> $GITHUB_OUTPUT
-            pkg_tmp="$(mktemp -d)"
             
-            (
-              cd "$pkg_tmp"
-              qpm package create "package-test" "0.1.0"
-              qpm dependency add bs-cordl -v "$cordl"
-              qpm restore --update
-              echo "packageVersion=$(cat extern/includes/bs-cordl/include/version.txt)" >> $GITHUB_OUTPUT
-            )
-            rm -r "$pkg_tmp"
+            ${!modsJson.mods["bs-cordl"] ? trimAndDedent(`
+              pkg_tmp="$(mktemp -d)"
+              
+              (
+                cd "$pkg_tmp"
+                qpm package create "package-test" "0.1.0"
+                qpm dependency add bs-cordl -v "$cordl"
+                qpm restore --update
+                echo "packageVersion=$(cat extern/includes/bs-cordl/include/version.txt)" >> $GITHUB_OUTPUT
+              )
+
+              rm -r "$pkg_tmp"
+            `) : ""}
             
             cat $GITHUB_OUTPUT
           `)
         },
-        {
-          "name": "Upload QPM Cache",
-          "uses": "./.github/actions/upload-qpm-cache",
-          "with": {
-            "artifact-name": "cache_bs-cordl"
+        ...(!modsJson.mods["bs-cordl"] ? [] : [
+          {
+            "name": "Upload QPM Cache",
+            "uses": "./.github/actions/upload-qpm-cache",
+            "with": {
+              "artifact-name": "cache_bs-cordl"
+            }
           }
-        },
+        ]),
       ]
     },
     ...await getBumpJobs(modsJson),

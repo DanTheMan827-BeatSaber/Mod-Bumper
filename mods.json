@@ -1,7 +1,23 @@
 {
   "$schema": "https://github.com/DanTheMan827-BeatSaber/Mod-Bumper/raw/refs/heads/main/mods.schema.json",
   "newestDependencies": {
-    "beatsaber-hook": "7.2.0"
+    "beatsaber-hook": "7.2.0",
+    "beatsaverplusplus": "0.2.3",
+    "bs-utils": "0.8.6",
+    "conditional-dependencies": "0.3.0",
+    "config-utils": "2.0.3",
+    "cpp-semver": "0.1.2",
+    "fmt": "11.0.2",
+    "kaleb": "0.1.9",
+    "libcryptopp": "8.5.0",
+    "libil2cpp": "0.5.0",
+    "paper2_scotland2": "4.7.0",
+    "rapidjson-macros": "2.1.0",
+    "scotland2": "0.1.6",
+    "sombrero": "0.1.43",
+    "song-details": "1.0.4",
+    "tinyxml2": "10.0.0",
+    "web-utils": "0.6.7"
   },
   "mods": {
     "AntiVertigo": {
@@ -11,6 +27,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "lapiz"
       ]
     },
@@ -20,7 +37,8 @@
       "branch": "main",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "BeatLeader": {
@@ -30,6 +48,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "metacore",
         "playlistcore",
         "songcore"
@@ -42,6 +61,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "lapiz",
         "multiplayer-core"
       ],
@@ -55,6 +75,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "songcore"
       ]
     },
@@ -64,7 +85,8 @@
       "branch": "main",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "bs-cordl": {
@@ -72,7 +94,9 @@
       "repo": "https://github.com/DanTheMan827-BeatSaber/Quest.Cordl.git",
       "branch": "dev/1.41.0_11623",
       "version": "4100.0.0",
-      "dependencies": []
+      "dependencies": [],
+      "build": "true",
+      "qmod": "qpm qmod create && qpm qmod zip --skip_build"
     },
     "bsl": {
       "name": "Better Song List",
@@ -81,6 +105,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "playlistcore",
         "songcore"
       ]
@@ -91,7 +116,8 @@
       "branch": "master",
       "version": "0.4.55",
       "dependencies": [
-        "bs-cordl"
+        "bs-cordl",
+        "custom-types"
       ]
     },
     "BSNightcoreQuest": {
@@ -100,7 +126,8 @@
       "branch": "main",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "bts-yeeter": {
@@ -117,7 +144,8 @@
       "branch": "master",
       "version": "1.1.11",
       "dependencies": [
-        "bs-cordl"
+        "bs-cordl",
+        "custom-types"
       ]
     },
     "chatplex-sdk-bs": {
@@ -128,6 +156,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "songcore"
       ]
     },
@@ -139,6 +168,7 @@
         "bs-cordl",
         "bsml",
         "custom-json-data",
+        "custom-types",
         "songcore",
         "tracks"
       ]
@@ -149,7 +179,8 @@
       "branch": "main",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ],
       "build": "pwsh build.ps1"
     },
@@ -159,7 +190,8 @@
       "branch": "master",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "custom-json-data": {
@@ -169,8 +201,16 @@
       "version": "0.24.3",
       "dependencies": [
         "bs-cordl",
+        "custom-types",
         "songcore"
       ]
+    },
+    "custom-types": {
+      "name": "custom-types",
+      "repo": "https://github.com/QuestPackageManager/Il2CppQuestTypePatching.git",
+      "branch": "master",
+      "version": "0.19.0",
+      "dependencies": []
     },
     "custommodels": {
       "name": "Custom Models",
@@ -179,6 +219,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "lapiz",
         "metacore"
       ],
@@ -189,7 +230,8 @@
       "repo": "https://github.com/Metalit/PlayerDataKeeper.git",
       "branch": "master",
       "dependencies": [
-        "bs-cordl"
+        "bs-cordl",
+        "custom-types"
       ]
     },
     "DlcSorter": {
@@ -206,7 +248,8 @@
       "branch": "master",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "FakeId": {
@@ -223,7 +266,8 @@
       "branch": "main",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "graphicstweaks": {
@@ -232,7 +276,8 @@
       "branch": "main",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "HitScoreVisualizer": {
@@ -242,6 +287,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "metacore"
       ]
     },
@@ -251,7 +297,8 @@
       "branch": "master",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "hollywood": {
@@ -261,6 +308,7 @@
       "version": "1.2.2",
       "dependencies": [
         "bs-cordl",
+        "custom-types",
         "metacore"
       ],
       "build": "pip install PyGithub && pip install requests && python3 ./update_ffmpeg.py && qpm s build"
@@ -271,7 +319,8 @@
       "branch": "main",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "IntroSkip": {
@@ -281,6 +330,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "lapiz"
       ],
       "build": "pwsh ./build.ps1"
@@ -292,6 +342,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "metacore"
       ]
     },
@@ -301,7 +352,8 @@
       "branch": "main",
       "version": "0.2.23",
       "dependencies": [
-        "bs-cordl"
+        "bs-cordl",
+        "custom-types"
       ]
     },
     "MappingExtensions": {
@@ -322,7 +374,8 @@
       "branch": "main",
       "version": "1.5.0",
       "dependencies": [
-        "bs-cordl"
+        "bs-cordl",
+        "custom-types"
       ]
     },
     "mod-list": {
@@ -331,7 +384,8 @@
       "branch": "main",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "morebuttons": {
@@ -351,6 +405,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "lapiz",
         "songcore"
       ]
@@ -363,6 +418,7 @@
         "bs-cordl",
         "bsml",
         "custom-json-data",
+        "custom-types",
         "songcore",
         "tracks"
       ]
@@ -381,7 +437,8 @@
       "branch": "main",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "particletuner": {
@@ -390,7 +447,8 @@
       "branch": "master",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "Play3rdPer": {
@@ -399,7 +457,8 @@
       "branch": "main",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "playlistcore": {
@@ -410,6 +469,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "metacore",
         "songcore"
       ]
@@ -421,6 +481,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "metacore",
         "playlistcore",
         "songcore"
@@ -433,6 +494,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "metacore",
         "playlistcore",
         "songcore"
@@ -445,7 +507,8 @@
       "branch": "master",
       "dependencies": [
         "bs-cordl",
-        "chatplex-sdk-bs"
+        "chatplex-sdk-bs",
+        "custom-types"
       ]
     },
     "qbeatsaberplus-menumusic": {
@@ -455,6 +518,7 @@
       "dependencies": [
         "bs-cordl",
         "chatplex-sdk-bs",
+        "custom-types",
         "songcore"
       ]
     },
@@ -464,7 +528,8 @@
       "branch": "master",
       "dependencies": [
         "bs-cordl",
-        "chatplex-sdk-bs"
+        "chatplex-sdk-bs",
+        "custom-types"
       ]
     },
     "qonsistentsabercolors": {
@@ -473,7 +538,8 @@
       "branch": "master",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "Qounters": {
@@ -483,6 +549,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "metacore",
         "songcore"
       ],
@@ -494,7 +561,8 @@
       "branch": "master",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ],
       "build": "pwsh ./build.ps1",
       "qmod": "qpm qmod zip --skip_build -i build -i extern/libs -i Examples"
@@ -505,7 +573,8 @@
       "branch": "main",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "RecentlyPlayed": {
@@ -515,6 +584,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "metacore",
         "songcore"
       ]
@@ -524,7 +594,8 @@
       "repo": "https://github.com/vcmikuu/Red-bar.git",
       "branch": "master",
       "dependencies": [
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "replay": {
@@ -534,6 +605,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "hollywood",
         "metacore"
       ]
@@ -545,6 +617,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "metacore"
       ],
       "build": "pwsh ./build.ps1"
@@ -556,6 +629,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "lapiz"
       ],
       "build": "pwsh ./build.ps1"
@@ -566,7 +640,8 @@
       "branch": "master",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "smoothedcontroller": {
@@ -575,7 +650,8 @@
       "branch": "main",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "songchartvisualizer": {
@@ -585,6 +661,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "lapiz"
       ]
     },
@@ -596,6 +673,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "lapiz"
       ]
     },
@@ -606,6 +684,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "playlistcore",
         "songcore"
       ]
@@ -616,7 +695,8 @@
       "branch": "main",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "stream-mod": {
@@ -626,6 +706,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "hollywood",
         "metacore"
       ]
@@ -636,7 +717,8 @@
       "branch": "main",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "tracks": {
@@ -647,6 +729,7 @@
       "dependencies": [
         "bs-cordl",
         "custom-json-data",
+        "custom-types",
         "songcore"
       ],
       "build": "rustup install nightly && rustup target add aarch64-linux-android --toolchain nightly && cargo install bindgen-cli && cargo install --locked --git https://github.com/bbqsrc/cargo-ndk.git cargo-ndk && qpm s build"
@@ -657,7 +740,8 @@
       "branch": "master",
       "dependencies": [
         "bs-cordl",
-        "bsml"
+        "bsml",
+        "custom-types"
       ]
     },
     "tricksaber-lite": {
@@ -667,6 +751,7 @@
       "dependencies": [
         "bs-cordl",
         "bsml",
+        "custom-types",
         "metacore"
       ]
     },

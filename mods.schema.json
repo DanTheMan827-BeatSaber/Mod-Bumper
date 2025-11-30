@@ -5,6 +5,10 @@
   "type": "object",
   "description": "Schema for a mods.json configuration file.",
   "properties": {
+    "gameVersion": {
+      "type": "string",
+      "description": "The game version this mods.json is for"
+    },
     "newestDependencies": {
       "type": "object",
       "description": "A list of dependencies and the version to set when bumping",

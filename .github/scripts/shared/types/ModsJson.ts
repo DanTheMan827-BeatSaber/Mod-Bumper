@@ -27,6 +27,9 @@ export interface Mod<DependencyType = string> {
 export interface ModsJson {
   /** The schema */
   $schema: "https://github.com/DanTheMan827-BeatSaber/Mod-Bumper/raw/refs/heads/main/mods.schema.json";
+  
+  /** The game version */
+  gameVersion?: string;
 
   /** A list of dependencies and the version to set when bumping */
   newestDependencies: Record<string, string>;
