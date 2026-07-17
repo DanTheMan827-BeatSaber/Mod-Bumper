@@ -36,7 +36,8 @@
       "repo": "https://github.com/CatsaCode/AnyText.git",
       "branch": "main",
       "dependencies": [
-        "bsml"
+        "bsml",
+        "metacore"
       ]
     },
     "BeatLeader": {
@@ -566,6 +567,7 @@
       "branch": "main",
       "dependencies": [
         "bsml",
+        "camera-utils",
         "hollywood",
         "metacore"
       ]

@@ -37,8 +37,8 @@ jobs:
       - name: Parse mods.json
         id: parse-mods
         env:
-          newestDependencies: '["beatsaber-hook:6.4.2","beatsaverplusplus:0.2.1","bs-cordl:4008.*","bs-utils:0.8.6","conditional-dependencies:0.3.0","config-utils:2.0.3","cpp-semver:0.1.2","custom-types:0.18.3","fmt:11.0.2","kaleb:0.1.9","libcryptopp:8.5.0","libil2cpp:0.4.0","paper2_scotland2:4.6.4","rapidjson-macros:2.1.0","scotland2:0.1.6","sombrero:0.1.43","song-details:1.0.2","tinyxml2:10.0.0","web-utils:0.6.7","bsml:0.4.55","chatplex-sdk-bs:6.4.1","custom-json-data:0.24.3","hollywood:1.2.2","lapiz:0.2.23","metacore:1.5.0","multiplayer-core:1.6.2","playlistcore:1.5.5","songcore:1.1.24","tracks:2.4.4"]'
-          cordl: 4008.*
+          newestDependencies: '["beatsaber-hook:8.0.1","beatsaverplusplus:0.2.1","bs-cordl:4402.*","bs-utils:0.8.6","conditional-dependencies:0.3.0","config-utils:2.0.3","cpp-semver:0.1.2","custom-types:0.18.3","fmt:11.0.2","kaleb:0.1.9","libcryptopp:8.5.0","libil2cpp:0.4.0","paper2_scotland2:4.6.4","rapidjson-macros:2.1.0","scotland2:0.1.6","sombrero:0.1.43","song-details:1.0.2","tinyxml2:10.0.0","web-utils:0.6.7","bsml:0.4.55","camera-utils:1.1.11","chatplex-sdk-bs:6.4.1","custom-json-data:0.24.3","hollywood:1.2.2","lapiz:0.2.23","metacore:1.5.0","multiplayer-core:1.6.2","playlistcore:1.5.5","songcore:1.1.24","tracks:2.4.4"]'
+          cordl: 4402.*
         run: |-
           echo "newestDependencies=$newestDependencies" >> $GITHUB_OUTPUT
           echo "bs-cordl=$cordl" >> $GITHUB_OUTPUT
@@ -70,23 +70,6 @@ jobs:
       bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
       newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
       repo: https://github.com/DanTheMan827-BeatSaber/Quest.BtsYeeter.git
-      branch: master
-      install: false
-      installed_mods: "[]"
-      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
-  bump-camera-utils:
-    needs:
-      - get-mods
-    uses: ./.github/workflows/bump-reusable.yml
-    secrets: inherit
-    name: CameraUtils
-    with:
-      id: camera-utils
-      game_version: ${{ needs.get-mods.outputs.packageVersion }}
-      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
-      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
-      repo: https://github.com/Reezonate/CameraUtils-Quest.git
-      version: 1.1.11
       branch: master
       install: false
       installed_mods: "[]"
@@ -338,6 +321,23 @@ jobs:
       build_command: rustup install nightly && rustup target add aarch64-linux-android --toolchain nightly && cargo install bindgen-cli && cargo install --locked --git https://github.com/bbqsrc/cargo-ndk.git cargo-ndk && qpm s build
       installed_mods: '["custom-json-data","songcore"]'
       force_build: ${{ inputs.type == 'Bump All Mods' && true }}
+  bump-camera-utils:
+    needs:
+      - get-mods
+    uses: ./.github/workflows/bump-reusable.yml
+    secrets: inherit
+    name: CameraUtils
+    with:
+      id: camera-utils
+      game_version: ${{ needs.get-mods.outputs.packageVersion }}
+      bs_cordl: ${{ needs.get-mods.outputs.bs-cordl }}
+      newest_mods: ${{ needs.get-mods.outputs.newestDependencies }}
+      repo: https://github.com/Reezonate/CameraUtils-Quest.git
+      version: 1.1.11
+      branch: master
+      install: true
+      installed_mods: "[]"
+      force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-multiplayer-core:
     needs:
       - get-mods
@@ -380,6 +380,7 @@ jobs:
     needs:
       - get-mods
       - bump-bsml
+      - bump-metacore
     uses: ./.github/workflows/bump-reusable.yml
     secrets: inherit
     name: AnyText
@@ -391,7 +392,7 @@ jobs:
       repo: https://github.com/CatsaCode/AnyText.git
       branch: main
       install: false
-      installed_mods: '["bsml"]'
+      installed_mods: '["bsml","metacore"]'
       force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-BeatLeader:
     needs:
@@ -1179,6 +1180,7 @@ jobs:
     needs:
       - get-mods
       - bump-bsml
+      - bump-camera-utils
       - bump-hollywood
       - bump-metacore
     uses: ./.github/workflows/bump-reusable.yml
@@ -1192,7 +1194,7 @@ jobs:
       repo: https://github.com/Metalit/StreamMod.git
       branch: main
       install: false
-      installed_mods: '["bsml","hollywood","metacore"]'
+      installed_mods: '["bsml","camera-utils","hollywood","metacore"]'
       force_build: ${{ inputs.type == 'Bump All Mods' && true }}
   bump-too-many-fireworks:
     needs:
