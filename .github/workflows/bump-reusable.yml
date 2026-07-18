@@ -270,13 +270,7 @@ jobs:
       - name: Resolve NDK
         if: env.run_build != 'false'
         run: |
-          qpm ndk resolve -d || (
-            echo "No NDK pinned."
-            qpm ndk pin 27 || (
-              qpm ndk download 27
-              qpm ndk pin 27
-            )
-          )
+          qpm ndk pin 29
 
       - name: Run pre-bump
         if: env.run_build != 'false' && inputs.prebump_command
