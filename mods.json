@@ -540,7 +540,8 @@
       "version": "1.1.24",
       "dependencies": [
         "bsml",
-        "lapiz"
+        "lapiz",
+        "metacore"
       ]
     },
     "songdownloader": {
