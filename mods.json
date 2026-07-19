@@ -4,6 +4,7 @@
     "autohooks": "0.1.2251799813750784",
     "beatsaber-hook": "8.0.1",
     "beatsaverplusplus": "0.2.3",
+    "bsml": "0.5.3",
     "bs-cordl": "4402.*",
     "bs-utils": "0.8.6",
     "conditional-dependencies": "0.3.0",
@@ -95,7 +96,7 @@
       "name": "BSML",
       "repo": "https://github.com/bsq-ports/Quest-BSML.git",
       "branch": "master",
-      "version": "0.4.55",
+      "version": "0.5.3",
       "dependencies": []
     },
     "BSNightcoreQuest": {
@@ -277,7 +278,7 @@
       "name": "Lapiz",
       "repo": "https://github.com/raineaeternal/Lapiz.git",
       "branch": "main",
-      "version": "0.2.23",
+      "version": "0.3.3",
       "dependencies": []
     },
     "MappingExtensions": {
@@ -295,7 +296,7 @@
       "name": "MetaCore",
       "repo": "https://github.com/Metalit/MetaCore.git",
       "branch": "main",
-      "version": "1.5.0",
+      "version": "2.0.2",
       "dependencies": []
     },
     "mod-list": {
@@ -538,7 +539,7 @@
       "name": "Quest-SongCore",
       "repo": "https://github.com/raineaeternal/Quest-SongCore.git",
       "branch": "main",
-      "version": "1.1.24",
+      "version": "1.3.1",
       "dependencies": [
         "bsml",
         "lapiz",
